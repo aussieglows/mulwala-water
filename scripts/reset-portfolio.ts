@@ -13,23 +13,23 @@ function makeAdapter() {
 }
 const db = new PrismaClient({ adapter: makeAdapter() });
 
-// name, short descriptor (editable in admin), logo path is added once the logo files are supplied.
-const companies: [string, string][] = [
-  ["F45", "Functional-fitness franchise"],
-  ["Noom", "Digital health platform"],
-  ["Iris Energy", "Data centres & digital infrastructure"],
-  ["Tifi", ""],
-  ["Dixon Projects", "Design & construction"],
-  ["Evans and Partners", "Investment & advisory"],
-  ["aussie glows", "Mobile spray-tan studio"],
-  ["Donavan Realty and Development", "Real estate & development"],
+// name, short descriptor (editable in admin), logo path (empty = show the name until a logo is added).
+const companies: [string, string, string][] = [
+  ["F45", "Functional-fitness franchise", "/images/logos/f45.jpg"],
+  ["Noom", "Digital health platform", "/images/logos/noom.jpg"],
+  ["Iris Energy", "Data centres & digital infrastructure", "/images/logos/iris.png"],
+  ["Tifi", "", ""],
+  ["Dixon Projects", "Design & construction", "/images/logos/dixon.jpg"],
+  ["Evans and Partners", "Investment & advisory", ""],
+  ["aussie glows", "Mobile spray-tan studio", "/images/logos/aussie-glows.png"],
+  ["Donavan Realty and Development", "Real estate & development", "/images/logos/donovan.jpg"],
 ];
 
 async function main() {
   await db.portfolioCompany.deleteMany({});
   for (let i = 0; i < companies.length; i++) {
-    await db.portfolioCompany.create({ data: { name: companies[i][0], description: companies[i][1] || null, sortOrder: i + 1, active: true } });
+    await db.portfolioCompany.create({ data: { name: companies[i][0], description: companies[i][1] || null, logoUrl: companies[i][2] || null, sortOrder: i + 1, active: true } });
   }
-  console.log("Portfolio reset:", companies.length, "companies.");
+  console.log("Portfolio reset:", companies.length, "companies (6 with logos).");
 }
 main().finally(() => db.$disconnect());

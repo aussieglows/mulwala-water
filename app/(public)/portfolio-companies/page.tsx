@@ -18,14 +18,14 @@ export default async function PortfolioPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {companies.map((c) => {
               const inner = (
-                <div className="h-36 bg-surface border border-border rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-brand/50 transition-colors">
+                <div className="h-36 bg-white border border-border rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-brand/50 transition-colors">
                   {c.logoUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={c.logoUrl} alt={c.name} className="max-h-14 max-w-[80%] object-contain" />
+                    <img src={c.logoUrl} alt={c.name} className="max-h-16 max-w-[85%] object-contain" />
                   ) : (
                     <span className="text-lg font-bold text-navy leading-tight">{c.name}</span>
                   )}
-                  {c.description && <span className="text-[11px] text-muted mt-2 uppercase tracking-wide">{c.description}</span>}
+                  {c.description && !c.logoUrl && <span className="text-[11px] text-navy/55 mt-2 uppercase tracking-wide">{c.description}</span>}
                 </div>
               );
               return c.url ? (
