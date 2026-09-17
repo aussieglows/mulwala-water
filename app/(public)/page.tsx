@@ -15,7 +15,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-navy" />
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/bridge-aerial.jpg')" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.78) 0%, rgba(20,32,48,0.55) 45%, rgba(20,32,48,0.9) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.55) 0%, rgba(20,32,48,0.28) 45%, rgba(20,32,48,0.72) 100%)" }} />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-28 sm:py-40">
           <h1 className="text-4xl sm:text-6xl font-bold max-w-3xl leading-tight drop-shadow-lg">{s.heroHeadline}</h1>
           <p className="text-white/85 text-lg mt-5 max-w-xl drop-shadow">{s.heroSubtext}</p>
@@ -54,7 +54,7 @@ export default async function HomePage() {
       {/* Photo band — office */}
       <section className="relative overflow-hidden">
         <div className="h-72 sm:h-80 bg-cover bg-center" style={{ backgroundImage: "url('/images/office.jpg')" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.88) 0%, rgba(20,32,48,0.45) 55%, rgba(20,32,48,0.15) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.7) 0%, rgba(20,32,48,0.3) 55%, rgba(20,32,48,0.05) 100%)" }} />
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
             <p className="text-white text-2xl sm:text-3xl font-bold max-w-lg leading-snug drop-shadow-lg">Big-business insight, brought to founder-led companies.</p>

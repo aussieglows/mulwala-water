@@ -32,7 +32,7 @@ export default async function PlaybooksPage() {
       {/* Photo band */}
       <section className="relative overflow-hidden mb-6">
         <div className="h-64 bg-cover bg-center" style={{ backgroundImage: "url('/images/bridge-pano.jpg')" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.82) 0%, rgba(20,32,48,0.3) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.66) 0%, rgba(20,32,48,0.18) 100%)" }} />
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
             <p className="text-white text-xl sm:text-3xl font-bold max-w-lg leading-snug drop-shadow-lg">A play for every inflection point.</p>

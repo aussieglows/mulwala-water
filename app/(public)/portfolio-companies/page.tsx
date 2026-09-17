@@ -41,7 +41,7 @@ export default async function PortfolioPage() {
       {/* Skyline band + CTA */}
       <section className="relative overflow-hidden">
         <div className="h-80 bg-cover bg-center" style={{ backgroundImage: "url('/images/skyline.jpg')" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.55) 0%, rgba(20,32,48,0.85) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.4) 0%, rgba(20,32,48,0.7) 100%)" }} />
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full text-center text-white">
             <h2 className="text-2xl sm:text-4xl font-bold drop-shadow-lg">Your partner in business success</h2>

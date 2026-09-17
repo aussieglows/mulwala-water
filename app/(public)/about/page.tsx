@@ -45,7 +45,7 @@ export default async function AboutPage() {
       {/* Photo band — boardroom */}
       <section className="relative overflow-hidden">
         <div className="h-72 sm:h-80 bg-cover bg-center" style={{ backgroundImage: "url('/images/boardroom.jpg')" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.85) 0%, rgba(20,32,48,0.3) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.68) 0%, rgba(20,32,48,0.18) 100%)" }} />
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
             <p className="text-white text-2xl sm:text-3xl font-bold max-w-lg leading-snug drop-shadow-lg">{s.approachTagline}</p>
