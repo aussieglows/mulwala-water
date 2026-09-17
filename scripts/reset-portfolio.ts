@@ -28,7 +28,7 @@ const companies: [string, string, string, string][] = [
   ["Apex Wellness Group", "Health & wellness", "/images/logos/apex.png", ""],
   ["LODI enabled", "Supply-chain hardware & tech", "/images/logos/lodi.png", "https://lodienabled.com"],
   ["Storyline", "", "/images/logos/storyline.png", ""],
-  ["OWNA", "Childcare management software", "", "https://owna.com.au"],
+  ["OWM", "", "", ""],
 ];
 
 async function main() {
