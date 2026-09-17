@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="Evans and Partners">
+  <rect x="22" y="34" width="132" height="132" fill="none" stroke="#33383d" stroke-width="3"/>
+  <text x="88" y="118" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="300" letter-spacing="1" fill="#33383d">E&amp;P</text>
+  <line x1="196" y1="46" x2="196" y2="154" stroke="#33383d" stroke-width="2"/>
+  <text x="228" y="94" font-family="'Segoe UI', Arial, sans-serif" font-size="40" font-weight="300" letter-spacing="3" fill="#33383d">EVANS &amp;</text>
+  <text x="228" y="140" font-family="'Segoe UI', Arial, sans-serif" font-size="40" font-weight="300" letter-spacing="3" fill="#33383d">PARTNERS</text>
+</svg>

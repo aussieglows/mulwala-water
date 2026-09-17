@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 110" role="img" aria-label="tifi">
+  <path d="M16 18 L64 55 L16 92 Z" fill="#3b6ef5"/>
+  <path d="M16 55 L44 55 L16 92 Z" fill="#5fd0b0"/>
+  <text x="86" y="83" font-family="Verdana, 'Segoe UI', Arial, sans-serif" font-size="66" font-weight="700" letter-spacing="-3" fill="#10203f">tifi</text>
+</svg>

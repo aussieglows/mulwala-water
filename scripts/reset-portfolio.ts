@@ -18,9 +18,9 @@ const companies: [string, string, string][] = [
   ["F45", "Functional-fitness franchise", "/images/logos/f45.jpg"],
   ["Noom", "Digital health platform", "/images/logos/noom.jpg"],
   ["Iris Energy", "Data centres & digital infrastructure", "/images/logos/iris.png"],
-  ["Tifi", "", ""],
+  ["Tifi", "", "/images/logos/tifi.svg"],
   ["Dixon Projects", "Design & construction", "/images/logos/dixon.jpg"],
-  ["Evans and Partners", "Investment & advisory", ""],
+  ["Evans and Partners", "Investment & advisory", "/images/logos/evans-partners.svg"],
   ["aussie glows", "Mobile spray-tan studio", "/images/logos/aussie-glows.png"],
   ["Donavan Realty and Development", "Real estate & development", "/images/logos/donovan.jpg"],
 ];
