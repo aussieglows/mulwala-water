@@ -25,30 +25,22 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Who we are */}
+      {/* What we do — expertise highlights (the full story lives on the About page) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-          <div>
-            <h2 className="text-3xl font-bold">{s.aboutHeading}</h2>
-            <h3 className="text-brand-dark font-semibold text-lg mt-6">{s.visionHeading}</h3>
-            <p className="text-muted mt-2 leading-relaxed">{s.visionBody}</p>
-            <h3 className="text-brand-dark font-semibold text-lg mt-6">{s.approachHeading}</h3>
-            <p className="text-ink font-medium mt-2">{s.approachTagline}</p>
-            <p className="text-muted mt-1 leading-relaxed">{s.approachBody}</p>
+        <div className="flex items-end justify-between gap-4 flex-wrap">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-bold">{s.expertiseHeading}</h2>
+            <p className="text-muted mt-2 leading-relaxed">{s.expertiseIntro}</p>
           </div>
-          <div className="bg-gray-bg rounded-2xl p-6">
-            <h3 className="text-brand-dark font-semibold text-lg">{s.expertiseHeading}</h3>
-            <p className="text-muted text-sm mt-1">{s.expertiseIntro}</p>
-            <ul className="mt-4 flex flex-col gap-3">
-              {expertise.map((e) => (
-                <li key={e.id} className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex items-center justify-center w-5 h-5 rounded-full bg-brand text-white text-xs shrink-0">✓</span>
-                  <span className="text-ink">{e.text}</span>
-                </li>
-              ))}
-            </ul>
-            <Link href="/about" className="inline-block mt-5 text-brand-dark font-bold no-underline">Learn more about us →</Link>
-          </div>
+          <Link href="/about" className="text-brand-dark font-bold no-underline shrink-0">Learn about us →</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+          {expertise.map((e) => (
+            <div key={e.id} className="bg-surface border border-border rounded-2xl p-5 flex items-start gap-3">
+              <span className="mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-brand text-white text-xs shrink-0">✓</span>
+              <span className="text-ink">{e.text}</span>
+            </div>
+          ))}
         </div>
       </section>
 
