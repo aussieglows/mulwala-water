@@ -3,6 +3,7 @@
 //   postgres://… or postgresql://…  → provider = "postgresql"
 //   file:… (or unset)               → provider = "sqlite"
 // Runs before `prisma generate` / `prisma db push` (see package.json scripts).
+import "dotenv/config";
 import { readFileSync, writeFileSync } from "node:fs";
 
 const url = process.env.DATABASE_URL || "file:./dev.db";

@@ -10,7 +10,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 // Uploaded invoice / receipt / revenue-screenshot files, stored in the DB and served at
