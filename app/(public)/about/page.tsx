@@ -34,19 +34,21 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership */}
-      <section className="bg-gray-bg">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/founder.jpg" alt={s.founderName} className="w-full max-w-[280px] rounded-2xl object-cover shadow-sm mx-auto" />
-          <div>
-            <div className="text-[11px] font-bold text-brand-dark uppercase tracking-wide">Leadership</div>
-            <h2 className="text-3xl font-bold mt-1">{s.founderName}</h2>
-            <p className="text-brand-dark font-medium">{s.founderTitle}</p>
-            <p className="text-muted mt-3 leading-relaxed max-w-xl">{s.founderBio}</p>
+      {/* Leadership — hidden until turned on in the admin (Website → Leadership) */}
+      {s.showLeadership && (
+        <section className="bg-gray-bg">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/founder.jpg" alt={s.founderName} className="w-full max-w-[280px] rounded-2xl object-cover shadow-sm mx-auto" />
+            <div>
+              <div className="text-[11px] font-bold text-brand-dark uppercase tracking-wide">Leadership</div>
+              <h2 className="text-3xl font-bold mt-1">{s.founderName}</h2>
+              <p className="text-brand-dark font-medium">{s.founderTitle}</p>
+              <p className="text-muted mt-3 leading-relaxed max-w-xl">{s.founderBio}</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Photo band — boardroom */}
       <section className="relative overflow-hidden">

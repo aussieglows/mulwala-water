@@ -19,7 +19,7 @@ export default async function SiteAdminPage() {
     aboutHeading: s.aboutHeading, visionHeading: s.visionHeading, visionBody: s.visionBody,
     expertiseHeading: s.expertiseHeading, expertiseIntro: s.expertiseIntro,
     approachHeading: s.approachHeading, approachTagline: s.approachTagline, approachBody: s.approachBody,
-    founderName: s.founderName, founderTitle: s.founderTitle, founderBio: s.founderBio,
+    showLeadership: s.showLeadership, founderName: s.founderName, founderTitle: s.founderTitle, founderBio: s.founderBio,
     playbooksHeading: s.playbooksHeading, playbooksIntro: s.playbooksIntro,
     portfolioHeading: s.portfolioHeading, portfolioIntro: s.portfolioIntro, footerText: s.footerText,
   };

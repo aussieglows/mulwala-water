@@ -52,6 +52,10 @@ export type RevenueCategory = (typeof REVENUE_CATEGORIES)[number];
 export const PAYMENT_METHODS = ["Bank transfer", "Card", "Check", "Cash", "Other"] as const;
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number];
 
+// Playbook categories (grouping on the public Playbooks page).
+export const PLAYBOOK_CATEGORIES = ["Growth", "Systems", "Turnaround", "Lifestyle"] as const;
+export type PlaybookCategory = (typeof PLAYBOOK_CATEGORIES)[number];
+
 // Kinds of revenue source (drives grouping on the P&L).
 export const SOURCE_KINDS = ["CLIENT", "INVESTMENT", "OTHER"] as const;
 export type SourceKind = (typeof SOURCE_KINDS)[number];

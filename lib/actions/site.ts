@@ -29,6 +29,7 @@ export type SiteSettingsInput = {
   approachHeading: string;
   approachTagline: string;
   approachBody: string;
+  showLeadership: boolean;
   founderName: string;
   founderTitle: string;
   founderBio: string;
@@ -66,16 +67,16 @@ export async function deleteExpertise(id: string) {
 }
 
 // --- Playbooks ---
-export async function addPlaybook(title: string, summary: string) {
+export async function addPlaybook(title: string, summary: string, category: string) {
   await requireAuth();
   if (!title.trim()) return;
   const max = await db.playbook.aggregate({ _max: { sortOrder: true } });
-  await db.playbook.create({ data: { title: title.trim(), summary: summary.trim() || null, sortOrder: (max._max.sortOrder ?? 0) + 1 } });
+  await db.playbook.create({ data: { title: title.trim(), summary: summary.trim() || null, category: category || "Growth", sortOrder: (max._max.sortOrder ?? 0) + 1 } });
   bumpPublic();
 }
-export async function updatePlaybook(id: string, title: string, summary: string, active: boolean) {
+export async function updatePlaybook(id: string, title: string, summary: string, category: string, active: boolean) {
   await requireAuth();
-  await db.playbook.update({ where: { id }, data: { title: title.trim(), summary: summary.trim() || null, active } });
+  await db.playbook.update({ where: { id }, data: { title: title.trim(), summary: summary.trim() || null, category: category || "Growth", active } });
   bumpPublic();
 }
 export async function deletePlaybook(id: string) {

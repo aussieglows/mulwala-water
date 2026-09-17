@@ -165,13 +165,14 @@ model SiteSettings {
   approachHeading  String   @default("Our Approach")
   approachTagline  String   @default("Data drives decision, people drive businesses.")
   approachBody     String   @default("We are all about relationships, and we start with the people first. Only by truly understanding your business and your goals can we chart the path to lasting growth.")
-  // Leadership / founder
+  // Leadership / founder (hidden until showLeadership is turned on)
+  showLeadership   Boolean  @default(false)
   founderName      String   @default("David Orr")
   founderTitle     String   @default("Founder & Principal")
   founderBio       String   @default("David founded Mulwala Water to bring the tools, insight, and expertise usually reserved for big business to founder-led companies — partnering closely with leadership teams through their most important inflection points.")
   // Playbooks / Portfolio intro copy
   playbooksHeading String   @default("Playbooks")
-  playbooksIntro   String   @default("Proven, repeatable approaches we bring to every engagement.")
+  playbooksIntro   String   @default("Whatever business you're in, versions of the same problem arise — with the same decision model and solutions to achieve your objectives. We call these playbooks. We tailor the right play to each situation, across four broad categories: growth, systems, turnaround and lifestyle.")
   portfolioHeading String   @default("Portfolio Companies")
   portfolioIntro   String   @default("Businesses we partner with and invest in.")
   footerText       String   @default("Copyright © 2024 Mulwala Water Operating & Investment LLC — All Rights Reserved.")
@@ -186,11 +187,12 @@ model ExpertisePoint {
   active    Boolean @default(true)
 }
 
-// A card on the Playbooks page.
+// A play on the Playbooks page, grouped by category (Growth / Systems / Turnaround / Lifestyle).
 model Playbook {
   id        String  @id @default(cuid())
   title     String
   summary   String?
+  category  String  @default("Growth")
   sortOrder Int     @default(0)
   active    Boolean @default(true)
 }

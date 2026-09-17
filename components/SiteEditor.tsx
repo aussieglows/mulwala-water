@@ -8,10 +8,11 @@ import {
   addPlaybook, updatePlaybook, deletePlaybook,
   addPortfolio, updatePortfolio, deletePortfolio,
 } from "@/lib/actions/site";
+import { PLAYBOOK_CATEGORIES } from "@/lib/categories";
 
 type Settings = SiteSettingsInput;
 type Expertise = { id: string; text: string; active: boolean };
-type PlaybookT = { id: string; title: string; summary: string | null; active: boolean };
+type PlaybookT = { id: string; title: string; summary: string | null; category: string; active: boolean };
 type PortfolioT = { id: string; name: string; description: string | null; url: string | null; active: boolean };
 
 const input = "w-full px-3 py-2 border border-border rounded-lg text-sm bg-white";
@@ -77,6 +78,10 @@ export function SiteEditor({ settings, expertise, playbooks, portfolio }: { sett
       </Section>
 
       <Section title="Leadership (About page)">
+        <label className="flex items-center gap-2 text-sm font-medium mb-3 cursor-pointer">
+          <input type="checkbox" checked={f.showLeadership} onChange={(e) => setF((p) => ({ ...p, showLeadership: e.target.checked }))} />
+          Show the Leadership section on the About page
+        </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Field label="Founder name" value={f.founderName} onChange={set("founderName")} />
           <Field label="Founder title" value={f.founderTitle} onChange={set("founderTitle")} />
@@ -148,6 +153,7 @@ function ExpertiseRow({ e, busy, run }: { e: Expertise; busy: boolean; run: (fn:
 function PlaybooksManager({ items, onChanged }: { items: PlaybookT[]; onChanged: () => void }) {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
+  const [category, setCategory] = useState<string>("Growth");
   const [busy, setBusy] = useState(false);
   const run = async (fn: () => Promise<void>) => { setBusy(true); try { await fn(); onChanged(); } finally { setBusy(false); } };
   return (
@@ -156,9 +162,14 @@ function PlaybooksManager({ items, onChanged }: { items: PlaybookT[]; onChanged:
         {items.map((p) => <PlaybookRow key={p.id} p={p} busy={busy} run={run} />)}
       </div>
       <div className="border-t border-border mt-3 pt-3 flex flex-col gap-2">
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="New playbook title" className={input} />
-        <textarea value={summary} onChange={(e) => setSummary(e.target.value)} placeholder="Summary" rows={2} className={`${input} resize-y`} />
-        <button onClick={() => run(async () => { await addPlaybook(title, summary); setTitle(""); setSummary(""); })} disabled={busy || !title.trim()} className="self-start bg-brand text-white rounded-full px-4 py-2 text-sm font-bold cursor-pointer disabled:opacity-50">Add playbook</button>
+        <div className="flex gap-2 flex-wrap">
+          <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="New play name" className={`${input} flex-1 min-w-[160px]`} />
+          <select value={category} onChange={(e) => setCategory(e.target.value)} className={input}>
+            {PLAYBOOK_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+        <textarea value={summary} onChange={(e) => setSummary(e.target.value)} placeholder="Description" rows={2} className={`${input} resize-y`} />
+        <button onClick={() => run(async () => { await addPlaybook(title, summary, category); setTitle(""); setSummary(""); })} disabled={busy || !title.trim()} className="self-start bg-brand text-white rounded-full px-4 py-2 text-sm font-bold cursor-pointer disabled:opacity-50">Add play</button>
       </div>
     </Section>
   );
@@ -166,14 +177,20 @@ function PlaybooksManager({ items, onChanged }: { items: PlaybookT[]; onChanged:
 function PlaybookRow({ p, busy, run }: { p: PlaybookT; busy: boolean; run: (fn: () => Promise<void>) => Promise<void> }) {
   const [title, setTitle] = useState(p.title);
   const [summary, setSummary] = useState(p.summary ?? "");
+  const [category, setCategory] = useState(p.category);
   const [active, setActive] = useState(p.active);
   return (
     <div className="border border-border rounded-lg p-2.5 flex flex-col gap-2">
-      <input value={title} onChange={(e) => setTitle(e.target.value)} className={input} />
+      <div className="flex gap-2 flex-wrap">
+        <input value={title} onChange={(e) => setTitle(e.target.value)} className={`${input} flex-1 min-w-[160px]`} />
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className={input}>
+          {PLAYBOOK_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
+      </div>
       <textarea value={summary} onChange={(e) => setSummary(e.target.value)} rows={2} className={`${input} resize-y`} />
       <div className="flex items-center gap-3">
         <label className="flex items-center gap-1 text-[12px] text-muted"><input type="checkbox" checked={active} onChange={(e) => setActive(e.target.checked)} /> Show</label>
-        <button onClick={() => run(() => updatePlaybook(p.id, title, summary, active))} disabled={busy} className="text-[12px] font-bold text-brand-dark bg-transparent border-none cursor-pointer">Save</button>
+        <button onClick={() => run(() => updatePlaybook(p.id, title, summary, category, active))} disabled={busy} className="text-[12px] font-bold text-brand-dark bg-transparent border-none cursor-pointer">Save</button>
         <button onClick={() => run(() => deletePlaybook(p.id))} disabled={busy} className="text-[12px] font-bold text-red bg-transparent border-none cursor-pointer">Delete</button>
       </div>
     </div>
