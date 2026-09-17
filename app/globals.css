@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --color-cream: #f7f8fa; /* page background */
+  --color-gray-bg: #eef1f5; /* subtle surface */
+  --color-surface: #ffffff;
+  --color-border: #e2e6ec;
+  --color-ink: #1c2530; /* primary text */
+  --color-muted: #64707e; /* secondary text */
+
+  /* Brand accent — a professional deep teal. */
+  --color-brand: #0f766e;
+  --color-brand-dark: #0b5850;
+  --color-brand-light: #d7ece9;
+
+  /* Status colors. */
+  --color-green: oklch(0.6 0.12 155);
+  --color-green-light: oklch(0.95 0.04 155);
+  --color-amber: oklch(0.72 0.13 75);
+  --color-amber-light: oklch(0.96 0.05 75);
+  --color-red: oklch(0.58 0.16 25);
+  --color-red-light: oklch(0.95 0.04 25);
+  --color-navy: #24384f;
+}
+
+@theme inline {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --color-cream: var(--color-cream);
+  --color-gray-bg: var(--color-gray-bg);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-brand: var(--color-brand);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-brand-light: var(--color-brand-light);
+  --color-green: var(--color-green);
+  --color-green-light: var(--color-green-light);
+  --color-amber: var(--color-amber);
+  --color-amber-light: var(--color-amber-light);
+  --color-red: var(--color-red);
+  --color-red-light: var(--color-red-light);
+  --color-navy: var(--color-navy);
+}
+
+@layer base {
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+  }
+  a {
+    color: var(--color-brand-dark);
+  }
+  a:hover {
+    color: var(--color-brand);
+  }
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid color-mix(in srgb, var(--color-brand) 45%, transparent);
+    outline-offset: 1px;
+  }
+}
+
+/* Stop iOS Safari auto-zoom on focus (fields under 16px). Desktop keeps smaller sizes. */
+@media (max-width: 640px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}

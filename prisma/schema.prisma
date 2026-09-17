@@ -1,0 +1,221 @@
+// Prisma schema for the Consulting P&L app.
+// Local-first: SQLite. (Swap `provider` to "postgresql" + a Prisma adapter to deploy — same as the
+// aussie glows booking app the framework came from.)
+// Note: SQLite has no native enums, so "kind"/"category"/"method"/"status" fields are plain strings
+// validated in app code (see lib/categories.ts).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// Uploaded invoice / receipt / revenue-screenshot files, stored in the DB and served at
+// /api/media/<id>. Images are resized to JPEG on the way in; PDFs are kept as-is.
+model MediaAsset {
+  id          String   @id @default(cuid())
+  contentType String   @default("image/jpeg")
+  data        Bytes
+  createdAt   DateTime @default(now())
+}
+
+// A revenue line item on the P&L — i.e. a client or income stream. Seeded with Parched Hospitality
+// Group, Romina Day, and Investment Income; fully editable / add your own.
+model RevenueSource {
+  id         String         @id @default(cuid())
+  name       String
+  // "CLIENT" | "INVESTMENT" | "OTHER" — drives grouping + default category on the P&L.
+  kind       String         @default("CLIENT")
+  sortOrder  Int            @default(0)
+  active     Boolean        @default(true)
+  createdAt  DateTime       @default(now())
+  entries    RevenueEntry[]
+}
+
+// One received-revenue record. Ties to a RevenueSource (the P&L line item).
+model RevenueEntry {
+  id          String         @id @default(cuid())
+  receivedOn  DateTime
+  amountCents Int
+  sourceId    String
+  source      RevenueSource  @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  // Revenue type, from REVENUE_CATEGORIES (e.g. "Consulting fees", "Retainer", "Investment income").
+  category    String         @default("Consulting fees")
+  payer       String?        // who paid (free text; often mirrors the source)
+  description String?
+  method      String?        // "Bank transfer" | "Card" | "Check" | "Cash" | "Other"
+  invoiceRef  String?        // your invoice number, if any
+  receiptUrl  String?        // uploaded revenue screenshot / remittance (/api/media/<id>)
+  // Draft rows created by AI from an upload or a forwarded email — reviewed then confirmed.
+  pending     Boolean        @default(false)
+  createdBy   String?        // "Manual" | "Upload" | "Email: <from>" | "Bank: <institution>"
+  bankTxnId   String?        @unique // Plaid transaction id, for dedup when syncing a bank feed
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@index([receivedOn])
+  @@index([sourceId])
+}
+
+// Editable expense categories (the "expense side" of Sources). Seeded from lib/categories.ts, then
+// managed in the admin. An Expense stores the category NAME (a string), so renaming here does not
+// retro-change historical rows.
+model ExpenseCategory {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  sortOrder Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+// One business expense. Consulting-flavoured categories (Flights, Accommodation, …) in lib/categories.ts.
+model Expense {
+  id          String   @id @default(cuid())
+  incurredOn  DateTime
+  amountCents Int
+  category    String   @default("Other")
+  vendor      String?
+  description String?
+  method      String?  // "Card" | "Bank transfer" | "Cash" | "Other"
+  // Billable / reimbursable to a client? Optional link to the RevenueSource it belongs to.
+  billable    Boolean  @default(false)
+  clientId    String?
+  receiptUrl  String?  // uploaded invoice / receipt (/api/media/<id>)
+  pending     Boolean  @default(false)
+  createdBy   String?  // "Manual" | "Upload" | "Email: <from>" | "Bank: <institution>"
+  bankTxnId   String?  @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([incurredOn])
+  @@index([category])
+}
+
+// Single-row app settings (id is always "singleton").
+model AppSettings {
+  id                  String  @id @default("singleton")
+  businessName        String  @default("My Consulting")
+  currency            String  @default("USD")
+  // Estimated income-tax rate applied to net profit on the P&L (a planning memo, not filed tax).
+  taxRatePercent      Float   @default(0)
+  // Month the fiscal year starts (1 = January).
+  fiscalYearStartMonth Int    @default(1)
+  updatedAt           DateTime @updatedAt
+}
+
+// A linked bank / investment account (Plaid). Access token is stored server-side only.
+model BankConnection {
+  id              String    @id @default(cuid())
+  itemId          String    @unique
+  accessToken     String
+  institutionName String?
+  products        String?   // comma list, e.g. "transactions,investments"
+  cursor          String?   // Plaid transactions sync cursor
+  investmentsFrom String?   // last investments sync date (YYYY-MM-DD)
+  lastSyncAt      DateTime?
+  createdAt       DateTime  @default(now())
+}
+
+// A connected Google account for reading forwarded receipts/revenue from Gmail (single account).
+model GoogleAccount {
+  id           String    @id @default("singleton")
+  email        String?
+  accessToken  String?
+  refreshToken String?
+  expiryDate   DateTime? // access-token expiry
+  expenseLabel String    @default("Expenses") // Gmail label scanned for expense documents
+  revenueLabel String    @default("Revenue")  // Gmail label scanned for revenue documents
+  lastSyncAt   DateTime?
+  connectedAt  DateTime  @default(now())
+}
+
+// Records a Gmail message we've already imported, so re-syncs don't create duplicates.
+model ProcessedEmail {
+  id        String   @id @default(cuid())
+  messageId String   @unique
+  kind      String   // "revenue" | "expense"
+  createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Public marketing website (mulwalawater.com) — editable from the admin.
+// ---------------------------------------------------------------------------
+
+// Single-row editable copy for the public site (id is always "singleton").
+model SiteSettings {
+  id               String   @id @default("singleton")
+  siteName         String   @default("Mulwala Water")
+  legalName        String   @default("Mulwala Water Operating & Investment LLC")
+  tagline          String   @default("Expert consulting services to boost growth and profitability.")
+  phone            String   @default("(201) 657-2292")
+  email            String   @default("info@mulwalawater.com")
+  // Hero
+  heroHeadline     String   @default("Unlock Your Business Potential")
+  heroSubtext      String   @default("Expert consulting services to boost growth and profitability.")
+  ctaLabel         String   @default("Take Action")
+  // About
+  aboutHeading     String   @default("Who We Are")
+  visionHeading    String   @default("Our Vision")
+  visionBody       String   @default("Our passion is small and medium business. Our vision is to help founders and executive teams to thrive during their biggest challenges. We bring the tools, insight, and expertise typically only available to big business.")
+  expertiseHeading String   @default("Our Expertise")
+  expertiseIntro   String   @default("We focus on inflection points that set you up to thrive:")
+  approachHeading  String   @default("Our Approach")
+  approachTagline  String   @default("Data drives decision, people drive businesses.")
+  approachBody     String   @default("We are all about relationships, and we start with the people first. Only by truly understanding your business and your goals can we chart the path to lasting growth.")
+  // Playbooks / Portfolio intro copy
+  playbooksHeading String   @default("Playbooks")
+  playbooksIntro   String   @default("Proven, repeatable approaches we bring to every engagement.")
+  portfolioHeading String   @default("Portfolio Companies")
+  portfolioIntro   String   @default("Businesses we partner with and invest in.")
+  footerText       String   @default("Copyright © 2024 Mulwala Water Operating & Investment LLC — All Rights Reserved.")
+  updatedAt        DateTime @updatedAt
+}
+
+// A bullet under "Our Expertise".
+model ExpertisePoint {
+  id        String  @id @default(cuid())
+  text      String
+  sortOrder Int     @default(0)
+  active    Boolean @default(true)
+}
+
+// A card on the Playbooks page.
+model Playbook {
+  id        String  @id @default(cuid())
+  title     String
+  summary   String?
+  sortOrder Int     @default(0)
+  active    Boolean @default(true)
+}
+
+// A company on the Portfolio Companies page.
+model PortfolioCompany {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  url         String?
+  sortOrder   Int     @default(0)
+  active      Boolean @default(true)
+}
+
+// A submission from the public contact form.
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String
+  message   String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+// A newsletter email sign-up from the public site.
+model NewsletterSignup {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,23 @@
+/node_modules
+/.next
+/out
+/build
+next-env.d.ts
+*.tsbuildinfo
+
+# local env + secrets
+.env
+.env*.local
+
+# local SQLite database + generated Prisma client
+/dev.db
+/dev.db-journal
+/prisma/dev.db
+/app/generated
+
+# one-off scratch scripts
+/scratch-*.ts
+
+# OS
+.DS_Store
+Thumbs.db
