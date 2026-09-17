@@ -14,7 +14,7 @@ export default async function HomePage() {
       {/* Hero — Mulwala Bridge aerial with a navy overlay */}
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-navy" />
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/hero-sunset.jpg')" }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/bridge-aerial.jpg')" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.78) 0%, rgba(20,32,48,0.55) 45%, rgba(20,32,48,0.9) 100%)" }} />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-28 sm:py-40">
           <h1 className="text-4xl sm:text-6xl font-bold max-w-3xl leading-tight drop-shadow-lg">{s.heroHeadline}</h1>
