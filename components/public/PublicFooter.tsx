@@ -7,8 +7,11 @@ export function PublicFooter({ siteName, email, phone, footerText }: { siteName:
     <footer className="bg-navy text-white/80 mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-          <div className="text-white font-bold text-lg">{siteName}</div>
-          <p className="text-sm mt-2 max-w-xs">Expert consulting services to boost growth and profitability.</p>
+          <div className="inline-block bg-white rounded-lg p-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/logo.png" alt={siteName} className="h-12 w-auto" />
+          </div>
+          <p className="text-sm mt-3 max-w-xs">Expert consulting services to boost growth and profitability.</p>
         </div>
         <div>
           <div className="text-white font-semibold text-sm uppercase tracking-wide mb-2">Contact</div>
