@@ -14,7 +14,7 @@ export default async function HomePage() {
       {/* Hero — Mulwala Bridge aerial with a navy overlay */}
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-navy" />
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/mulwala-bridge.jpg')" }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/hero-sunset.jpg')" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.78) 0%, rgba(20,32,48,0.55) 45%, rgba(20,32,48,0.9) 100%)" }} />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-28 sm:py-40">
           <h1 className="text-4xl sm:text-6xl font-bold max-w-3xl leading-tight drop-shadow-lg">{s.heroHeadline}</h1>
@@ -52,8 +52,19 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Photo band — office */}
+      <section className="relative overflow-hidden">
+        <div className="h-72 sm:h-80 bg-cover bg-center" style={{ backgroundImage: "url('/images/office.jpg')" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.88) 0%, rgba(20,32,48,0.45) 55%, rgba(20,32,48,0.15) 100%)" }} />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+            <p className="text-white text-2xl sm:text-3xl font-bold max-w-lg leading-snug drop-shadow-lg">Big-business insight, brought to founder-led companies.</p>
+          </div>
+        </div>
+      </section>
+
       {/* Quick links */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-4">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link href="/playbooks" className="group bg-surface border border-border rounded-2xl p-6 no-underline hover:border-brand/50 transition-colors">
             <div className="text-xl font-bold text-ink">{s.playbooksHeading}</div>

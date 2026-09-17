@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Logo } from "@/components/Logo";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -21,8 +22,7 @@ export function PublicHeader({ siteName, phone }: { siteName: string; phone: str
     <header className="bg-white border-b border-border sticky top-0 z-30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center no-underline" aria-label={siteName}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo.png" alt={siteName} className="h-14 w-auto" />
+          <Logo layout="horizontal" color="#1c2530" className="h-11 w-auto" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">

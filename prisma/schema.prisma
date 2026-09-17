@@ -165,6 +165,10 @@ model SiteSettings {
   approachHeading  String   @default("Our Approach")
   approachTagline  String   @default("Data drives decision, people drive businesses.")
   approachBody     String   @default("We are all about relationships, and we start with the people first. Only by truly understanding your business and your goals can we chart the path to lasting growth.")
+  // Leadership / founder
+  founderName      String   @default("David Orr")
+  founderTitle     String   @default("Founder & Principal")
+  founderBio       String   @default("David founded Mulwala Water to bring the tools, insight, and expertise usually reserved for big business to founder-led companies — partnering closely with leadership teams through their most important inflection points.")
   // Playbooks / Portfolio intro copy
   playbooksHeading String   @default("Playbooks")
   playbooksIntro   String   @default("Proven, repeatable approaches we bring to every engagement.")

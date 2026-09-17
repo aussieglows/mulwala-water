@@ -76,6 +76,14 @@ export function SiteEditor({ settings, expertise, playbooks, portfolio }: { sett
         </div>
       </Section>
 
+      <Section title="Leadership (About page)">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Field label="Founder name" value={f.founderName} onChange={set("founderName")} />
+          <Field label="Founder title" value={f.founderTitle} onChange={set("founderTitle")} />
+        </div>
+        <div className="mt-3"><Field label="Founder bio" value={f.founderBio} onChange={set("founderBio")} textarea /></div>
+      </Section>
+
       <Section title="Section intros & footer">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Field label="Playbooks heading" value={f.playbooksHeading} onChange={set("playbooksHeading")} />

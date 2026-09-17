@@ -3,7 +3,7 @@ export function PageBanner({ title, subtitle }: { title: string; subtitle?: stri
   return (
     <section className="relative overflow-hidden text-white">
       <div className="absolute inset-0 bg-navy" />
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/mulwala-bridge-md.jpg')" }} />
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/bridge-aerial-md.jpg')" }} />
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.72) 0%, rgba(20,32,48,0.88) 100%)" }} />
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
         <h1 className="text-4xl sm:text-5xl font-bold drop-shadow">{title}</h1>

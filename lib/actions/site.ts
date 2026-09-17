@@ -29,6 +29,9 @@ export type SiteSettingsInput = {
   approachHeading: string;
   approachTagline: string;
   approachBody: string;
+  founderName: string;
+  founderTitle: string;
+  founderBio: string;
   playbooksHeading: string;
   playbooksIntro: string;
   portfolioHeading: string;

@@ -34,7 +34,32 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+      {/* Leadership */}
+      <section className="bg-gray-bg">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/founder.jpg" alt={s.founderName} className="w-full max-w-[280px] rounded-2xl object-cover shadow-sm mx-auto" />
+          <div>
+            <div className="text-[11px] font-bold text-brand-dark uppercase tracking-wide">Leadership</div>
+            <h2 className="text-3xl font-bold mt-1">{s.founderName}</h2>
+            <p className="text-brand-dark font-medium">{s.founderTitle}</p>
+            <p className="text-muted mt-3 leading-relaxed max-w-xl">{s.founderBio}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Photo band — boardroom */}
+      <section className="relative overflow-hidden">
+        <div className="h-72 sm:h-80 bg-cover bg-center" style={{ backgroundImage: "url('/images/boardroom.jpg')" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.85) 0%, rgba(20,32,48,0.3) 100%)" }} />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+            <p className="text-white text-2xl sm:text-3xl font-bold max-w-lg leading-snug drop-shadow-lg">{s.approachTagline}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
           <h2 className="text-3xl font-bold">Contact Us</h2>
           <p className="text-muted mt-2">Ready to take the first step?</p>
