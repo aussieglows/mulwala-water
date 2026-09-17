@@ -17,8 +17,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/mulwala-bridge.jpg')" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.78) 0%, rgba(20,32,48,0.55) 45%, rgba(20,32,48,0.9) 100%)" }} />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-28 sm:py-40">
-          <p className="text-brand-light font-medium tracking-wide uppercase text-sm drop-shadow">{s.tagline}</p>
-          <h1 className="text-4xl sm:text-6xl font-bold mt-4 max-w-3xl leading-tight drop-shadow-lg">{s.heroHeadline}</h1>
+          <h1 className="text-4xl sm:text-6xl font-bold max-w-3xl leading-tight drop-shadow-lg">{s.heroHeadline}</h1>
           <p className="text-white/85 text-lg mt-5 max-w-xl drop-shadow">{s.heroSubtext}</p>
           <a href={ctaMail} className="inline-block mt-8 px-8 py-3.5 rounded-full bg-brand text-white font-bold no-underline hover:bg-brand-dark transition-colors shadow-lg">
             {s.ctaLabel}
