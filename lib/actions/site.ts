@@ -29,6 +29,13 @@ export type SiteSettingsInput = {
   approachHeading: string;
   approachTagline: string;
   approachBody: string;
+  aboutPageTitle: string;
+  storyHeading: string;
+  storyBody: string;
+  historyHeading: string;
+  historyBody: string;
+  missionHeading: string;
+  missionBody: string;
   showLeadership: boolean;
   founderName: string;
   founderTitle: string;

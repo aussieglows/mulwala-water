@@ -64,9 +64,9 @@ export function SiteEditor({ settings, expertise, playbooks, portfolio }: { sett
         </div>
       </Section>
 
-      <Section title="About section">
+      <Section title="Home — Who We Are (Vision / Expertise / Approach)">
         <div className="grid grid-cols-1 gap-3">
-          <Field label="About heading" value={f.aboutHeading} onChange={set("aboutHeading")} />
+          <Field label="Section heading" value={f.aboutHeading} onChange={set("aboutHeading")} />
           <Field label="Vision heading" value={f.visionHeading} onChange={set("visionHeading")} />
           <Field label="Vision body" value={f.visionBody} onChange={set("visionBody")} textarea />
           <Field label="Approach heading" value={f.approachHeading} onChange={set("approachHeading")} />
@@ -74,6 +74,18 @@ export function SiteEditor({ settings, expertise, playbooks, portfolio }: { sett
           <Field label="Approach body" value={f.approachBody} onChange={set("approachBody")} textarea />
           <Field label="Expertise heading" value={f.expertiseHeading} onChange={set("expertiseHeading")} />
           <Field label="Expertise intro" value={f.expertiseIntro} onChange={set("expertiseIntro")} />
+        </div>
+      </Section>
+
+      <Section title="About page (Story / History / Mission)">
+        <div className="grid grid-cols-1 gap-3">
+          <Field label="About page title" value={f.aboutPageTitle} onChange={set("aboutPageTitle")} />
+          <Field label="Story heading" value={f.storyHeading} onChange={set("storyHeading")} />
+          <Field label="Story body" value={f.storyBody} onChange={set("storyBody")} textarea />
+          <Field label="History heading" value={f.historyHeading} onChange={set("historyHeading")} />
+          <Field label="History body" value={f.historyBody} onChange={set("historyBody")} textarea />
+          <Field label="Mission heading" value={f.missionHeading} onChange={set("missionHeading")} />
+          <Field label="Mission body" value={f.missionBody} onChange={set("missionBody")} textarea />
         </div>
       </Section>
 
