@@ -1,5 +1,6 @@
 import { getSiteSettings, getActiveExpertise } from "@/lib/site";
 import { ContactForm } from "@/components/public/ContactForm";
+import { PageBanner } from "@/components/public/PageBanner";
 
 export const dynamic = "force-dynamic";
 
@@ -9,12 +10,7 @@ export default async function AboutPage() {
 
   return (
     <main>
-      <section className="bg-navy text-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-          <h1 className="text-4xl sm:text-5xl font-bold">{s.aboutHeading}</h1>
-          <p className="text-white/75 mt-3 max-w-2xl">{s.tagline}</p>
-        </div>
-      </section>
+      <PageBanner title={s.aboutHeading} subtitle={s.tagline} />
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>

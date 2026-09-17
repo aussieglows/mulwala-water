@@ -11,14 +11,16 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-navy text-white">
-        <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(circle at 20% 20%, var(--color-brand) 0%, transparent 45%), radial-gradient(circle at 85% 60%, #2b6cb0 0%, transparent 50%)" }} />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-24 sm:py-32">
-          <p className="text-brand-light font-medium tracking-wide uppercase text-sm">{s.tagline}</p>
-          <h1 className="text-4xl sm:text-6xl font-bold mt-4 max-w-3xl leading-tight">{s.heroHeadline}</h1>
-          <p className="text-white/75 text-lg mt-5 max-w-xl">{s.heroSubtext}</p>
-          <a href={ctaMail} className="inline-block mt-8 px-8 py-3.5 rounded-full bg-brand text-white font-bold no-underline hover:bg-brand-dark transition-colors">
+      {/* Hero — Mulwala Bridge aerial with a navy overlay */}
+      <section className="relative overflow-hidden text-white">
+        <div className="absolute inset-0 bg-navy" />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/mulwala-bridge.jpg')" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.78) 0%, rgba(20,32,48,0.55) 45%, rgba(20,32,48,0.9) 100%)" }} />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-28 sm:py-40">
+          <p className="text-brand-light font-medium tracking-wide uppercase text-sm drop-shadow">{s.tagline}</p>
+          <h1 className="text-4xl sm:text-6xl font-bold mt-4 max-w-3xl leading-tight drop-shadow-lg">{s.heroHeadline}</h1>
+          <p className="text-white/85 text-lg mt-5 max-w-xl drop-shadow">{s.heroSubtext}</p>
+          <a href={ctaMail} className="inline-block mt-8 px-8 py-3.5 rounded-full bg-brand text-white font-bold no-underline hover:bg-brand-dark transition-colors shadow-lg">
             {s.ctaLabel}
           </a>
         </div>

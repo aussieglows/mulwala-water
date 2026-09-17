@@ -1,4 +1,5 @@
 import { getSiteSettings, getActivePortfolio } from "@/lib/site";
+import { PageBanner } from "@/components/public/PageBanner";
 
 export const dynamic = "force-dynamic";
 
@@ -8,12 +9,7 @@ export default async function PortfolioPage() {
 
   return (
     <main>
-      <section className="bg-navy text-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-          <h1 className="text-4xl sm:text-5xl font-bold">{s.portfolioHeading}</h1>
-          <p className="text-white/75 mt-3 max-w-2xl">{s.portfolioIntro}</p>
-        </div>
-      </section>
+      <PageBanner title={s.portfolioHeading} subtitle={s.portfolioIntro} />
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
         {companies.length === 0 ? (
