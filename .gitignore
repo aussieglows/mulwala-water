@@ -17,6 +17,7 @@ next-env.d.ts
 
 # one-off scratch scripts
 /scratch-*.ts
+scripts/page-*.html
 
 # OS
 .DS_Store
