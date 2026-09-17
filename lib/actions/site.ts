@@ -86,16 +86,16 @@ export async function deletePlaybook(id: string) {
 }
 
 // --- Portfolio companies ---
-export async function addPortfolio(name: string, description: string, url: string) {
+export async function addPortfolio(name: string, description: string, url: string, logoUrl: string) {
   await requireAuth();
   if (!name.trim()) return;
   const max = await db.portfolioCompany.aggregate({ _max: { sortOrder: true } });
-  await db.portfolioCompany.create({ data: { name: name.trim(), description: description.trim() || null, url: url.trim() || null, sortOrder: (max._max.sortOrder ?? 0) + 1 } });
+  await db.portfolioCompany.create({ data: { name: name.trim(), description: description.trim() || null, url: url.trim() || null, logoUrl: logoUrl.trim() || null, sortOrder: (max._max.sortOrder ?? 0) + 1 } });
   bumpPublic();
 }
-export async function updatePortfolio(id: string, name: string, description: string, url: string, active: boolean) {
+export async function updatePortfolio(id: string, name: string, description: string, url: string, logoUrl: string, active: boolean) {
   await requireAuth();
-  await db.portfolioCompany.update({ where: { id }, data: { name: name.trim(), description: description.trim() || null, url: url.trim() || null, active } });
+  await db.portfolioCompany.update({ where: { id }, data: { name: name.trim(), description: description.trim() || null, url: url.trim() || null, logoUrl: logoUrl.trim() || null, active } });
   bumpPublic();
 }
 export async function deletePortfolio(id: string) {

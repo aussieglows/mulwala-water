@@ -13,7 +13,7 @@ import { PLAYBOOK_CATEGORIES } from "@/lib/categories";
 type Settings = SiteSettingsInput;
 type Expertise = { id: string; text: string; active: boolean };
 type PlaybookT = { id: string; title: string; summary: string | null; category: string; active: boolean };
-type PortfolioT = { id: string; name: string; description: string | null; url: string | null; active: boolean };
+type PortfolioT = { id: string; name: string; description: string | null; url: string | null; logoUrl: string | null; active: boolean };
 
 const input = "w-full px-3 py-2 border border-border rounded-lg text-sm bg-white";
 const labelCls = "flex flex-col gap-1 text-[12px] text-muted font-medium";
@@ -201,6 +201,7 @@ function PortfolioManager({ items, onChanged }: { items: PortfolioT[]; onChanged
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+  const [logoUrl, setLogoUrl] = useState("");
   const [busy, setBusy] = useState(false);
   const run = async (fn: () => Promise<void>) => { setBusy(true); try { await fn(); onChanged(); } finally { setBusy(false); } };
   return (
@@ -210,9 +211,10 @@ function PortfolioManager({ items, onChanged }: { items: PortfolioT[]; onChanged
       </div>
       <div className="border-t border-border mt-3 pt-3 flex flex-col gap-2">
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Company name" className={input} />
-        <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" className={input} />
-        <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https:// (optional)" className={input} />
-        <button onClick={() => run(async () => { await addPortfolio(name, description, url); setName(""); setDescription(""); setUrl(""); })} disabled={busy || !name.trim()} className="self-start bg-brand text-white rounded-full px-4 py-2 text-sm font-bold cursor-pointer disabled:opacity-50">Add company</button>
+        <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description (optional)" className={input} />
+        <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Website https:// (optional)" className={input} />
+        <input value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)} placeholder="Logo path e.g. /images/logos/f45.png (optional)" className={input} />
+        <button onClick={() => run(async () => { await addPortfolio(name, description, url, logoUrl); setName(""); setDescription(""); setUrl(""); setLogoUrl(""); })} disabled={busy || !name.trim()} className="self-start bg-brand text-white rounded-full px-4 py-2 text-sm font-bold cursor-pointer disabled:opacity-50">Add company</button>
       </div>
     </Section>
   );
@@ -221,15 +223,17 @@ function PortfolioRow({ c, busy, run }: { c: PortfolioT; busy: boolean; run: (fn
   const [name, setName] = useState(c.name);
   const [description, setDescription] = useState(c.description ?? "");
   const [url, setUrl] = useState(c.url ?? "");
+  const [logoUrl, setLogoUrl] = useState(c.logoUrl ?? "");
   const [active, setActive] = useState(c.active);
   return (
     <div className="border border-border rounded-lg p-2.5 flex flex-col gap-2">
       <input value={name} onChange={(e) => setName(e.target.value)} className={input} />
-      <input value={description} onChange={(e) => setDescription(e.target.value)} className={input} />
-      <input value={url} onChange={(e) => setUrl(e.target.value)} className={input} />
+      <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description (optional)" className={input} />
+      <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Website (optional)" className={input} />
+      <input value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)} placeholder="Logo path (optional)" className={input} />
       <div className="flex items-center gap-3">
         <label className="flex items-center gap-1 text-[12px] text-muted"><input type="checkbox" checked={active} onChange={(e) => setActive(e.target.checked)} /> Show</label>
-        <button onClick={() => run(() => updatePortfolio(c.id, name, description, url, active))} disabled={busy} className="text-[12px] font-bold text-brand-dark bg-transparent border-none cursor-pointer">Save</button>
+        <button onClick={() => run(() => updatePortfolio(c.id, name, description, url, logoUrl, active))} disabled={busy} className="text-[12px] font-bold text-brand-dark bg-transparent border-none cursor-pointer">Save</button>
         <button onClick={() => run(() => deletePortfolio(c.id))} disabled={busy} className="text-[12px] font-bold text-red bg-transparent border-none cursor-pointer">Delete</button>
       </div>
     </div>

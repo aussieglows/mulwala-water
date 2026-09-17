@@ -29,6 +29,17 @@ export default async function PlaybooksPage() {
         <p className="text-ink text-lg mt-8 leading-relaxed">{s.playbooksIntro}</p>
       </section>
 
+      {/* Photo band */}
+      <section className="relative overflow-hidden mb-6">
+        <div className="h-64 bg-cover bg-center" style={{ backgroundImage: "url('/images/bridge-pano.jpg')" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.82) 0%, rgba(20,32,48,0.3) 100%)" }} />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+            <p className="text-white text-xl sm:text-3xl font-bold max-w-lg leading-snug drop-shadow-lg">A play for every inflection point.</p>
+          </div>
+        </div>
+      </section>
+
       {/* Plays grouped by category */}
       {cats.length === 0 && (
         <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
