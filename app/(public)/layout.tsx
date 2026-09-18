@@ -1,14 +1,12 @@
-import { getSiteSettings } from "@/lib/site";
-import { PublicHeader } from "@/components/public/PublicHeader";
-import { PublicFooter } from "@/components/public/PublicFooter";
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
 
-export default async function PublicLayout({ children }: { children: React.ReactNode }) {
-  const s = await getSiteSettings();
+export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col">
-      <PublicHeader siteName={s.siteName} phone={s.phone} />
-      <div className="flex-1">{children}</div>
-      <PublicFooter siteName={s.siteName} email={s.email} phone={s.phone} footerText={s.footerText} />
+    <div className="min-h-screen flex flex-col bg-paper">
+      <Nav />
+      <main className="flex-1">{children}</main>
+      <Footer />
     </div>
   );
 }
