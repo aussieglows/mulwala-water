@@ -79,9 +79,6 @@ export default function HowWeWorkPage() {
           {c.price.body.map((p, i) => (
             <p key={i} className="t-body-lg text-ink2 mt-4 measure">{p}</p>
           ))}
-          <div className="mt-4">
-            <Placeholder block>{c.price.optional}</Placeholder>
-          </div>
         </div>
       </Section>
 

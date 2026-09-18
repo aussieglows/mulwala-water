@@ -91,7 +91,6 @@ export const howWeWork = {
     h2: "When we're the wrong call.",
     items: [
       { lead: "If you already know the answer and just need extra hands,", rest: "a contractor or a staffing firm is cheaper. We earn our keep when the judgement is the hard part, not the labour." },
-      { lead: "If the business is under [[$X]]M in revenue,", rest: "the economics usually don't work for either of us. We'll tell you what would, and who to call." },
       { lead: "If the owner isn't ready to change anything,", rest: "an outside operator makes it worse, not better. We've learned this the hard way." },
       { lead: "If you need a permanent hire, hire one.", rest: "Sometimes the right answer is a full-time COO. We'll say so, and we've helped people find one." },
     ],
@@ -103,7 +102,6 @@ export const howWeWork = {
       "We price to the mandate, not to a rate card — a three-week read on a 40-unit franchisee and a three-week read on a single-site manufacturer are different pieces of work. Every engagement is a fixed fee agreed in writing before we start, so you are never billed for a surprise.",
       "You'll have a number in the first conversation. We don't make people work for it.",
     ],
-    optional: "[[OPTIONAL — Laura to decide: add \"Engagements typically start at $X.\" Part 4.5.]]",
   },
 
   alternatives: {
