@@ -17,9 +17,9 @@ const db = new PrismaClient({ adapter: makeAdapter() });
 const companies: [string, string, string, string][] = [
   ["F45", "Functional-fitness franchise", "/images/logos/f45.jpg", "https://f45training.com"],
   ["Noom", "Digital health platform", "/images/logos/noom.jpg", "https://www.noom.com"],
-  ["Iris Energy", "Data centres & digital infrastructure", "/images/logos/iris.png", "https://irisenergy.co"],
+  ["Iris Energy", "Data centres & digital infrastructure", "/images/logos/iris.png", "https://iren.com"],
   ["Tifi", "", "/images/logos/tifi.svg", ""],
-  ["Dixon Projects", "Design & construction", "/images/logos/dixon.jpg", "https://www.dixon-projects.com"],
+  ["Dixon Projects", "Design & construction", "/images/logos/dixon.jpg", ""],
   ["Evans and Partners", "Investment & advisory", "/images/logos/evans-partners.png", "https://www.evansandpartners.com.au"],
   ["aussie glows", "Mobile spray-tan studio", "/images/logos/aussie-glows.png", "https://www.aussieglows.com"],
   ["Donavan Realty and Development", "Real estate & development", "/images/logos/donovan.png", "https://donovanrealtygroup.com"],
@@ -28,7 +28,7 @@ const companies: [string, string, string, string][] = [
   ["Apex Wellness Group", "Health & wellness", "/images/logos/apex.png", ""],
   ["LODI enabled", "Supply-chain hardware & tech", "/images/logos/lodi.png", "https://lodienabled.com"],
   ["Storyline", "", "/images/logos/storyline.png", ""],
-  ["OWM", "", "", "https://www.owm.ai"],
+  ["OWM", "", "/images/logos/owm.png", "https://www.owm.ai"],
 ];
 
 async function main() {
