@@ -11,7 +11,6 @@ import { Section, Container, Button } from "@/components/site/ui";
 import { MetricBand, CTABand } from "@/components/site/bands";
 import { DoorCard, PlayCard, PhaseStrip } from "@/components/site/blocks";
 import { TrussMark } from "@/components/site/Truss";
-import { Placeholder } from "@/components/site/Placeholder";
 
 export const dynamic = "force-dynamic";
 
@@ -91,22 +90,31 @@ export default async function HomePage() {
               title={cat.name}
               line={cat.home.line}
               plays={cat.home.examples}
-              href={`/playbooks/${cat.slug}`}
+              href="/playbooks"
             />
           ))}
         </div>
       </Section>
 
-      {/* 6 — Proof (gated on case studies) */}
-      <Section>
-        <h2 className="t-display-md text-ink m-0">{home.proof.h2}</h2>
-        <div className="mt-6">
-          <Placeholder block>{home.proof.placeholder}</Placeholder>
-        </div>
-      </Section>
+      {/* 6 — Proof — only rendered once case studies exist; hidden from the public site until then */}
+      {home.proof.caseStudies.length > 0 && (
+        <Section className="bg-surface border-y border-line">
+          <h2 className="t-display-md text-ink m-0">{home.proof.h2}</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {home.proof.caseStudies.map((cs, i) => (
+              <div key={i} className="rounded-2xl border border-line bg-paper p-6">
+                <p className="t-small text-muted">{cs.situation}</p>
+                <p className="t-body-lg text-ink mt-3">{cs.change}</p>
+                <p className="t-metric text-river-deep mt-4">{cs.number}</p>
+                <p className="t-small text-ink2 mt-4 italic">“{cs.quote}” — {cs.name}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* 7 — How we work, in brief */}
-      <Section className="bg-surface border-y border-line">
+      <Section>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 className="t-display-md text-ink m-0">{home.phasesBrief.h2}</h2>
           <Button href={home.phasesBrief.cta.href} variant="ghost">{home.phasesBrief.cta.label} →</Button>
@@ -114,13 +122,10 @@ export default async function HomePage() {
         <PhaseStrip items={howWeWork.phases.items} className="mt-12" />
       </Section>
 
-      {/* 8 — Portfolio strip */}
+      {/* 8 — Portfolio strip — logos only for launch (the /portfolio page is parked) */}
       {companies.length > 0 && (
-        <Section>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="t-display-md text-ink m-0">{home.portfolioStrip.h2}</h2>
-            <Button href={home.portfolioStrip.cta.href} variant="ghost">{home.portfolioStrip.cta.label} →</Button>
-          </div>
+        <Section className="bg-surface border-y border-line">
+          <h2 className="t-display-md text-ink m-0">{home.portfolioStrip.h2}</h2>
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {companies.map((c) =>
               c.logoUrl ? (

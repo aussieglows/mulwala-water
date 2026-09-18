@@ -59,7 +59,8 @@ export const home = {
 
   proof: {
     h2: "What it looks like when it works.",
-    placeholder: "[[LAURA: needs 2–3 case studies, Part 10]]",
+    // Hidden on the public site until Laura supplies case studies (Part 10). No public placeholder.
+    caseStudies: [] as { situation: string; change: string; number: string; quote: string; name: string }[],
   },
 
   phasesBrief: {

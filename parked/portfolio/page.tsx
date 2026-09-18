@@ -4,7 +4,6 @@ import { ctaPrimary } from "@/content/site";
 import { Hero } from "@/components/site/Hero";
 import { Section } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
-import { Placeholder } from "@/components/site/Placeholder";
 
 export const dynamic = "force-dynamic";
 
@@ -28,12 +27,6 @@ export default async function PortfolioPage() {
       />
 
       <Section>
-        <div className="max-w-3xl mb-10">
-          <Placeholder block>
-            [[LAURA: confirm the accurate relationship (Investment · Advisory · Operating) and period for each company, and confirm you have permission to use each logo. Do not publish any company whose relationship you cannot describe accurately, or whose mark you are not cleared to display.]]
-          </Placeholder>
-        </div>
-
         {companies.length === 0 ? (
           <p className="text-muted">Portfolio companies coming soon.</p>
         ) : (
@@ -49,10 +42,7 @@ export default async function PortfolioPage() {
                       <span className="t-heading text-ink">{c.name}</span>
                     )}
                   </div>
-                  <div className="mt-4">
-                    <Placeholder>[[Role · period]]</Placeholder>
-                  </div>
-                  {c.description && <p className="t-small text-ink2 mt-3 mb-0">{c.description}</p>}
+                  {c.description && <p className="t-small text-ink2 mt-4 mb-0">{c.description}</p>}
                 </div>
               );
               return c.url ? (

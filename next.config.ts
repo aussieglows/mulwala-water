@@ -5,8 +5,10 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["sharp", "@prisma/adapter-better-sqlite3", "@prisma/adapter-pg", "pg", "googleapis", "google-auth-library", "plaid"],
   async redirects() {
     return [
-      // Preserve the old URL after the rebuild (spec Part 5).
-      { source: "/portfolio-companies", destination: "/portfolio", permanent: true },
+      // /portfolio is parked for the initial launch, so send the old URL home for now
+      // (temporary — restore the /portfolio destination when the page is added back).
+      { source: "/portfolio-companies", destination: "/", permanent: false },
+      { source: "/portfolio", destination: "/", permanent: false },
     ];
   },
 };

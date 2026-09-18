@@ -118,8 +118,10 @@ export const howWeWork = {
   },
 
   risk: {
+    // Hidden on the public site until Laura approves it (a real commercial commitment).
+    // Flip `approved` to true to publish. Do NOT ship unapproved.
+    approved: false,
     h2: "If it isn't working, you shouldn't have to finish it.",
-    approvalNote: "[[LAURA — THIS IS A REAL COMMERCIAL COMMITMENT. Approve, amend or delete. Do not ship it unapproved.]]",
     body:
       "Two weeks into any engagement you'll know whether we're the right people, and so will we. If either of us thinks we aren't, we stop there and you pay only for the time used. No notice period, no wind-down fee, no awkward conversation about the rest of the contract.",
   },

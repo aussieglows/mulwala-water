@@ -6,7 +6,7 @@ import { Section, Container, Eyebrow } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
 import { EngagementCard, PhaseStrip, ComparisonTable, FAQ } from "@/components/site/blocks";
 import { TrussMark } from "@/components/site/Truss";
-import { Placeholder, isPlaceholder, RichText } from "@/components/site/Placeholder";
+import { isPlaceholder, RichText } from "@/components/site/Placeholder";
 import { ctaPrimary } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 };
 
 export default function HowWeWorkPage() {
-  // FAQPage structured data only from questions with real (non-placeholder) answers.
-  const answered = c.faq.items.filter((i) => !isPlaceholder(i.a));
+  // Only questions with real (non-placeholder) answers are shown publicly or emitted as FAQPage data.
+  const answeredFaq = c.faq.items.filter((i) => !isPlaceholder(i.a));
   const faqLd =
-    answered.length > 0
+    answeredFaq.length > 0
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: answered.map((i) => ({
+          mainEntity: answeredFaq.map((i) => ({
             "@type": "Question",
             name: i.q,
             acceptedAnswer: { "@type": "Answer", text: i.a },
@@ -92,29 +92,30 @@ export default function HowWeWorkPage() {
         </div>
       </Section>
 
-      {/* Where the risk sits — must not ship unapproved */}
-      <Section className="bg-surface border-y border-line">
-        <div className="max-w-3xl">
-          <Eyebrow className="mb-4">WHERE THE RISK SITS</Eyebrow>
-          <h2 className="t-display-md text-ink m-0">{c.risk.h2}</h2>
-          <div className="mt-4">
-            <Placeholder block>{c.risk.approvalNote}</Placeholder>
+      {/* Where the risk sits — hidden from the public site until Laura approves it (c.risk.approved) */}
+      {c.risk.approved && (
+        <Section className="bg-surface border-y border-line">
+          <div className="max-w-3xl">
+            <Eyebrow className="mb-4">WHERE THE RISK SITS</Eyebrow>
+            <h2 className="t-display-md text-ink m-0">{c.risk.h2}</h2>
+            <blockquote className="mt-5 border-l-2 border-brass pl-5 t-body-lg text-ink2 measure italic">
+              {c.risk.body}
+            </blockquote>
           </div>
-          <blockquote className="mt-5 border-l-2 border-brass pl-5 t-body-lg text-ink2 measure italic">
-            {c.risk.body}
-          </blockquote>
-        </div>
-      </Section>
+        </Section>
+      )}
 
-      {/* FAQ */}
-      <Section>
-        <div className="max-w-3xl">
-          <h2 className="t-display-md text-ink m-0">{c.faq.h2}</h2>
-          <div className="mt-8">
-            <FAQ items={c.faq.items} />
+      {/* FAQ — only the answered questions render; the section is hidden until at least one has an answer */}
+      {answeredFaq.length > 0 && (
+        <Section className="bg-surface border-y border-line">
+          <div className="max-w-3xl">
+            <h2 className="t-display-md text-ink m-0">{c.faq.h2}</h2>
+            <div className="mt-8">
+              <FAQ items={answeredFaq} />
+            </div>
           </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
       <CTABand heading={c.cta.heading} body={c.cta.sub} secondary={null} />
 

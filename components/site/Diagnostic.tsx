@@ -57,7 +57,7 @@ export function Diagnostic() {
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Button href="/contact" variant="primary">Book a 20-minute call</Button>
-          <Button href={result.href} variant="secondary">See the {result.name} plays</Button>
+          <Button href="/playbooks" variant="secondary">See the playbooks</Button>
         </div>
         <button onClick={restart} className="mt-6 block t-small text-muted hover:text-river-deep bg-transparent border-0 p-0 cursor-pointer">
           ↻ Start over

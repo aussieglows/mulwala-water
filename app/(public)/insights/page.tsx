@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { articles, publishedArticles } from "@/content/insights";
+import { articles } from "@/content/insights";
 import { ctaPrimary } from "@/content/site";
 import { Hero } from "@/components/site/Hero";
 import { Section } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
-import { Placeholder } from "@/components/site/Placeholder";
 import { TrussMark } from "@/components/site/Truss";
 
 export const metadata: Metadata = {
@@ -16,8 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default function InsightsPage() {
-  const live = publishedArticles();
-
   return (
     <>
       <Hero
@@ -28,12 +25,6 @@ export default function InsightsPage() {
       />
 
       <Section>
-        {live.length === 0 && (
-          <div className="max-w-3xl mb-8">
-            <Placeholder block>[[Laura — these six are planned launch pieces (Part 6.11). Each publishes under a named author once written; nothing goes up we wouldn&rsquo;t defend in a room.]]</Placeholder>
-          </div>
-        )}
-
         <div className="grid gap-5 md:grid-cols-2">
           {articles.map((a) => {
             const inner = (

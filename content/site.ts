@@ -31,21 +31,10 @@ export const nav = [
       { label: "Family-owned businesses", href: "/who-we-help/family-owned" },
       { label: "Sponsor-backed companies", href: "/who-we-help/private-equity" },
       { label: "Franchise & multi-unit", href: "/who-we-help/franchise" },
-      { label: "Portfolio & advisory companies", href: "/portfolio", divider: true },
     ],
   },
   { label: "How We Work", href: "/how-we-work" },
-  {
-    label: "Playbooks",
-    href: "/playbooks",
-    children: [
-      { label: "Growth", href: "/playbooks/growth" },
-      { label: "Systems", href: "/playbooks/systems" },
-      { label: "Turnaround", href: "/playbooks/turnaround" },
-      { label: "Owner & Exit", href: "/playbooks/owner-and-exit" },
-    ],
-  },
-  { label: "Results", href: "/results" },
+  { label: "Playbooks", href: "/playbooks" },
   { label: "About", href: "/about" },
 ];
 
@@ -54,8 +43,9 @@ export const footer = {
     {
       title: "Company",
       links: [
+        { label: "How We Work", href: "/how-we-work" },
+        { label: "Playbooks", href: "/playbooks" },
         { label: "About", href: "/about" },
-        { label: "Portfolio", href: "/portfolio" },
         { label: "Insights", href: "/insights" },
         { label: "Contact", href: "/contact" },
         { label: "Privacy", href: "/privacy" },
@@ -70,18 +60,5 @@ export const footer = {
         { label: "Franchise & multi-unit", href: "/who-we-help/franchise" },
       ],
     },
-    {
-      title: "Playbooks",
-      links: [
-        { label: "Growth", href: "/playbooks/growth" },
-        { label: "Systems", href: "/playbooks/systems" },
-        { label: "Turnaround", href: "/playbooks/turnaround" },
-        { label: "Owner & Exit", href: "/playbooks/owner-and-exit" },
-      ],
-    },
   ],
-  newsletter: {
-    heading: "The occasional note",
-    description: "Field notes on operating founder-led and multi-unit businesses. A few times a year, never more.",
-  },
 };

@@ -3,7 +3,6 @@ import { ctaPrimary } from "@/content/site";
 import { Hero } from "@/components/site/Hero";
 import { Section } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
-import { Placeholder } from "@/components/site/Placeholder";
 import { TrussMark } from "@/components/site/Truss";
 
 export const metadata: Metadata = {
@@ -32,10 +31,6 @@ export default function ResultsPage() {
       />
 
       <Section>
-        <div className="max-w-3xl mb-8">
-          <Placeholder block>[[This page cannot be built without Laura&rsquo;s case studies (Part 10.1) — two or three, each following the template below.]]</Placeholder>
-        </div>
-
         <h2 className="t-heading text-ink m-0">How each case study reads</h2>
         <ol className="list-none p-0 m-0 mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {template.map((t, i) => (

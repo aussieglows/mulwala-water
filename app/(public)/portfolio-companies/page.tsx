@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-// Old URL preserved after the rebuild. The 301 in next.config.ts handles this at the edge;
-// this fallback covers any request that reaches the route directly (spec Part 5).
+// Old URL. /portfolio is parked for launch, so this and the next.config redirect both send home
+// for now. Restore "/portfolio" here (and in next.config.ts) when the page is added back.
 export default function PortfolioCompaniesRedirect() {
-  redirect("/portfolio");
+  redirect("/");
 }

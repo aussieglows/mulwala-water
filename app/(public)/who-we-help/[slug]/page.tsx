@@ -11,7 +11,7 @@ import { CTABand } from "@/components/site/bands";
 import { EngagementCard, PlayCard } from "@/components/site/blocks";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { TrussMark } from "@/components/site/Truss";
-import { Placeholder } from "@/components/site/Placeholder";
+import { isPlaceholder } from "@/components/site/Placeholder";
 import { ctaPrimary } from "@/content/site";
 
 export function generateStaticParams() {
@@ -84,22 +84,22 @@ export default async function DoorPage({ params }: { params: Promise<{ slug: str
               title={c!.name}
               line={c!.home.line}
               plays={c!.home.examples}
-              href={`/playbooks/${c!.slug}`}
+              href="/playbooks"
             />
           ))}
         </div>
       </Section>
 
-      {/* Audience case study */}
-      <Section>
-        <h2 className="t-display-md text-ink m-0">Proof from this side of the business.</h2>
-        <div className="mt-6">
-          <Placeholder block>{d.caseStudy}</Placeholder>
-        </div>
-      </Section>
+      {/* Audience case study — hidden from the public site until a real one is supplied */}
+      {!isPlaceholder(d.caseStudy) && (
+        <Section>
+          <h2 className="t-display-md text-ink m-0">Proof from this side of the business.</h2>
+          <p className="t-body-lg text-ink2 mt-5 measure">{d.caseStudy}</p>
+        </Section>
+      )}
 
       {/* Relevant engagement shapes */}
-      <Section className="bg-surface border-y border-line">
+      <Section>
         <h2 className="t-display-md text-ink m-0">How this usually starts.</h2>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {shapes.map((s) => (

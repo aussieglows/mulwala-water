@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { Section, Container } from "@/components/site/ui";
 import { ContactForm } from "@/components/site/ContactForm";
-import { Placeholder, isPlaceholder } from "@/components/site/Placeholder";
+import { isPlaceholder } from "@/components/site/Placeholder";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -26,8 +26,7 @@ export default function ContactPage() {
           <div>
             <ContactForm />
             <p className="t-small text-muted mt-4 measure">
-              We reply within one business day. Your details go to{" "}
-              <Placeholder>[[NAME]]</Placeholder> and nowhere else — we don&rsquo;t add you to a list.
+              We reply within one business day. Your details come straight to us and nowhere else — we don&rsquo;t add you to a list.
             </p>
           </div>
 
@@ -42,15 +41,17 @@ export default function ContactPage() {
                 <dt className="t-small text-muted">Phone</dt>
                 <dd className="m-0">
                   <a href={`tel:${site.phone.replace(/[^0-9+]/g, "")}`} className="t-body-lg text-ink hover:text-river-deep no-underline">{site.phone}</a>
-                  <span className="block t-small text-muted mt-1">
-                    {isPlaceholder(site.phoneHours) ? <Placeholder>{site.phoneHours}</Placeholder> : site.phoneHours}
-                  </span>
+                  {!isPlaceholder(site.phoneHours) && (
+                    <span className="block t-small text-muted mt-1">{site.phoneHours}</span>
+                  )}
                 </dd>
               </div>
-              <div>
-                <dt className="t-small text-muted">LinkedIn</dt>
-                <dd className="m-0"><Placeholder>{site.linkedin}</Placeholder></dd>
-              </div>
+              {!isPlaceholder(site.linkedin) && (
+                <div>
+                  <dt className="t-small text-muted">LinkedIn</dt>
+                  <dd className="m-0"><a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="t-body-lg text-ink hover:text-river-deep no-underline">Connect on LinkedIn →</a></dd>
+                </div>
+              )}
             </dl>
             <p className="t-small text-ink2 mt-8">
               Already know you want to talk?{" "}

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { footer, site } from "@/content/site";
-import { NewsletterForm } from "@/components/site/NewsletterForm";
 import { Truss, TrussMark } from "@/components/site/Truss";
 
 export function Footer() {
@@ -8,15 +7,16 @@ export function Footer() {
   return (
     <footer className="mt-24 border-t border-line bg-surface">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-10">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1.4fr]">
-          {/* Brand + newsletter */}
+        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr]">
+          {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2.5 no-underline mb-3" aria-label={site.name}>
               <span className="text-river"><TrussMark className="w-8 h-auto" /></span>
               <span className="font-serif text-lg font-semibold tracking-tight text-ink">Mulwala Water</span>
             </Link>
-            <p className="t-small text-muted max-w-xs mb-5">{footer.newsletter.description}</p>
-            <NewsletterForm />
+            <p className="t-small text-muted max-w-xs">
+              We advise, operate, and invest in founder-led, family-owned, sponsor-backed and multi-unit businesses.
+            </p>
           </div>
 
           {footer.columns.map((col) => (
