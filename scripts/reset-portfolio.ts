@@ -25,7 +25,7 @@ const companies: [string, string, string, string][] = [
   ["Donavan Realty and Development", "Real estate & development", "/images/logos/donovan.png", "https://donovanrealtygroup.com"],
   ["Parched Hospitality Group", "Hospitality group", "/images/logos/phg.jpg", "https://parchedhg.com"],
   ["Romina Day", "", "/images/logos/romina-day.png", "https://www.rominaday.com"],
-  ["Apex Wellness Group", "Health & wellness", "/images/logos/apex.png", ""],
+  ["Apex Wellness Group", "Health & wellness", "/images/logos/apex.png", "https://www.apexwellness.group"],
   ["LODI enabled", "Supply-chain hardware & tech", "/images/logos/lodi.png", "https://lodienabled.com"],
   ["Storyline", "", "/images/logos/storyline.png", ""],
   ["OWM", "", "/images/logos/owm.png", "https://www.owm.ai"],
