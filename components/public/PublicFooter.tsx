@@ -27,9 +27,8 @@ export function PublicFooter({ siteName, email, phone, footerText }: { siteName:
         </div>
       </div>
       <div className="border-t border-white/15">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3 flex-wrap text-xs text-white/60">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-xs text-white/60">
           <span>{footerText}</span>
-          <Link href="/admin" className="text-white/50 hover:text-white/80 no-underline">Admin</Link>
         </div>
       </div>
     </footer>
