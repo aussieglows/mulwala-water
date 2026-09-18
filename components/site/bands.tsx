@@ -1,5 +1,5 @@
 import { Container, Button } from "@/components/site/ui";
-import { Placeholder, isPlaceholder } from "@/components/site/Placeholder";
+import { RichText } from "@/components/site/Placeholder";
 import { Truss } from "@/components/site/Truss";
 import { ctaPrimary, ctaSecondary } from "@/content/site";
 
@@ -15,11 +15,9 @@ export function MetricBand({ metrics, className = "" }: { metrics: Metric[]; cla
             <div key={i}>
               <dt className="sr-only">{m.label}</dt>
               <dd className="m-0">
-                {isPlaceholder(m.value) ? (
-                  <Placeholder block>{m.value}</Placeholder>
-                ) : (
-                  <span className="t-metric text-river-deep block">{m.value}</span>
-                )}
+                <span className="t-metric text-river-deep block">
+                  {m.value.includes("[[") ? <RichText text={m.value} /> : m.value}
+                </span>
                 <span className="t-small text-muted mt-2 block">{m.label}</span>
               </dd>
             </div>
