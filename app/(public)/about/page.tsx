@@ -1,69 +1,74 @@
-import { getSiteSettings } from "@/lib/site";
-import { ContactForm } from "@/components/public/ContactForm";
-import { PageBanner } from "@/components/public/PageBanner";
+import type { Metadata } from "next";
+import Image from "next/image";
+import { about } from "@/content/about";
+import { ctaPrimary } from "@/content/site";
+import { Hero } from "@/components/site/Hero";
+import { Section, Container } from "@/components/site/ui";
+import { CTABand } from "@/components/site/bands";
+import { PrincipalProfile } from "@/components/site/PrincipalProfile";
 
-export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Mulwala Water puts big-company operating discipline inside founder-led, family-owned, sponsor-backed and multi-unit businesses — by advising, operating, or investing.",
+  alternates: { canonical: "/about" },
+};
 
-export default async function AboutPage() {
-  const s = await getSiteSettings();
-
+export default function AboutPage() {
   return (
-    <main>
-      <PageBanner title={s.aboutPageTitle} />
+    <>
+      <Hero eyebrow={about.eyebrow} title={about.h1} lead={about.lead} primary={ctaPrimary} />
 
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 flex flex-col gap-10">
-        <div>
-          <h2 className="text-2xl font-bold text-brand-dark">{s.storyHeading}</h2>
-          <p className="text-muted mt-3 leading-relaxed text-[15px]">{s.storyBody}</p>
+      {/* Our story */}
+      <Section>
+        <div className="max-w-3xl">
+          <h2 className="t-display-md text-ink m-0">{about.story.h2}</h2>
+          {about.story.body.map((p, i) => (
+            <p key={i} className="t-body-lg text-ink2 mt-5 measure">{p}</p>
+          ))}
         </div>
-        <div>
-          <h2 className="text-2xl font-bold text-brand-dark">{s.historyHeading}</h2>
-          <p className="text-muted mt-3 leading-relaxed text-[15px]">{s.historyBody}</p>
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold text-brand-dark">{s.missionHeading}</h2>
-          <p className="text-muted mt-3 leading-relaxed text-[15px]">{s.missionBody}</p>
-        </div>
-      </section>
+      </Section>
 
-      {/* Leadership — hidden until turned on in the admin (Website → Leadership) */}
-      {s.showLeadership && (
-        <section className="bg-gray-bg">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 items-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/founder.jpg" alt={s.founderName} className="w-full max-w-[280px] rounded-2xl object-cover shadow-sm mx-auto" />
-            <div>
-              <div className="text-[11px] font-bold text-brand-dark uppercase tracking-wide">Leadership</div>
-              <h2 className="text-3xl font-bold mt-1">{s.founderName}</h2>
-              <p className="text-brand-dark font-medium">{s.founderTitle}</p>
-              <p className="text-muted mt-3 leading-relaxed max-w-xl">{s.founderBio}</p>
+      {/* The name — with the Mulwala aerial */}
+      <Section className="bg-surface border-y border-line">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <h2 className="t-display-md text-ink m-0">{about.name.h2}</h2>
+            <p className="t-body-lg text-ink2 mt-5 measure">{about.name.body}</p>
+          </div>
+          <figure className="m-0">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-line">
+              <Image
+                src={about.name.image.src}
+                alt={about.name.image.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                style={{ filter: "saturate(0.8) sepia(0.06)" }}
+              />
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* Photo band — boardroom */}
-      <section className="relative overflow-hidden">
-        <div className="h-72 sm:h-80 bg-cover bg-center" style={{ backgroundImage: "url('/images/boardroom.jpg')" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.68) 0%, rgba(20,32,48,0.18) 100%)" }} />
-        <div className="absolute inset-0 flex items-center">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
-            <p className="text-white text-2xl sm:text-3xl font-bold max-w-lg leading-snug drop-shadow-lg">{s.approachTagline}</p>
-          </div>
+            <figcaption className="t-small text-muted mt-3">{about.name.caption}</figcaption>
+          </figure>
         </div>
-      </section>
+      </Section>
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div>
-          <h2 className="text-3xl font-bold">Contact Us</h2>
-          <p className="text-muted mt-2">Ready to take the first step?</p>
-          <div className="mt-5 flex flex-col gap-1 text-sm">
-            <a href={`mailto:${s.email}`} className="text-brand-dark font-medium no-underline">{s.email}</a>
-            <a href={`tel:${s.phone.replace(/[^0-9+]/g, "")}`} className="text-brand-dark font-medium no-underline">{s.phone}</a>
-          </div>
+      {/* Approach */}
+      <Section>
+        <div className="max-w-3xl">
+          <h2 className="t-display-md text-ink m-0">{about.approach.h2}</h2>
+          <p className="t-body-lg text-ink2 mt-5 measure">{about.approach.body}</p>
         </div>
-        <ContactForm />
-      </section>
-    </main>
+      </Section>
+
+      {/* Principal */}
+      <Section className="bg-surface border-y border-line">
+        <h2 className="t-display-md text-ink m-0">{about.principalHeading}</h2>
+        <div className="mt-8">
+          <PrincipalProfile />
+        </div>
+      </Section>
+
+      <CTABand heading="Book a 20-minute call." body="Twenty minutes, no deck. We'll tell you whether this is a problem we're good at." secondary={{ label: "See how we work", href: "/how-we-work" }} />
+    </>
   );
 }

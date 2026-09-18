@@ -1,97 +1,154 @@
+import type { Metadata } from "next";
+import Script from "next/script";
 import Link from "next/link";
-import { getSiteSettings, getActiveExpertise } from "@/lib/site";
-import { ContactForm } from "@/components/public/ContactForm";
+import { home } from "@/content/home";
+import { playbookCategories } from "@/content/playbooks";
+import { howWeWork } from "@/content/howWeWork";
+import { ctaPrimary, ctaSecondary, site } from "@/content/site";
+import { getActivePortfolio } from "@/lib/site";
+import { Hero } from "@/components/site/Hero";
+import { Section, Container, Button } from "@/components/site/ui";
+import { MetricBand, CTABand } from "@/components/site/bands";
+import { DoorCard, PlayCard, PhaseStrip } from "@/components/site/blocks";
+import { TrussMark } from "@/components/site/Truss";
 
 export const dynamic = "force-dynamic";
 
+export const metadata: Metadata = {
+  description:
+    "We advise, operate, and invest in founder-led, family-owned, sponsor-backed and multi-unit businesses — a plan you can act on, an operator who steps in and runs it, or capital alongside you.",
+  alternates: { canonical: "/" },
+};
+
 export default async function HomePage() {
-  const s = await getSiteSettings();
-  const expertise = await getActiveExpertise();
-  const ctaMail = `mailto:${s.email}?subject=${encodeURIComponent(s.ctaLabel)}&body=${encodeURIComponent("I am ready to take action toward improving business outcomes and would like to take the first step.\n\nPlease contact me to begin the journey.")}`;
+  const companies = await getActivePortfolio();
+
+  const serviceLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: site.legalName,
+    url: "https://www.mulwalawater.com",
+    email: site.email,
+    telephone: site.phone,
+    areaServed: ["US", "AU"],
+  };
 
   return (
-    <main>
-      {/* Hero — Mulwala Bridge aerial with a navy overlay */}
-      <section className="relative overflow-hidden text-white">
-        <div className="absolute inset-0 bg-navy" />
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/bridge-aerial.jpg')" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,32,48,0.55) 0%, rgba(20,32,48,0.28) 45%, rgba(20,32,48,0.72) 100%)" }} />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-28 sm:py-40">
-          <h1 className="text-4xl sm:text-6xl font-bold max-w-3xl leading-tight drop-shadow-lg">{s.heroHeadline}</h1>
-          <p className="text-white/85 text-lg mt-5 max-w-xl drop-shadow">{s.heroSubtext}</p>
-          <a href={ctaMail} className="inline-block mt-8 px-8 py-3.5 rounded-full bg-brand text-white font-bold no-underline hover:bg-brand-dark transition-colors shadow-lg">
-            {s.ctaLabel}
-          </a>
-        </div>
-      </section>
+    <>
+      {/* 1 — Hero */}
+      <Hero
+        variant="dark"
+        eyebrow={home.hero.eyebrow}
+        title={home.hero.h1}
+        lead={home.hero.lead}
+        primary={ctaPrimary}
+        secondary={ctaSecondary}
+      />
 
-      {/* Who We Are — Vision, Expertise, Approach (matches the original home page) */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-        <h2 className="text-3xl font-bold text-center">{s.aboutHeading}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8 items-start">
-          <div>
-            <h3 className="text-brand-dark font-semibold text-lg">{s.visionHeading}</h3>
-            <p className="text-muted mt-2 leading-relaxed">{s.visionBody}</p>
-            <h3 className="text-brand-dark font-semibold text-lg mt-8">{s.approachHeading}</h3>
-            <p className="text-ink font-medium italic mt-2">&ldquo;{s.approachTagline}&rdquo;</p>
-            <p className="text-muted mt-2 leading-relaxed">{s.approachBody}</p>
-          </div>
-          <div className="bg-gray-bg rounded-2xl p-6">
-            <h3 className="text-brand-dark font-semibold text-lg">{s.expertiseHeading}</h3>
-            <p className="text-muted text-sm mt-1">{s.expertiseIntro}</p>
-            <ul className="mt-4 flex flex-col gap-3">
-              {expertise.map((e) => (
-                <li key={e.id} className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex items-center justify-center w-5 h-5 rounded-full bg-brand text-white text-xs shrink-0">✓</span>
-                  <span className="text-ink">{e.text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+      {/* 2 — Metrics */}
+      <MetricBand metrics={home.metrics} />
 
-      {/* Photo band — office */}
-      <section className="relative overflow-hidden">
-        <div className="h-72 sm:h-80 bg-cover bg-center" style={{ backgroundImage: "url('/images/office.jpg')" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,32,48,0.7) 0%, rgba(20,32,48,0.3) 55%, rgba(20,32,48,0.05) 100%)" }} />
-        <div className="absolute inset-0 flex items-center">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
-            <p className="text-white text-2xl sm:text-3xl font-bold max-w-lg leading-snug drop-shadow-lg">Big-business insight, brought to founder-led companies.</p>
-          </div>
+      {/* 3 — The four doors */}
+      <Section>
+        <h2 className="t-display-md text-ink m-0">{home.doors.h2}</h2>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {home.doors.items.map((d) => (
+            <DoorCard key={d.href} {...d} />
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Quick links */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link href="/playbooks" className="group bg-surface border border-border rounded-2xl p-6 no-underline hover:border-brand/50 transition-colors">
-            <div className="text-xl font-bold text-ink">{s.playbooksHeading}</div>
-            <p className="text-muted text-sm mt-1">{s.playbooksIntro}</p>
-            <span className="inline-block mt-3 text-brand-dark font-bold">View playbooks →</span>
-          </Link>
-          <Link href="/portfolio-companies" className="group bg-surface border border-border rounded-2xl p-6 no-underline hover:border-brand/50 transition-colors">
-            <div className="text-xl font-bold text-ink">{s.portfolioHeading}</div>
-            <p className="text-muted text-sm mt-1">{s.portfolioIntro}</p>
-            <span className="inline-block mt-3 text-brand-dark font-bold">View portfolio →</span>
-          </Link>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div>
-            <h2 className="text-3xl font-bold">Contact Us</h2>
-            <p className="text-muted mt-2">Drop us a line and we&apos;ll get back to you.</p>
-            <div className="mt-5 flex flex-col gap-1 text-sm">
-              <a href={`mailto:${s.email}`} className="text-brand-dark font-medium no-underline">{s.email}</a>
-              <a href={`tel:${s.phone.replace(/[^0-9+]/g, "")}`} className="text-brand-dark font-medium no-underline">{s.phone}</a>
+      {/* 3.5 — Three ways to work with us (advise / operate / invest) */}
+      <Section className="bg-surface border-y border-line">
+        <h2 className="t-display-md text-ink m-0">{home.modes.h2}</h2>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {home.modes.items.map((m) => (
+            <div key={m.title} className="rounded-2xl border border-line bg-paper p-7 flex flex-col h-full">
+              <TrussMark className="w-8 h-auto text-brass mb-4" />
+              <h3 className="t-heading text-ink m-0">{m.title}</h3>
+              <p className="t-body-lg text-muted mt-3 mb-0">{m.line}</p>
             </div>
-          </div>
-          <ContactForm />
+          ))}
         </div>
-      </section>
-    </main>
+      </Section>
+
+      {/* 4 — Approach */}
+      <Section>
+        <div className="max-w-3xl">
+          <h2 className="t-display-md text-ink m-0">{home.approach.h2}</h2>
+          <p className="t-body-lg text-ink2 mt-5 measure">{home.approach.body}</p>
+        </div>
+      </Section>
+
+      {/* 5 — What we do (four kinds) */}
+      <Section className="bg-surface border-y border-line">
+        <h2 className="t-display-md text-ink m-0">{home.whatWeDo.h2}</h2>
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {playbookCategories.map((cat) => (
+            <PlayCard
+              key={cat.slug}
+              title={cat.name}
+              line={cat.home.line}
+              plays={cat.home.examples}
+              href="/playbooks"
+            />
+          ))}
+        </div>
+      </Section>
+
+      {/* 6 — Proof — only rendered once case studies exist; hidden from the public site until then */}
+      {home.proof.caseStudies.length > 0 && (
+        <Section className="bg-surface border-y border-line">
+          <h2 className="t-display-md text-ink m-0">{home.proof.h2}</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {home.proof.caseStudies.map((cs, i) => (
+              <div key={i} className="rounded-2xl border border-line bg-paper p-6">
+                <p className="t-small text-muted">{cs.situation}</p>
+                <p className="t-body-lg text-ink mt-3">{cs.change}</p>
+                <p className="t-metric text-river-deep mt-4">{cs.number}</p>
+                <p className="t-small text-ink2 mt-4 italic">“{cs.quote}” — {cs.name}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {/* 7 — How we work, in brief */}
+      <Section>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h2 className="t-display-md text-ink m-0">{home.phasesBrief.h2}</h2>
+          <Button href={home.phasesBrief.cta.href} variant="ghost">{home.phasesBrief.cta.label} →</Button>
+        </div>
+        <PhaseStrip items={howWeWork.phases.items} className="mt-12" />
+      </Section>
+
+      {/* 8 — Portfolio strip — logos only for launch (the /portfolio page is parked) */}
+      {companies.length > 0 && (
+        <Section className="bg-surface border-y border-line">
+          <h2 className="t-display-md text-ink m-0">{home.portfolioStrip.h2}</h2>
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {companies.map((c) =>
+              c.logoUrl ? (
+                <div key={c.id} className="h-24 rounded-xl border border-line bg-paper flex items-center justify-center p-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.logoUrl} alt={c.name} className="max-h-12 max-w-[80%] object-contain opacity-70 grayscale" />
+                </div>
+              ) : (
+                <div key={c.id} className="h-24 rounded-xl border border-line bg-paper flex items-center justify-center p-4 text-center">
+                  <span className="t-small font-semibold text-ink2">{c.name}</span>
+                </div>
+              )
+            )}
+          </div>
+        </Section>
+      )}
+
+      {/* 9 — Closing CTA */}
+      <CTABand heading={home.closing.heading} body={home.closing.body} secondary={null} />
+
+      <Script id="service-ld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(serviceLd)}
+      </Script>
+    </>
   );
 }
