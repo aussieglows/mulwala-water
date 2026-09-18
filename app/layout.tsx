@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | Mulwala Water",
   },
   description:
-    "We advise, operate, and invest in founder-led, sponsor-backed and multi-unit businesses — a plan you can act on, an operator who steps in and runs it, or capital alongside you.",
+    "We advise, operate, and invest in founder-led, family-owned, sponsor-backed and multi-unit businesses — a plan you can act on, an operator who steps in and runs it, or capital alongside you.",
   openGraph: { type: "website", siteName: "Mulwala Water", locale: "en_US" },
   twitter: { card: "summary_large_image" },
 };

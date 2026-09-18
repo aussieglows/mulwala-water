@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   description:
-    "We advise, operate, and invest in founder-led, sponsor-backed and multi-unit businesses — a plan you can act on, an operator who steps in and runs it, or capital alongside you.",
+    "We advise, operate, and invest in founder-led, family-owned, sponsor-backed and multi-unit businesses — a plan you can act on, an operator who steps in and runs it, or capital alongside you.",
   alternates: { canonical: "/" },
 };
 
@@ -49,10 +49,10 @@ export default async function HomePage() {
       {/* 2 — Metrics */}
       <MetricBand metrics={home.metrics} />
 
-      {/* 3 — Three doors */}
+      {/* 3 — The four doors */}
       <Section>
         <h2 className="t-display-md text-ink m-0">{home.doors.h2}</h2>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {home.doors.items.map((d) => (
             <DoorCard key={d.href} {...d} />
           ))}

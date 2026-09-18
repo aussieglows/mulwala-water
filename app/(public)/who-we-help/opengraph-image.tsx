@@ -5,5 +5,5 @@ export const contentType = OG_CONTENT_TYPE;
 export const alt = "Who we help — Mulwala Water";
 
 export default function Image() {
-  return renderOG({ eyebrow: "WHO WE HELP", title: "Three kinds of business. One way of working." });
+  return renderOG({ eyebrow: "WHO WE HELP", title: "Most of our work starts in one of four places." });
 }

@@ -11,7 +11,7 @@ import { TrussMark } from "@/components/site/Truss";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "Field notes on operating founder-led, sponsor-backed and multi-unit businesses — narrow, specific, and written by the people who do the work.",
+    "Field notes on operating founder-led, family-owned, sponsor-backed and multi-unit businesses — narrow, specific, and written by the people who do the work.",
   alternates: { canonical: "/insights" },
 };
 

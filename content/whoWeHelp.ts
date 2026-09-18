@@ -1,4 +1,4 @@
-// The three doors (spec Part 4.2 + 6.6). Vocabulary is switched per audience.
+// The four doors (spec Part 4.2 + 6.6, plus family-owned). Vocabulary is switched per audience.
 // Symptoms ("what we usually find") are drafted; the audience case study is [[LAURA]].
 
 export type Door = {
@@ -40,6 +40,32 @@ export const doors: Door[] = [
     caseStudy: "[[LAURA — a founder-led case study belongs here (Part 10.1).]]",
     shapes: ["THE READ", "IN THE SEAT", "ON CALL"],
     serviceType: "Operating advisory for founder-led businesses",
+  },
+  {
+    slug: "family-owned",
+    name: "Family-owned",
+    eyebrow: "FAMILY-OWNED BUSINESSES",
+    h1: "Everyone owns a piece. Nobody owns the decision.",
+    lead:
+      "The founder who could just decide is gone, and the business is usually run better than people give it credit for. What's holding it back isn't operations — it's governance: a group who each own part of it, and none of whom, alone, can move it.",
+    find: {
+      h2: "What we usually find.",
+      items: [
+        "Non-operating family shareholders own a piece but don't work in the business, and want different things from it — income, legacy, a clean exit — with no one reconciling the list.",
+        "Decisions stall because nobody has clear authority to make them, and \"we'll raise it at the next family meeting\" has become the answer to everything.",
+        "Ownership questions and operating questions get argued in the same room, and they contaminate each other.",
+        "Fair and equal are treated as the same thing. They aren't, and pretending they are costs both the business and the family.",
+      ],
+    },
+    about: {
+      h2: "What we do about it.",
+      body:
+        "We separate the two problems that get tangled — who owns the business and who runs it — and put in the governance to decide without a family fight: clear authority, a forum where ownership questions are settled apart from operating ones, and a plan for who runs it next and how they learn to. Succession is usually the play that matters most here. The plays that apply most:",
+      playbooks: ["owner-and-exit", "systems", "growth"],
+    },
+    caseStudy: "[[LAURA — a family-owned / multi-generation case study belongs here.]]",
+    shapes: ["THE READ", "IN THE SEAT", "ON CALL"],
+    serviceType: "Governance and operating support for family-owned businesses",
   },
   {
     slug: "private-equity",

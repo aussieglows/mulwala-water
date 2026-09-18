@@ -11,7 +11,7 @@ export const about = {
     h2: "Where this comes from.",
     body: [
       "Mulwala Water started with a simple observation from the inside of a public company: the tools, the discipline and the bench that big businesses take for granted are exactly what smaller ones are missing at the moment they need them most. The playbooks aren't secret. The people who can run them are just usually out of reach.",
-      "So we built a firm to put that capability inside founder-led, sponsor-backed and multi-unit businesses — as advice, as an operator in the seat, or as an investor alongside you. Whatever shape it takes, we do the work and hand it back running.",
+      "So we built a firm to put that capability inside founder-led, family-owned, sponsor-backed and multi-unit businesses — as advice, as an operator in the seat, or as an investor alongside you. Whatever shape it takes, we do the work and hand it back running.",
     ],
   },
 

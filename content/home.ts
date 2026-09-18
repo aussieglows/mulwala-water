@@ -7,7 +7,7 @@ export const home = {
     eyebrow: "ADVISORY · OPERATING · INVESTMENT",
     h1: "We advise, operate, and invest.",
     lead:
-      "Three ways to work with us: a plan you can act on, a senior operator who steps in and runs it, or capital alongside you. Big-company discipline for founder-led, sponsor-backed and multi-unit businesses — from people who have actually done the job, in Australia and America.",
+      "Three ways to work with us: a plan you can act on, a senior operator who steps in and runs it, or capital alongside you. Big-company discipline for founder-led, family-owned, sponsor-backed and multi-unit businesses — from people who have actually done the job, in Australia and America.",
   },
 
   // The three ways to work with us (added per Laura: advisory, operating, and investment).
@@ -31,9 +31,9 @@ export const home = {
 
   // Section 2 — portfolio-level aggregates avoid confidentiality problems. Real numbers are Laura's (Part 10).
   metrics: [
-    { value: "[[X]]", label: "years in operating seats" },
-    { value: "[[X]]", label: "businesses backed, advised or operated" },
-    { value: "[[$X]]M+", label: "revenue run through" },
+    { value: "20+", label: "years in operating seats" },
+    { value: "50+", label: "businesses backed, advised or operated" },
+    { value: "$5B+", label: "revenue run through" },
     { value: "2", label: "continents" },
   ] as Metric[],
 
@@ -41,6 +41,7 @@ export const home = {
     h2: "Where we're useful.",
     items: [
       { title: "Founder-led businesses", line: "You built it. It shouldn't depend on you to run it.", href: "/who-we-help/founder-led" },
+      { title: "Family-owned businesses", line: "Everyone owns a piece. Nobody owns the decision.", href: "/who-we-help/family-owned" },
       { title: "Sponsor-backed companies", line: "The underwriting case doesn't care how busy the team is.", href: "/who-we-help/private-equity" },
       { title: "Franchise & multi-unit", line: "Units open is not the same number as units working.", href: "/who-we-help/franchise" },
     ],

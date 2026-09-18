@@ -28,6 +28,7 @@ export const nav = [
     href: "/who-we-help",
     children: [
       { label: "Founder-led businesses", href: "/who-we-help/founder-led" },
+      { label: "Family-owned businesses", href: "/who-we-help/family-owned" },
       { label: "Sponsor-backed companies", href: "/who-we-help/private-equity" },
       { label: "Franchise & multi-unit", href: "/who-we-help/franchise" },
       { label: "Portfolio & advisory companies", href: "/portfolio", divider: true },
@@ -64,6 +65,7 @@ export const footer = {
       title: "Who We Help",
       links: [
         { label: "Founder-led", href: "/who-we-help/founder-led" },
+        { label: "Family-owned", href: "/who-we-help/family-owned" },
         { label: "Sponsor-backed", href: "/who-we-help/private-equity" },
         { label: "Franchise & multi-unit", href: "/who-we-help/franchise" },
       ],

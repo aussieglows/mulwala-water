@@ -10,7 +10,7 @@ import { PrincipalProfile } from "@/components/site/PrincipalProfile";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Mulwala Water puts big-company operating discipline inside founder-led, sponsor-backed and multi-unit businesses — by doing the work, not writing about it.",
+    "Mulwala Water puts big-company operating discipline inside founder-led, family-owned, sponsor-backed and multi-unit businesses — by advising, operating, or investing.",
   alternates: { canonical: "/about" },
 };
 
