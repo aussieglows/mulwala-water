@@ -9,6 +9,7 @@ import { Hero } from "@/components/site/Hero";
 import { Section } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
 import { EngagementCard, PlayCard } from "@/components/site/blocks";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { TrussMark } from "@/components/site/Truss";
 import { Placeholder } from "@/components/site/Placeholder";
 import { ctaPrimary } from "@/content/site";
@@ -46,6 +47,13 @@ export default async function DoorPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Who We Help", href: "/who-we-help" },
+          { label: d.name, href: `/who-we-help/${d.slug}` },
+        ]}
+      />
       <Hero eyebrow={d.eyebrow} title={d.h1} lead={d.lead} primary={ctaPrimary} />
 
       {/* What we usually find */}

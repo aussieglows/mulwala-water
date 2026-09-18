@@ -7,6 +7,7 @@ import { Hero } from "@/components/site/Hero";
 import { Section } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
 import { TrussMark } from "@/components/site/Truss";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { Placeholder } from "@/components/site/Placeholder";
 
 export function generateStaticParams() {
@@ -39,6 +40,13 @@ export default async function PlaybookCategoryPage({ params }: { params: Promise
 
   return (
     <>
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Playbooks", href: "/playbooks" },
+          { label: c.name, href: `/playbooks/${c.slug}` },
+        ]}
+      />
       <Hero eyebrow={`PLAYBOOKS · ${c.name.toUpperCase()}`} title={c.tagline} primary={ctaPrimary} />
 
       <Section>

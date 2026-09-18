@@ -3,6 +3,7 @@
 
 export type Door = {
   slug: string;
+  name: string; // short label for breadcrumbs / nav
   eyebrow: string;
   h1: string;
   lead: string;
@@ -16,6 +17,7 @@ export type Door = {
 export const doors: Door[] = [
   {
     slug: "founder-led",
+    name: "Founder-led",
     eyebrow: "FOUNDER-LED BUSINESSES",
     h1: "You built it. It shouldn't depend on you to run it.",
     lead:
@@ -41,6 +43,7 @@ export const doors: Door[] = [
   },
   {
     slug: "private-equity",
+    name: "Sponsor-backed",
     eyebrow: "SPONSOR-BACKED COMPANIES",
     h1: "Between the underwriting case and what's actually happening.",
     lead:
@@ -66,6 +69,7 @@ export const doors: Door[] = [
   },
   {
     slug: "franchise",
+    name: "Franchise & multi-unit",
     eyebrow: "FRANCHISE & MULTI-UNIT",
     h1: "Units open is not the same number as units working.",
     lead:
