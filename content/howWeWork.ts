@@ -5,10 +5,14 @@ export const howWeWork = {
   eyebrow: "HOW WE WORK",
   h1: "What an engagement actually looks like.",
   lead:
-    "Most consulting starts with a discovery phase and ends with a document. We start by getting into the business and end by leaving it working. Here is the shape of it, so you can decide whether it fits before you spend twenty minutes on a call.",
+    "We work three ways — we advise, we operate, and we invest — and we scope to the problem, not to a rate card. Whether you need a plan you can act on, a person to step in and run it, or capital alongside you, here is the shape of an engagement, so you can decide whether it fits before you spend twenty minutes on a call.",
 
   shapes: {
     h2: "Four shapes. One way of working.",
+    intro:
+      "The Read and On Call are how we advise; the Build and In the Seat are how we operate. Each is a fixed-fee engagement, scoped to the problem.",
+    investNote:
+      "And where it fits, we invest — backing a business with capital as well as advice, so our incentives sit with yours. If that's the conversation, tell us on the call.",
     cards: [
       {
         name: "THE READ",
@@ -66,7 +70,7 @@ export const howWeWork = {
         n: "02",
         name: "Scope",
         body:
-          "One page. The mandate, what success looks like as a number, who is doing it, how long, what it costs, and when we leave. Fixed fee. You sign the page, not a deck.",
+          "One page. The mandate, what success looks like as a number, who is doing it, how long, what it costs, and when we leave. Fixed fee, agreed in writing before we start.",
       },
       {
         n: "03",
@@ -86,7 +90,7 @@ export const howWeWork = {
   dontDo: {
     h2: "When we're the wrong call.",
     items: [
-      { lead: "If you want a strategy document, we're expensive.", rest: "Plenty of firms write excellent ones. We're built to run the thing, and you pay for that whether you use it or not." },
+      { lead: "If you already know the answer and just need extra hands,", rest: "a contractor or a staffing firm is cheaper. We earn our keep when the judgement is the hard part, not the labour." },
       { lead: "If the business is under [[$X]]M in revenue,", rest: "the economics usually don't work for either of us. We'll tell you what would, and who to call." },
       { lead: "If the owner isn't ready to change anything,", rest: "an outside operator makes it worse, not better. We've learned this the hard way." },
       { lead: "If you need a permanent hire, hire one.", rest: "Sometimes the right answer is a full-time COO. We'll say so, and we've helped people find one." },

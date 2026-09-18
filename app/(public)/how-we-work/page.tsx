@@ -5,6 +5,7 @@ import { Hero } from "@/components/site/Hero";
 import { Section, Container, Eyebrow } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
 import { EngagementCard, PhaseStrip, ComparisonTable, FAQ } from "@/components/site/blocks";
+import { TrussMark } from "@/components/site/Truss";
 import { Placeholder, isPlaceholder, RichText } from "@/components/site/Placeholder";
 import { ctaPrimary } from "@/content/site";
 
@@ -38,10 +39,15 @@ export default function HowWeWorkPage() {
       {/* Four shapes */}
       <Section>
         <h2 className="t-display-md text-ink m-0">{c.shapes.h2}</h2>
+        <p className="t-body-lg text-muted mt-4 measure">{c.shapes.intro}</p>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {c.shapes.cards.map((s) => (
             <EngagementCard key={s.name} {...s} />
           ))}
+        </div>
+        <div className="mt-8 rounded-2xl border border-line bg-river-wash/40 p-6 flex gap-3 max-w-3xl">
+          <TrussMark className="w-7 h-auto text-brass mt-1 shrink-0" />
+          <p className="t-body-lg text-ink2 m-0">{c.shapes.investNote}</p>
         </div>
       </Section>
 

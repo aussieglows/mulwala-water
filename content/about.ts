@@ -5,13 +5,13 @@ export const about = {
   eyebrow: "ABOUT",
   h1: "Big-company discipline, run by people who've done the job.",
   lead:
-    "Big companies have people whose whole job is the thing that's currently keeping you up at night. You don't. That's the gap we close — and we close it by doing the work, not by writing about it.",
+    "Big companies have people whose whole job is the thing that's currently keeping you up at night. You don't. That's the gap we close — with advice when that's what's needed, by taking the seat when it isn't, and with capital when we believe in the business.",
 
   story: {
     h2: "Where this comes from.",
     body: [
       "Mulwala Water started with a simple observation from the inside of a public company: the tools, the discipline and the bench that big businesses take for granted are exactly what smaller ones are missing at the moment they need them most. The playbooks aren't secret. The people who can run them are just usually out of reach.",
-      "So we built a firm to put that capability inside founder-led, sponsor-backed and multi-unit businesses — for as long as it takes, and no longer. We take the seat, run the play, and leave it working.",
+      "So we built a firm to put that capability inside founder-led, sponsor-backed and multi-unit businesses — as advice, as an operator in the seat, or as an investor alongside you. Whatever shape it takes, we do the work and hand it back running.",
     ],
   },
 
