@@ -1,11 +1,11 @@
-import { Source_Serif_4, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 
-// Free, self-hosted type set (build spec Part 6.2). Poppins removed entirely.
-export const display = Source_Serif_4({
+// Type set: Space Grotesk (display + labels) + Inter (body). Free, self-hosted.
+export const display = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
+  weight: ["500", "600", "700"],
   variable: "--ff-display",
-  axes: ["opsz"],
 });
 
 export const body = Inter({
@@ -14,11 +14,7 @@ export const body = Inter({
   variable: "--ff-body",
 });
 
-export const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["500"],
-  variable: "--ff-mono",
-});
+// Labels/metrics use the display face too (no separate mono in this direction).
+export const mono = display;
 
-export const fontVariables = `${display.variable} ${body.variable} ${mono.variable}`;
+export const fontVariables = `${display.variable} ${body.variable}`;

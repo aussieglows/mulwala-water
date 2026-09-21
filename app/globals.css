@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  /* ---- Public site palette (build spec Part 6.3) ---- */
-  --color-ink: #0e1720; /* primary dark — headings, hero ground */
-  --color-ink2: #1b2b3a; /* footer, dark sections */
-  --color-river: #0b5850; /* PRIMARY ACCENT */
-  --color-river-deep: #084039; /* hover / pressed / small-text accent */
-  --color-river-wash: #dcebe7; /* tint blocks, active nav pill */
+  /* ---- Public site palette ("Bridge" direction) ---- */
+  --color-ink: #13232d; /* primary dark — headings, hero ground */
+  --color-ink2: #26333c; /* footer, dark sections, body-dark */
+  --color-river: #0e6055; /* PRIMARY ACCENT (teal) */
+  --color-river-deep: #0a4a42; /* hover / pressed / small-text accent */
+  --color-river-wash: #d9e8e3; /* tint blocks, active nav pill */
   --color-brass: #b8863b; /* warm accent — large text & non-text only */
   --color-brass-deep: #8a6120; /* warm accent for small text & links */
-  --color-paper: #faf8f4; /* warm page ground */
+  --color-paper: #f7f3ec; /* warm page ground */
   --color-surface: #ffffff; /* cards */
-  --color-line: #e3dfd7; /* hairlines, borders */
-  --color-muted: #5c6873; /* secondary text */
+  --color-line: #e4ddd0; /* hairlines, borders */
+  --color-muted: #67707a; /* secondary text */
 
   /* ---- Admin/accounting palette (kept intact) ---- */
   --color-cream: #f7f8fa;
@@ -32,8 +32,8 @@
 
 @theme inline {
   --font-sans: var(--ff-body), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--ff-display), Georgia, "Times New Roman", serif;
-  --font-mono: var(--ff-mono), ui-monospace, monospace;
+  --font-serif: var(--ff-display), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--ff-display), ui-sans-serif, system-ui, sans-serif;
 
   --color-ink: var(--color-ink);
   --color-ink2: var(--color-ink2);
@@ -83,14 +83,14 @@
 
 /* ---- Type scale (spec 6.2) ---- */
 @layer components {
-  .t-display-xl { font-family: var(--ff-display), Georgia, serif; font-size: clamp(2.75rem, 6vw, 4.5rem); letter-spacing: -0.02em; line-height: 1.05; font-weight: 600; }
-  .t-display-lg { font-family: var(--ff-display), Georgia, serif; font-size: clamp(2.25rem, 4.5vw, 3.25rem); letter-spacing: -0.02em; line-height: 1.1; font-weight: 600; }
-  .t-display-md { font-family: var(--ff-display), Georgia, serif; font-size: clamp(1.75rem, 3vw, 2.25rem); letter-spacing: -0.015em; line-height: 1.2; font-weight: 600; }
-  .t-heading { font-family: var(--ff-display), Georgia, serif; font-size: 1.375rem; letter-spacing: -0.01em; line-height: 1.3; font-weight: 600; }
+  .t-display-xl { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2.75rem, 6vw, 4.5rem); letter-spacing: -0.03em; line-height: 1.05; font-weight: 600; }
+  .t-display-lg { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2.25rem, 4.5vw, 3.25rem); letter-spacing: -0.03em; line-height: 1.1; font-weight: 600; }
+  .t-display-md { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(1.75rem, 3vw, 2.25rem); letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
+  .t-heading { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: 1.375rem; letter-spacing: -0.015em; line-height: 1.3; font-weight: 600; }
   .t-body-lg { font-size: 1.1875rem; line-height: 1.65; }
   .t-small { font-size: 0.9375rem; line-height: 1.55; }
-  .t-eyebrow { font-family: var(--ff-mono), ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.14em; line-height: 1.2; text-transform: uppercase; }
-  .t-metric { font-family: var(--ff-mono), ui-monospace, monospace; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.01em; line-height: 1; font-weight: 500; }
+  .t-eyebrow { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: 0.75rem; letter-spacing: 0.14em; line-height: 1.2; text-transform: uppercase; font-weight: 600; }
+  .t-metric { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.02em; line-height: 1; font-weight: 600; font-variant-numeric: tabular-nums; }
   /* default readable measure for prose blocks */
   .measure { max-width: 68ch; }
 }
