@@ -124,17 +124,17 @@ export default async function HomePage() {
 
       {/* 8 — Portfolio strip — logos only for launch (the /portfolio page is parked) */}
       {companies.length > 0 && (
-        <Section className="bg-surface border-y border-line">
+        <Section className="bg-paper border-y border-line">
           <h2 className="t-display-md text-ink m-0">{home.portfolioStrip.h2}</h2>
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {companies.map((c) =>
               c.logoUrl ? (
-                <div key={c.id} className="h-24 rounded-xl border border-line bg-paper flex items-center justify-center p-4">
+                <div key={c.id} className="h-24 rounded-xl border border-line bg-surface flex items-center justify-center p-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={c.logoUrl} alt={c.name} className="max-h-12 max-w-[80%] object-contain opacity-70 grayscale" />
                 </div>
               ) : (
-                <div key={c.id} className="h-24 rounded-xl border border-line bg-paper flex items-center justify-center p-4 text-center">
+                <div key={c.id} className="h-24 rounded-xl border border-line bg-surface flex items-center justify-center p-4 text-center">
                   <span className="t-small font-semibold text-ink2">{c.name}</span>
                 </div>
               )
