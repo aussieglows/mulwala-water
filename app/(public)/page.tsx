@@ -124,7 +124,7 @@ export default async function HomePage() {
 
       {/* 8 — Portfolio strip — logos only for launch (the /portfolio page is parked) */}
       {companies.length > 0 && (
-        <Section className="bg-paper border-y border-line">
+        <Section className="bg-surface border-y border-line">
           <h2 className="t-display-md text-ink m-0">{home.portfolioStrip.h2}</h2>
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {companies.map((c) =>
