@@ -21,25 +21,32 @@ export function Truss({
   baseOpacity,
   title,
 }: TrussProps) {
-  const u = 28; // panel width
+  // Geometry mirrors the logo bridge: X-braced bays, inset top chord, sloped end abutments.
+  const u = 28; // bay width
+  const oh = 18; // sloped end overhang (bottom chord extends past the top chord)
   const h = 22; // truss height
-  const W = spans * u;
+  const W = spans * u + 2 * oh;
+  const x0 = (i: number) => oh + i * u; // interior node x
   const L = (a: number, b: number, c: number, d: number, key: string) => (
     <line key={key} x1={a} y1={b} x2={c} y2={d} />
   );
 
-  const chords = [L(0, 0, W, 0, "top"), L(0, h, W, h, "bot")];
-  const verticals = Array.from({ length: spans + 1 }, (_, i) => L(i * u, 0, i * u, h, `v${i}`));
-  const diagonals = Array.from({ length: spans }, (_, i) =>
-    i % 2 === 0 ? L(i * u, h, (i + 1) * u, 0, `d${i}`) : L(i * u, 0, (i + 1) * u, h, `d${i}`)
-  );
+  const chords = [L(oh, 0, W - oh, 0, "top"), L(0, h, W, h, "bot")];
+  const ends = [L(0, h, oh, 0, "eL"), L(W, h, W - oh, 0, "eR")];
+  const verticals = Array.from({ length: spans + 1 }, (_, i) => L(x0(i), 0, x0(i), h, `v${i}`));
+  // X-bracing: both diagonals in every bay.
+  const diagonals = Array.from({ length: spans }, (_, i) => [
+    L(x0(i), h, x0(i + 1), 0, `da${i}`),
+    L(x0(i + 1), h, x0(i), 0, `db${i}`),
+  ]);
 
   const panelMembers = (i: number) => [
-    L(i * u, 0, (i + 1) * u, 0, `pt${i}`),
-    L(i * u, h, (i + 1) * u, h, `pb${i}`),
-    L(i * u, 0, i * u, h, `pv${i}`),
-    L((i + 1) * u, 0, (i + 1) * u, h, `pv2${i}`),
-    i % 2 === 0 ? L(i * u, h, (i + 1) * u, 0, `pd${i}`) : L(i * u, 0, (i + 1) * u, h, `pd${i}`),
+    L(x0(i), 0, x0(i + 1), 0, `pt${i}`),
+    L(x0(i), h, x0(i + 1), h, `pb${i}`),
+    L(x0(i), 0, x0(i), h, `pv${i}`),
+    L(x0(i + 1), 0, x0(i + 1), h, `pv2${i}`),
+    L(x0(i), h, x0(i + 1), 0, `pda${i}`),
+    L(x0(i + 1), h, x0(i), 0, `pdb${i}`),
   ];
 
   const dimmed = baseOpacity ?? (active != null ? 0.25 : 1);
@@ -56,6 +63,7 @@ export function Truss({
       {title ? <title>{title}</title> : null}
       <g fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" opacity={dimmed}>
         {chords}
+        {ends}
         {verticals}
         {diagonals}
       </g>
