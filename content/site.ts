@@ -18,10 +18,10 @@ export const site = {
   linkedin: PLACEHOLDER.linkedin,
 };
 
-// The "Book a 20-minute call" button points at the booking page/link once set (see site.bookingUrl —
-// e.g. a Google Calendar appointment-schedule URL). Falls back to /contact until then.
-const isUrl = (v: string) => /^https?:\/\//.test(v);
-export const bookingHref = isUrl(site.bookingUrl) ? site.bookingUrl : "/contact";
+// "Book a 20-minute call" goes to the on-site /book page, which embeds the scheduler.
+// The scheduler source is site.bookingUrl (a Google Appointment Schedule / Calendly embed URL);
+// until that's set, /book shows a graceful fallback.
+export const bookingHref = "/book";
 
 export const ctaPrimary = { label: "Book a 20-minute call", href: bookingHref };
 // Second CTA: the contact form.

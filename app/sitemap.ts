@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/insights",
     "/about",
     "/contact",
+    "/book",
     "/privacy",
     ...doors.map((d) => `/who-we-help/${d.slug}`),
   ];
