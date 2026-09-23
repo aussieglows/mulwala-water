@@ -26,11 +26,27 @@ The app is one Next.js project:
 - **Hosting:** Vercel (auto-deploys). GoDaddy DNS (apex A → Vercel `216.198.79.1`, `www` CNAME → `cname.vercel-dns.com`).
 - **DB:** Neon Postgres via `DATABASE_URL` (Prisma 7 driver adapters; local dev can fall back to SQLite/better-sqlite3). The homepage portfolio logos + `/admin` read the DB.
 
-> ⚠️ **First thing to do on the new computer: get the code.** As of this handoff there are **3 local
-> commits not yet pushed** (`50a74e4`, `295ad33`, `53cae8f` — the design change + white portfolio
-> squares). Laura must run `git push origin rebuild` from the OLD computer, OR they'll be lost.
-> After pushing, on the new computer: `git clone …`, `git checkout rebuild`, `npm install`,
-> set `DATABASE_URL`, `npm run dev` (port 3000).
+> ⚠️ **First thing to do on the new computer: get the code + env.** Push any local commits from the
+> OLD computer first (`git push origin rebuild`). Then on the new computer: `git clone …`,
+> `git checkout rebuild`, `npm install`, **pull env from Vercel (see §3 — do NOT transfer `.env`)**,
+> `npm run dev` (port 3000).
+
+## 2b. Environment variables — pull from Vercel (never transfer .env)
+
+The `.env` file is not moved between computers. Get the env vars from Vercel instead:
+
+```bash
+npm i -g vercel        # once, if the Vercel CLI isn't installed
+vercel login           # sign in as the account that owns the project
+vercel link            # in the repo root: pick the "mulwala-water" project
+vercel env pull .env.local   # writes DATABASE_URL etc. into .env.local
+```
+
+`vercel env pull` downloads the project's environment variables (Development scope by default; add
+`--environment=production` if a var is only set there) into a local `.env.local` that Next.js reads
+automatically. **Manual fallback:** Vercel → project `mulwala-water` → Settings → Environment
+Variables → reveal `DATABASE_URL` (Neon Postgres) and paste it into a local `.env.local`. That one var
+is what the homepage portfolio logos and `/admin` need; the site's public pages render without it.
 
 ## 3. Stack & conventions
 
