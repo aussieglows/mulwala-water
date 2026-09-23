@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { footer, site } from "@/content/site";
-import { Truss, TrussMark } from "@/components/site/Truss";
+import { Truss } from "@/components/site/Truss";
+import { Logo } from "@/components/site/Logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -10,9 +11,8 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2.5 no-underline mb-3" aria-label={site.name}>
-              <span className="text-river"><TrussMark className="w-8 h-auto" /></span>
-              <span className="font-serif text-lg font-semibold tracking-tight text-ink">Mulwala Water</span>
+            <Link href="/" className="inline-block no-underline mb-4 text-ink" aria-label={site.name}>
+              <Logo className="h-9 w-auto" />
             </Link>
             <p className="t-small text-muted max-w-xs">
               We advise, operate, and invest in founder-led, family-owned, sponsor-backed and multi-unit businesses.

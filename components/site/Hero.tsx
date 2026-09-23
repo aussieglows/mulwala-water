@@ -1,47 +1,46 @@
-import { Container, Button, Eyebrow } from "@/components/site/ui";
-import { Truss } from "@/components/site/Truss";
+import Image from "next/image";
+import { Container, Button } from "@/components/site/ui";
 
+// Photo hero (classic design): full-bleed image + navy overlay, white text.
+// `image` carries a hero photo across every page; defaults to the Mulwala aerial.
 export function Hero({
   eyebrow,
   title,
   lead,
   primary,
   secondary,
-  variant = "light",
+  image = "/images/bridge-aerial.jpg",
 }: {
   eyebrow?: string;
   title: React.ReactNode;
   lead?: React.ReactNode;
   primary?: { label: string; href: string };
   secondary?: { label: string; href: string } | null;
-  variant?: "light" | "dark";
+  variant?: "light" | "dark"; // accepted for compatibility; the classic hero is always a photo
+  image?: string;
 }) {
-  const dark = variant === "dark";
   return (
-    <section className={`relative overflow-hidden ${dark ? "bg-ink text-paper" : "bg-paper"}`}>
-      {/* Truss backdrop — the site's single graphic system */}
+    <section className="relative text-white overflow-hidden">
+      <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" />
       <div
-        className={`pointer-events-none absolute bottom-0 right-0 w-[70%] max-w-3xl ${dark ? "text-river/[0.18]" : "text-river/15"}`}
-        aria-hidden
-      >
-        <Truss spans={16} stretch className="w-full h-40" strokeWidth={0.75} />
-      </div>
-      <Container className="pt-20 pb-16 sm:pt-28 sm:pb-24 relative">
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(180deg, rgba(20,32,48,.58) 0%, rgba(20,32,48,.78) 100%)" }}
+      />
+      <Container className="relative pt-28 pb-20 sm:pt-36 sm:pb-28">
         <div className="max-w-3xl">
-          {eyebrow && <Eyebrow className={`mb-5 ${dark ? "text-brass" : ""}`}>{eyebrow}</Eyebrow>}
-          <h1 className={`t-display-lg m-0 ${dark ? "text-paper" : "text-ink"}`}>{title}</h1>
-          {lead && <p className={`t-body-lg mt-6 measure ${dark ? "text-paper/80" : "text-muted"}`}>{lead}</p>}
+          {eyebrow && <p className="t-eyebrow text-white/85 m-0 mb-5">{eyebrow}</p>}
+          <h1 className="t-display-lg text-white m-0">{title}</h1>
+          {lead && <p className="t-body-lg text-white/90 mt-6 measure">{lead}</p>}
           {(primary || secondary) && (
             <div className="mt-9 flex flex-wrap gap-3">
               {primary && <Button href={primary.href} variant="primary">{primary.label}</Button>}
               {secondary && (
-                <Button
+                <a
                   href={secondary.href}
-                  variant="secondary"
-                  className={dark ? "text-paper border-paper/30 hover:border-paper hover:text-paper" : ""}
+                  className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold border border-white/60 text-white hover:border-white no-underline transition-colors"
                 >
                   {secondary.label}
-                </Button>
+                </a>
               )}
             </div>
           )}

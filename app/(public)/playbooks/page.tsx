@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function PlaybooksPage() {
   return (
     <>
-      <Hero eyebrow={playbooksIntro.eyebrow} title={playbooksIntro.h1} lead={playbooksIntro.lead} primary={ctaPrimary} />
+      <Hero eyebrow={playbooksIntro.eyebrow} title={playbooksIntro.h1} lead={playbooksIntro.lead} primary={ctaPrimary} image="/images/hero-sunset.jpg" />
 
       <Section>
         <div className="space-y-16">

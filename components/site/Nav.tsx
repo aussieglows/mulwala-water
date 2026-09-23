@@ -4,16 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav, ctaPrimary, site } from "@/content/site";
-import { TrussMark } from "@/components/site/Truss";
+import { Logo } from "@/components/site/Logo";
 
 function Wordmark() {
   return (
-    <Link href="/" className="flex items-center gap-2.5 no-underline shrink-0" aria-label={site.name}>
-      <span className="text-river"><TrussMark className="w-8 h-auto" /></span>
-      <span className="flex flex-col leading-none">
-        <span className="font-serif text-[1.15rem] font-semibold tracking-tight text-ink">Mulwala Water</span>
-        <span className="t-eyebrow text-[0.55rem] text-muted mt-0.5">Operating &amp; Investment</span>
-      </span>
+    <Link href="/" className="no-underline shrink-0 text-ink" aria-label={site.name}>
+      <Logo className="h-10 w-auto" />
     </Link>
   );
 }

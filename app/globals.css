@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  /* ---- Public site palette ("Bridge" direction) ---- */
-  --color-ink: #13232d; /* primary dark — headings, hero ground */
-  --color-ink2: #26333c; /* footer, dark sections, body-dark */
-  --color-river: #0e6055; /* PRIMARY ACCENT (teal) */
-  --color-river-deep: #0a4a42; /* hover / pressed / small-text accent */
-  --color-river-wash: #d9e8e3; /* tint blocks, active nav pill */
-  --color-brass: #b8863b; /* warm accent — large text & non-text only */
-  --color-brass-deep: #8a6120; /* warm accent for small text & links */
-  --color-paper: #f7f3ec; /* warm page ground */
-  --color-surface: #ffffff; /* cards */
-  --color-line: #e4ddd0; /* hairlines, borders */
-  --color-muted: #67707a; /* secondary text */
+  /* ---- Public site palette ("Classic" — original mulwalawater.com) ---- */
+  --color-ink: #24384f; /* navy — headings, dark bands */
+  --color-ink2: #2f4256; /* body-dark / secondary dark */
+  --color-river: #0f766e; /* PRIMARY ACCENT (teal) */
+  --color-river-deep: #0b5850; /* hover / pressed */
+  --color-river-wash: #e6f2f0; /* tint blocks, active nav pill */
+  --color-brass: #0f766e; /* accent (teal) — eyebrows/markers in this theme */
+  --color-brass-deep: #0b5850; /* accent for small text/links */
+  --color-paper: #f5f8f9; /* light page ground (alternating soft sections) */
+  --color-surface: #ffffff; /* cards / white sections */
+  --color-line: #e5ebef; /* hairlines, borders */
+  --color-muted: #5f6f7e; /* secondary text */
 
   /* ---- Admin/accounting palette (kept intact) ---- */
   --color-cream: #f7f8fa;
@@ -82,14 +82,14 @@
 
 /* ---- Type scale (spec 6.2) ---- */
 @layer components {
-  .t-display-xl { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2.75rem, 6vw, 4.5rem); letter-spacing: -0.03em; line-height: 1.05; font-weight: 600; }
-  .t-display-lg { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2.25rem, 4.5vw, 3.25rem); letter-spacing: -0.03em; line-height: 1.1; font-weight: 600; }
-  .t-display-md { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(1.75rem, 3vw, 2.25rem); letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
-  .t-heading { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: 1.375rem; letter-spacing: -0.015em; line-height: 1.3; font-weight: 600; }
+  .t-display-xl { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2.75rem, 6vw, 4.5rem); letter-spacing: -0.02em; line-height: 1.05; font-weight: 700; }
+  .t-display-lg { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2.25rem, 4.5vw, 3.25rem); letter-spacing: -0.02em; line-height: 1.08; font-weight: 700; }
+  .t-display-md { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(1.75rem, 3vw, 2.25rem); letter-spacing: -0.01em; line-height: 1.18; font-weight: 700; }
+  .t-heading { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: 1.375rem; letter-spacing: -0.005em; line-height: 1.3; font-weight: 600; }
   .t-body-lg { font-size: 1.1875rem; line-height: 1.65; }
   .t-small { font-size: 0.9375rem; line-height: 1.55; }
   .t-eyebrow { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: 0.75rem; letter-spacing: 0.14em; line-height: 1.2; text-transform: uppercase; font-weight: 600; }
-  .t-metric { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.02em; line-height: 1; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .t-metric { font-family: var(--ff-display), ui-sans-serif, sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.01em; line-height: 1; font-weight: 700; font-variant-numeric: tabular-nums; }
   /* default readable measure for prose blocks */
   .measure { max-width: 68ch; }
 }

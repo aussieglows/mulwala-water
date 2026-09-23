@@ -34,7 +34,7 @@ export default function HowWeWorkPage() {
 
   return (
     <>
-      <Hero eyebrow={c.eyebrow} title={c.h1} lead={c.lead} primary={ctaPrimary} />
+      <Hero eyebrow={c.eyebrow} title={c.h1} lead={c.lead} primary={ctaPrimary} image="/images/boardroom.jpg" />
 
       {/* Four shapes */}
       <Section>

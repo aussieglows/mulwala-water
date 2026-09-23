@@ -22,6 +22,7 @@ export default function InsightsPage() {
         title="Field notes, not content."
         lead="A few times a year, on narrow and ownable territory — the questions we actually get asked, answered the way we'd answer them in the room."
         primary={ctaPrimary}
+        image="/images/office.jpg"
       />
 
       <Section>

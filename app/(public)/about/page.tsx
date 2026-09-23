@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Hero eyebrow={about.eyebrow} title={about.h1} lead={about.lead} primary={ctaPrimary} />
+      <Hero eyebrow={about.eyebrow} title={about.h1} lead={about.lead} primary={ctaPrimary} image="/images/bridge-pano.jpg" />
 
       {/* Our story */}
       <Section>

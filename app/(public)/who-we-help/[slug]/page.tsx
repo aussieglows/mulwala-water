@@ -54,7 +54,7 @@ export default async function DoorPage({ params }: { params: Promise<{ slug: str
           { label: d.name, href: `/who-we-help/${d.slug}` },
         ]}
       />
-      <Hero eyebrow={d.eyebrow} title={d.h1} lead={d.lead} primary={ctaPrimary} />
+      <Hero eyebrow={d.eyebrow} title={d.h1} lead={d.lead} primary={ctaPrimary} image="/images/office.jpg" />
 
       {/* What we usually find */}
       <Section>

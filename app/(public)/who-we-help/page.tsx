@@ -23,6 +23,7 @@ export default function WhoWeHelpPage() {
         title="Most of our work starts in one of four places."
         lead="The problems rhyme, but the language doesn't. Pick the door that sounds like you — the vocabulary and the plays behind each one are yours, not a template."
         primary={ctaPrimary}
+        image="/images/skyline.jpg"
       />
 
       <Section>
