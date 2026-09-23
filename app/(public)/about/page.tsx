@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { about } from "@/content/about";
-import { ctaPrimary } from "@/content/site";
+import { ctaPrimary, ctaContact } from "@/content/site";
 import { Hero } from "@/components/site/Hero";
 import { Section, Container } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
@@ -68,7 +68,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <CTABand heading="Book a 20-minute call." body="Twenty minutes, no deck. We'll tell you whether this is a problem we're good at." secondary={{ label: "See how we work", href: "/how-we-work" }} />
+      <CTABand heading="Book a 20-minute call." body="Twenty minutes, no deck. We'll tell you whether this is a problem we're good at." secondary={ctaContact} />
     </>
   );
 }

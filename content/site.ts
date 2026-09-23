@@ -18,8 +18,14 @@ export const site = {
   linkedin: PLACEHOLDER.linkedin,
 };
 
-// Primary CTA — verbatim everywhere (spec Part 4.4). Falls back to /contact until a booking link exists.
-export const ctaPrimary = { label: "Book a 20-minute call", href: "/contact" };
+// The "Book a 20-minute call" button points at the booking page/link once set (see site.bookingUrl —
+// e.g. a Google Calendar appointment-schedule URL). Falls back to /contact until then.
+const isUrl = (v: string) => /^https?:\/\//.test(v);
+export const bookingHref = isUrl(site.bookingUrl) ? site.bookingUrl : "/contact";
+
+export const ctaPrimary = { label: "Book a 20-minute call", href: bookingHref };
+// Second CTA: the contact form.
+export const ctaContact = { label: "Send us a note", href: "/contact" };
 export const ctaSecondary = { label: "See how we work", href: "/how-we-work" };
 
 export const nav = [

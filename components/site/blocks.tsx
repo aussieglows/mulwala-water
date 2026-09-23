@@ -21,7 +21,7 @@ export function EngagementCard({
         <span className="t-eyebrow text-brass-deep shrink-0">{duration}</span>
       </div>
       <p className="t-small text-muted mt-2 mb-4">{who}</p>
-      <ul className="list-none p-0 m-0 space-y-2.5 mt-auto">
+      <ul className="list-none p-0 m-0 space-y-2.5">
         {gets.map((g, i) => (
           <li key={i} className="flex gap-2.5 text-[15px] text-ink2">
             <TrussMark className="w-5 h-auto text-brass mt-1.5 shrink-0" />
@@ -163,18 +163,18 @@ export function PlayCard({
   return (
     <Link
       href={href}
-      className="group rounded-2xl border border-line bg-surface p-7 no-underline flex flex-col h-full hover:border-river transition-colors"
+      className="group rounded-2xl border border-line bg-surface p-5 no-underline flex flex-col h-full hover:border-river transition-colors"
     >
       <h3 className="t-heading text-ink m-0">{title}</h3>
-      <p className="t-small text-muted mt-2">{line}</p>
-      <ul className="list-none p-0 m-0 mt-4 space-y-1.5">
+      <p className="t-small text-muted mt-1.5">{line}</p>
+      <ul className="list-none p-0 m-0 mt-3 space-y-1">
         {plays.map((p, i) => (
           <li key={i} className="t-small text-ink2 flex gap-2">
             <span className="text-brass" aria-hidden>·</span> {p}
           </li>
         ))}
       </ul>
-      <span className="mt-6 t-small font-semibold text-river-deep group-hover:text-river">
+      <span className="mt-4 t-small font-semibold text-river-deep group-hover:text-river">
         See the plays →
       </span>
     </Link>

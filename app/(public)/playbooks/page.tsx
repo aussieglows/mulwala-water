@@ -44,7 +44,7 @@ export default function PlaybooksPage() {
         heading="Not sure which play you need?"
         body="Take the two-minute diagnostic for a straight read, or tell us what's going on and we'll point you at the right one."
         primary={{ label: "Which play do you need?", href: "/playbooks/diagnostic" }}
-        secondary={{ label: "Book a 20-minute call", href: "/contact" }}
+        secondary={ctaPrimary}
       />
     </>
   );

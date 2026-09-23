@@ -20,7 +20,7 @@ export const howWeWork = {
         who: "One operator, on site and in the numbers.",
         gets: [
           "A written point of view on what is actually holding the business back, ranked by impact",
-          "The three things to do first, with owners and dates",
+          "A clear view of what to fix first — and what to leave alone for now",
           "A straight answer on whether you need us after that, including when you don't",
         ],
       },

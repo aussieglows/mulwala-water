@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@/content/site";
+import { site, bookingHref } from "@/content/site";
 import { Section, Container } from "@/components/site/ui";
 import { ContactForm } from "@/components/site/ContactForm";
 import { isPlaceholder } from "@/components/site/Placeholder";
@@ -55,7 +55,7 @@ export default function ContactPage() {
             </dl>
             <p className="t-small text-ink2 mt-8">
               Already know you want to talk?{" "}
-              <a href={`mailto:${site.email}?subject=${encodeURIComponent("Book a 20-minute call")}`} className="font-semibold text-river-deep hover:text-river no-underline">
+              <a href={bookingHref} className="font-semibold text-river-deep hover:text-river no-underline">
                 Book a 20-minute call →
               </a>
             </p>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { home } from "@/content/home";
-import { ctaPrimary } from "@/content/site";
+import { ctaPrimary, ctaContact } from "@/content/site";
 import { Hero } from "@/components/site/Hero";
 import { Section } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
@@ -37,7 +37,7 @@ export default function WhoWeHelpPage() {
       <CTABand
         heading="None of these quite fit?"
         body="Most owners are a bit of two, and some are none of them. The door matters less than whether the problem is the kind we're good at. Tell us what's going on and we'll tell you — including when the answer is that it isn't us."
-        secondary={{ label: "See how we work", href: "/how-we-work" }}
+        secondary={ctaContact}
       />
     </>
   );

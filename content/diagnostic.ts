@@ -113,7 +113,7 @@ export const diagnosticResults: Record<
     blurb:
       "First job is time. Get thirteen weeks of cash visibility, stabilize, then decide what to stop — in that order, not the other way around.",
     plays: [
-      { name: "Cash First", subtitle: "Thirteen-week cash, stabilise, buy time" },
+      { name: "Cash First", subtitle: "Stabilise cash and buy time" },
       { name: "Cut to the Core", subtitle: "Decide what to stop" },
     ],
     href: "/playbooks/turnaround",

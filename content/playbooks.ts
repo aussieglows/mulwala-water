@@ -30,7 +30,7 @@ export const playbookCategories: PlaybookCategory[] = [
     },
     plays: [
       { name: "Au Naturel", subtitle: "Grow with what already works" },
-      { name: "Same, Same but Different", subtitle: "New channels, proven offer" },
+      { name: "Channel Expansion", subtitle: "New channels, proven offer" },
       { name: "New Revenue Hotline", subtitle: "Complementary lines for the customers you already have" },
       { name: "Big Foot", subtitle: "Expand the footprint" },
       { name: "Parallel Partners", subtitle: "Same customer, not a competitor" },
@@ -63,7 +63,7 @@ export const playbookCategories: PlaybookCategory[] = [
       examples: ["Cash First", "Cut to the Core", "Unit Triage"],
     },
     plays: [
-      { name: "Cash First", subtitle: "Thirteen-week cash, stabilise, buy time" },
+      { name: "Cash First", subtitle: "Stabilise cash and buy time" },
       { name: "Cut to the Core", subtitle: "Decide what to stop" },
       { name: "Renegotiate", subtitle: "Suppliers, leases, terms" },
       { name: "The Front Door", subtitle: "Pricing and margin, fixed at the source" },

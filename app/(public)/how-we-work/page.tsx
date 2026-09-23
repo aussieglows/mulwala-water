@@ -7,7 +7,7 @@ import { CTABand } from "@/components/site/bands";
 import { EngagementCard, PhaseStrip, ComparisonTable, FAQ } from "@/components/site/blocks";
 import { TrussMark } from "@/components/site/Truss";
 import { isPlaceholder, RichText } from "@/components/site/Placeholder";
-import { ctaPrimary } from "@/content/site";
+import { ctaPrimary, ctaContact } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "How we work",
@@ -117,7 +117,7 @@ export default function HowWeWorkPage() {
         </Section>
       )}
 
-      <CTABand heading={c.cta.heading} body={c.cta.sub} secondary={null} />
+      <CTABand heading={c.cta.heading} body={c.cta.sub} secondary={ctaContact} />
 
       {faqLd && (
         <Script id="faq-ld" type="application/ld+json" strategy="afterInteractive">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { home } from "@/content/home";
 import { playbookCategories } from "@/content/playbooks";
 import { howWeWork } from "@/content/howWeWork";
-import { ctaPrimary, ctaSecondary, site } from "@/content/site";
+import { ctaPrimary, ctaSecondary, ctaContact, site } from "@/content/site";
 import { getActivePortfolio } from "@/lib/site";
 import { Hero } from "@/components/site/Hero";
 import { Section, Container, Button } from "@/components/site/ui";
@@ -144,7 +144,7 @@ export default async function HomePage() {
       )}
 
       {/* 9 — Closing CTA */}
-      <CTABand heading={home.closing.heading} body={home.closing.body} secondary={null} />
+      <CTABand heading={home.closing.heading} body={home.closing.body} secondary={ctaContact} />
 
       <Script id="service-ld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(serviceLd)}

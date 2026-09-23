@@ -12,7 +12,7 @@ import { EngagementCard, PlayCard } from "@/components/site/blocks";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { TrussMark } from "@/components/site/Truss";
 import { isPlaceholder } from "@/components/site/Placeholder";
-import { ctaPrimary } from "@/content/site";
+import { ctaPrimary, ctaContact } from "@/content/site";
 
 export function generateStaticParams() {
   return doors.map((d) => ({ slug: d.slug }));
@@ -108,7 +108,7 @@ export default async function DoorPage({ params }: { params: Promise<{ slug: str
         </div>
       </Section>
 
-      <CTABand heading="Book a 20-minute call." body="Twenty minutes, no deck. We'll tell you whether this is a problem we're good at." secondary={{ label: "See how we work", href: "/how-we-work" }} />
+      <CTABand heading="Book a 20-minute call." body="Twenty minutes, no deck. We'll tell you whether this is a problem we're good at." secondary={ctaContact} />
 
       <Script id="door-service-ld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(serviceLd)}

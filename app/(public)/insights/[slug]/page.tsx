@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { publishedArticles, getArticle } from "@/content/insights";
-import { site } from "@/content/site";
+import { site, ctaContact } from "@/content/site";
 import { Section, Container } from "@/components/site/ui";
 import { CTABand } from "@/components/site/bands";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
@@ -69,7 +69,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </Container>
       </Section>
 
-      <CTABand heading="Book a 20-minute call." body="Twenty minutes, no deck. We'll tell you whether this is a problem we're good at." secondary={null} />
+      <CTABand heading="Book a 20-minute call." body="Twenty minutes, no deck. We'll tell you whether this is a problem we're good at." secondary={ctaContact} />
 
       <Script id="article-ld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(articleLd)}

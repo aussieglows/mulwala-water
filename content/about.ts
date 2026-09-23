@@ -18,9 +18,9 @@ export const about = {
   name: {
     h2: "The name.",
     body:
-      "Mulwala is a town on the Murray, and its bridge is a steel truss — plain, engineered, load-bearing, built to carry weight across a gap and stay standing. Our mission has always been to bridge the gap to the resources of a large company. The bridge is the whole idea, so we made it the mark.",
-    image: { src: "/images/bridge-aerial.jpg", alt: "Aerial view of Mulwala and the Murray River" },
-    caption: "Mulwala, on the Murray — where the name and the bridge come from.",
+      "Mulwala is a town on Lake Mulwala, on the Murray River in Australia, and its bridge is a steel truss — plain, engineered, load-bearing, built to carry weight across a gap and stay standing. Our mission has always been to bridge the gap to the resources of a large company. The bridge is the whole idea, so we made it the mark.",
+    image: { src: "/images/bridge-aerial.jpg", alt: "Aerial view of Mulwala and Lake Mulwala, Australia" },
+    caption: "Mulwala, on Lake Mulwala in Australia — where the name and the bridge come from.",
   },
 
   approach: {

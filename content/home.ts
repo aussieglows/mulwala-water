@@ -16,7 +16,7 @@ export const home = {
     items: [
       {
         title: "Advise",
-        line: "A plan you can act on. A senior operator reads the business, tells you what's actually holding it back, and hands you the three things to do first — with owners and dates.",
+        line: "A plan you can act on. A senior operator reads the business, tells you what's actually holding it back, hands you the things to do first, and lays out a plan for the rest.",
       },
       {
         title: "Operate",
