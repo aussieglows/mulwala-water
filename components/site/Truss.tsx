@@ -68,17 +68,29 @@ export function Truss({
   );
 }
 
-// A tiny two-triangle fragment for list markers / bullets.
+// The Mulwala truss bridge — matches the mark on the live logo (an X-braced deck truss).
+// Used as the icon throughout the site. Uses currentColor so the parent sets the colour.
 export function TrussMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 30 16" className={className} aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
-        <line x1="1" y1="14" x2="29" y2="14" />
-        <line x1="1" y1="2" x2="29" y2="2" />
-        <line x1="1" y1="14" x2="8.5" y2="2" />
-        <line x1="8.5" y1="2" x2="16" y2="14" />
-        <line x1="16" y1="14" x2="23.5" y2="2" />
-        <line x1="23.5" y1="2" x2="29" y2="14" />
+    <svg viewBox="3 23 112 30" className={className} aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+        <line x1="6" y1="50" x2="112" y2="50" />
+        <line x1="18.7" y1="26" x2="99.3" y2="26" />
+        <line x1="6" y1="50" x2="18.7" y2="26" />
+        <line x1="112" y1="50" x2="99.3" y2="26" />
+        <line x1="18.7" y1="50" x2="18.7" y2="26" />
+        <line x1="38.9" y1="50" x2="38.9" y2="26" />
+        <line x1="59" y1="50" x2="59" y2="26" />
+        <line x1="79.1" y1="50" x2="79.1" y2="26" />
+        <line x1="99.3" y1="50" x2="99.3" y2="26" />
+        <line x1="18.7" y1="50" x2="38.9" y2="26" />
+        <line x1="38.9" y1="50" x2="18.7" y2="26" />
+        <line x1="38.9" y1="50" x2="59" y2="26" />
+        <line x1="59" y1="50" x2="38.9" y2="26" />
+        <line x1="59" y1="50" x2="79.1" y2="26" />
+        <line x1="79.1" y1="50" x2="59" y2="26" />
+        <line x1="79.1" y1="50" x2="99.3" y2="26" />
+        <line x1="99.3" y1="50" x2="79.1" y2="26" />
       </g>
     </svg>
   );
