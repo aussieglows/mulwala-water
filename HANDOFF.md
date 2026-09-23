@@ -160,7 +160,7 @@ Repo docs: **`PHASE-3-INTAKE.md`** (fill-in worksheet for items 1–8) and **`IN
 
 ## 12. First steps for the new Claude
 
-1. Confirm you're on branch `rebuild`, `npm install`, set `DATABASE_URL`, `npm run dev`.
+1. Confirm you're on branch `rebuild`, `npm install`, pull env from Vercel (§2b), `npm run dev`.
 2. Read this file, then skim `content/` and `components/site/`.
 3. Open the actions tracker artifact (URL in §8) to see the live to-do list.
 4. Continue from §9. When Laura supplies inputs, wire them into the relevant `content/` module and the
