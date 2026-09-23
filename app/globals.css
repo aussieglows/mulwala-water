@@ -68,7 +68,6 @@
     color: var(--color-ink);
     font-family: var(--ff-body), ui-sans-serif, system-ui, sans-serif;
   }
-  a:hover { color: var(--color-river-deep); }
   input:focus, textarea:focus, select:focus {
     outline: 2px solid color-mix(in srgb, var(--color-river) 45%, transparent);
     outline-offset: 1px;
