@@ -1,0 +1,198 @@
+<title>Mulwala design directions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root {
+    --page: #f4f1ec;
+    --panel-line: #e0dbd2;
+    --chrome-ink: #1a2530;
+    --chrome-muted: #6a7078;
+    --chrome-accent: #0b5850;
+    --shadow: 0 1px 2px rgba(20,25,30,.05), 0 18px 44px -28px rgba(20,25,30,.4);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--page); color: var(--chrome-ink);
+    font-family: "Inter", system-ui, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-block: clamp(28px, 5vw, 60px); padding-left: clamp(16px, 4vw, 44px); padding-right: clamp(16px, 4vw, 44px); }
+
+  .kicker { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--chrome-accent); margin: 0 0 12px; }
+  h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: clamp(30px, 5.5vw, 46px); line-height: 1.06; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+  .intro { color: var(--chrome-muted); max-width: 66ch; margin: 14px 0 0; font-size: 16px; }
+
+  /* spectrum legend */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 26px 0 8px; }
+  .end { flex: 1 1 240px; border: 1px solid var(--panel-line); border-radius: 12px; background: #fff; padding: 14px 16px; box-shadow: var(--shadow); }
+  .end .lab { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--chrome-muted); }
+  .end .desc { font-size: 13.5px; color: var(--chrome-ink); margin-top: 4px; }
+  .end .sw { display: flex; gap: 5px; margin-top: 9px; }
+  .end .sw i { width: 20px; height: 20px; border-radius: 5px; display: inline-block; border: 1px solid rgba(0,0,0,.06); }
+  .arrow { align-self: center; color: var(--chrome-muted); font-size: 20px; padding: 0 2px; }
+
+  .grid { display: grid; gap: 22px; margin-top: 30px; }
+
+  /* ---- concept panel ---- */
+  .panel { border: 1px solid var(--panel-line); border-radius: 18px; overflow: hidden; background: var(--paper); box-shadow: var(--shadow); font-family: var(--b); }
+  .phead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; padding: 18px 22px 0; }
+  .pname { font-family: var(--d); font-weight: 600; font-size: 22px; letter-spacing: -.01em; color: var(--ink); }
+  .ptag { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 3px 9px; }
+  .pdesc { color: var(--muted); font-size: 14px; margin: 0; padding: 8px 22px 0; max-width: 72ch; }
+
+  .hero { margin: 18px; border-radius: 12px; background: var(--hero-bg); color: var(--hero-ink); padding: clamp(22px, 3.4vw, 40px); position: relative; overflow: hidden; }
+  .hero .eyebrow { font-family: var(--ey); font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--eyebrow); margin: 0 0 14px; }
+  .hero .hh { font-family: var(--d); font-weight: 600; font-size: clamp(26px, 4vw, 40px); line-height: 1.08; letter-spacing: -.02em; margin: 0; color: var(--hero-ink); text-wrap: balance; }
+  .hero .hsub { color: var(--hero-sub); font-size: 15.5px; margin: 14px 0 0; max-width: 52ch; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .btn { font-family: var(--b); font-weight: 600; font-size: 14px; padding: 11px 20px; border-radius: 999px; background: var(--btn-bg); color: var(--btn-ink); border: 1px solid var(--btn-bg); text-decoration: none; }
+  .btn2 { font-family: var(--b); font-weight: 600; font-size: 14px; padding: 11px 20px; border-radius: 999px; background: transparent; color: var(--hero-ink); border: 1px solid color-mix(in srgb, var(--hero-ink) 45%, transparent); text-decoration: none; }
+  .truss { position: absolute; right: 0; bottom: 0; width: 55%; max-width: 360px; color: var(--eyebrow); opacity: .22; }
+
+  .samples { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; padding: 0 18px 18px; }
+  .metric { border: 1px solid var(--tint); background: color-mix(in srgb, var(--tint) 35%, var(--paper)); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: center; }
+  .mn { font-family: var(--mn); font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1; color: var(--accent); letter-spacing: -.01em; }
+  .ml { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  .card { border: 1px solid var(--tint); background: var(--surface); border-radius: 12px; padding: 20px; }
+  .ceyebrow { font-family: var(--ey); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .card h3 { font-family: var(--d); font-weight: 600; font-size: 19px; line-height: 1.25; letter-spacing: -.01em; color: var(--ink); margin: 8px 0 0; }
+  .clink { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--accent); }
+
+  .meta { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; padding: 16px 22px; border-top: 1px solid var(--tint); background: color-mix(in srgb, var(--tint) 22%, var(--paper)); }
+  .fonts { font-size: 13px; color: var(--ink); }
+  .fonts b { font-family: var(--d); font-weight: 600; }
+  .fonts .fb { font-family: var(--b); font-weight: 600; }
+  .swatches { display: flex; gap: 8px; align-items: center; }
+  .swatches .s { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .swatches i { width: 30px; height: 30px; border-radius: 7px; border: 1px solid rgba(0,0,0,.08); display: block; }
+  .swatches .hex { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; color: var(--muted); }
+
+  .choose { margin-top: 34px; border-top: 1px solid var(--panel-line); padding-top: 20px; color: var(--chrome-muted); font-size: 14px; max-width: 70ch; }
+  .choose b { color: var(--chrome-ink); font-family: "Fraunces", serif; font-weight: 600; }
+
+  /* ---- the three concepts ---- */
+  .harbour {
+    --d: "Space Grotesk", system-ui, sans-serif; --b: "Inter", system-ui, sans-serif; --ey: "Space Grotesk", sans-serif; --mn: "Space Grotesk", sans-serif;
+    --paper: #fbfaf7; --surface: #ffffff; --ink: #17242e; --muted: #697480; --accent: #1f8378; --tint: #e7dcc6;
+    --hero-bg: #16324f; --hero-ink: #ffffff; --hero-sub: #c6d2dc; --eyebrow: #8fb6cc;
+    --btn-bg: #1f8378; --btn-ink: #ffffff;
+  }
+  .bridge {
+    --d: "Fraunces", Georgia, serif; --b: "Inter", system-ui, sans-serif; --ey: "IBM Plex Mono", monospace; --mn: "IBM Plex Mono", monospace;
+    --paper: #f7f3ec; --surface: #ffffff; --ink: #1b2932; --muted: #6a7178; --accent: #0e6055; --tint: #e6dcc9;
+    --hero-bg: #13232d; --hero-ink: #f6f1e9; --hero-sub: #bcc5cb; --eyebrow: #c79a4f;
+    --btn-bg: #0e6055; --btn-ink: #ffffff;
+  }
+  .estuary {
+    --d: "Source Serif 4", Georgia, serif; --b: "Inter", system-ui, sans-serif; --ey: "IBM Plex Mono", monospace; --mn: "IBM Plex Mono", monospace;
+    --paper: #f6f2e9; --surface: #fffdf8; --ink: #14201d; --muted: #5f6b64; --accent: #b7841c; --tint: #e6dcc7;
+    --hero-bg: #0d5b52; --hero-ink: #f7f2e7; --hero-sub: #c7ddd5; --eyebrow: #e6c27a;
+    --btn-bg: #d9a441; --btn-ink: #123029;
+  }
+
+  @media (max-width: 640px) { .samples { grid-template-columns: 1fr; } .legend .arrow { display: none; } }
+</style>
+
+<div class="wrap">
+  <p class="kicker">Mulwala Water · design directions</p>
+  <h1>Three directions, between the current site and the new one</h1>
+  <p class="intro">Each option below is a real midpoint &mdash; shown with its own colours, fonts, and a sample hero, button, metric and card so you can see it in use. Pick the one that feels right and I&rsquo;ll apply it across the whole build.</p>
+
+  <div class="legend">
+    <div class="end">
+      <div class="lab">Where we are now</div>
+      <div class="desc">Poppins, teal &amp; navy, photo-led hero.</div>
+      <div class="sw"><i style="background:#0f766e"></i><i style="background:#24384f"></i><i style="background:#ffffff"></i></div>
+    </div>
+    <span class="arrow">→</span>
+    <div class="end">
+      <div class="lab">The new build</div>
+      <div class="desc">Source Serif + Inter, ink / river / brass, truss motif.</div>
+      <div class="sw"><i style="background:#0e1720"></i><i style="background:#0b5850"></i><i style="background:#b8863b"></i><i style="background:#faf8f4"></i></div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- HARBOUR -->
+    <section class="panel harbour">
+      <div class="phead"><span class="pname">Harbour</span><span class="ptag">closest to today</span></div>
+      <p class="pdesc">Keeps the teal-and-navy identity you have now, but trades Poppins for a sharper modern sans and a warm sand accent. Confident and approachable, all sans-serif &mdash; the smallest jump from the current site.</p>
+      <div class="hero">
+        <p class="eyebrow">Advisory · Operating · Investment</p>
+        <h2 class="hh">We advise, operate, and invest.</h2>
+        <p class="hsub">Big-company discipline for founder-led, family-owned, sponsor-backed and multi-unit businesses.</p>
+        <div class="btns"><a class="btn">Book a 20-minute call</a><a class="btn2">See how we work</a></div>
+      </div>
+      <div class="samples">
+        <div class="metric"><span class="mn">$5B+</span><span class="ml">revenue run through</span></div>
+        <div class="card"><span class="ceyebrow">Founder-led</span><h3>You built it. It shouldn&rsquo;t depend on you to run it.</h3><span class="clink">Read more →</span></div>
+      </div>
+      <div class="meta">
+        <div class="fonts">Display &mdash; <b>Space Grotesk</b> · Body &mdash; <span class="fb">Inter</span></div>
+        <div class="swatches">
+          <div class="s"><i style="background:#16324f"></i><span class="hex">#16324F</span></div>
+          <div class="s"><i style="background:#1f8378"></i><span class="hex">#1F8378</span></div>
+          <div class="s"><i style="background:#e7dcc6"></i><span class="hex">#E7DCC6</span></div>
+          <div class="s"><i style="background:#fbfaf7"></i><span class="hex">#FBFAF7</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRIDGE -->
+    <section class="panel bridge">
+      <div class="phead"><span class="pname">Bridge</span><span class="ptag">the middle</span></div>
+      <p class="pdesc">The true midpoint: the new build&rsquo;s structure and ink/teal/brass palette, but a softer, friendlier serif (Fraunces) instead of the austere one &mdash; and a touch of the truss motif. Serious, but warmer and more human.</p>
+      <div class="hero">
+        <p class="eyebrow">Advisory · Operating · Investment</p>
+        <h2 class="hh">We advise, operate, and invest.</h2>
+        <p class="hsub">Big-company discipline for founder-led, family-owned, sponsor-backed and multi-unit businesses.</p>
+        <div class="btns"><a class="btn">Book a 20-minute call</a><a class="btn2">See how we work</a></div>
+        <svg class="truss" viewBox="0 0 300 44" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><line x1="0" y1="2" x2="300" y2="2"/><line x1="0" y1="42" x2="300" y2="42"/><line x1="0" y1="2" x2="0" y2="42"/><line x1="37.5" y1="2" x2="37.5" y2="42"/><line x1="75" y1="2" x2="75" y2="42"/><line x1="112.5" y1="2" x2="112.5" y2="42"/><line x1="150" y1="2" x2="150" y2="42"/><line x1="187.5" y1="2" x2="187.5" y2="42"/><line x1="225" y1="2" x2="225" y2="42"/><line x1="262.5" y1="2" x2="262.5" y2="42"/><line x1="300" y1="2" x2="300" y2="42"/><line x1="0" y1="42" x2="37.5" y2="2"/><line x1="37.5" y1="2" x2="75" y2="42"/><line x1="75" y1="42" x2="112.5" y2="2"/><line x1="112.5" y1="2" x2="150" y2="42"/><line x1="150" y1="42" x2="187.5" y2="2"/><line x1="187.5" y1="2" x2="225" y2="42"/><line x1="225" y1="42" x2="262.5" y2="2"/><line x1="262.5" y1="2" x2="300" y2="42"/></svg>
+      </div>
+      <div class="samples">
+        <div class="metric"><span class="mn">$5B+</span><span class="ml">revenue run through</span></div>
+        <div class="card"><span class="ceyebrow">Founder-led</span><h3>You built it. It shouldn&rsquo;t depend on you to run it.</h3><span class="clink">Read more →</span></div>
+      </div>
+      <div class="meta">
+        <div class="fonts">Display &mdash; <b>Fraunces</b> · Body &mdash; <span class="fb">Inter</span> · Labels &mdash; IBM Plex Mono</div>
+        <div class="swatches">
+          <div class="s"><i style="background:#13232d"></i><span class="hex">#13232D</span></div>
+          <div class="s"><i style="background:#0e6055"></i><span class="hex">#0E6055</span></div>
+          <div class="s"><i style="background:#b8863b"></i><span class="hex">#B8863B</span></div>
+          <div class="s"><i style="background:#f7f3ec"></i><span class="hex">#F7F3EC</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESTUARY -->
+    <section class="panel estuary">
+      <div class="phead"><span class="pname">Estuary</span><span class="ptag">closest to the new build</span></div>
+      <p class="pdesc">Keeps the new build&rsquo;s editorial serif, but leads with teal instead of near-black and adds a gold accent &mdash; warmer, brighter and more inviting than the current dark hero, while staying premium.</p>
+      <div class="hero">
+        <p class="eyebrow">Advisory · Operating · Investment</p>
+        <h2 class="hh">We advise, operate, and invest.</h2>
+        <p class="hsub">Big-company discipline for founder-led, family-owned, sponsor-backed and multi-unit businesses.</p>
+        <div class="btns"><a class="btn">Book a 20-minute call</a><a class="btn2">See how we work</a></div>
+        <svg class="truss" viewBox="0 0 300 44" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><line x1="0" y1="2" x2="300" y2="2"/><line x1="0" y1="42" x2="300" y2="42"/><line x1="0" y1="2" x2="0" y2="42"/><line x1="37.5" y1="2" x2="37.5" y2="42"/><line x1="75" y1="2" x2="75" y2="42"/><line x1="112.5" y1="2" x2="112.5" y2="42"/><line x1="150" y1="2" x2="150" y2="42"/><line x1="187.5" y1="2" x2="187.5" y2="42"/><line x1="225" y1="2" x2="225" y2="42"/><line x1="262.5" y1="2" x2="262.5" y2="42"/><line x1="300" y1="2" x2="300" y2="42"/><line x1="0" y1="42" x2="37.5" y2="2"/><line x1="37.5" y1="2" x2="75" y2="42"/><line x1="75" y1="42" x2="112.5" y2="2"/><line x1="112.5" y1="2" x2="150" y2="42"/><line x1="150" y1="42" x2="187.5" y2="2"/><line x1="187.5" y1="2" x2="225" y2="42"/><line x1="225" y1="42" x2="262.5" y2="2"/><line x1="262.5" y1="2" x2="300" y2="42"/></svg>
+      </div>
+      <div class="samples">
+        <div class="metric"><span class="mn">$5B+</span><span class="ml">revenue run through</span></div>
+        <div class="card"><span class="ceyebrow">Founder-led</span><h3>You built it. It shouldn&rsquo;t depend on you to run it.</h3><span class="clink">Read more →</span></div>
+      </div>
+      <div class="meta">
+        <div class="fonts">Display &mdash; <b>Source Serif 4</b> · Body &mdash; <span class="fb">Inter</span> · Labels &mdash; IBM Plex Mono</div>
+        <div class="swatches">
+          <div class="s"><i style="background:#0d5b52"></i><span class="hex">#0D5B52</span></div>
+          <div class="s"><i style="background:#d9a441"></i><span class="hex">#D9A441</span></div>
+          <div class="s"><i style="background:#f6f2e9"></i><span class="hex">#F6F2E9</span></div>
+          <div class="s"><i style="background:#08453e"></i><span class="hex">#08453E</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <p class="choose">Tell me the one you want &mdash; <b>Harbour</b>, <b>Bridge</b> or <b>Estuary</b> &mdash; and I&rsquo;ll roll it across every page of the build. Mixing is fine too: e.g. &ldquo;Bridge palette, but Estuary&rsquo;s teal hero,&rdquo; or a different accent. Nothing here is locked.</p>
+</div>

@@ -1,168 +1,166 @@
-# Mulwala Water website — handoff for a new Claude / new computer
+# Mulwala Water — full handoff (read me first)
 
-Give this file to Claude on the new computer (it lives in the repo, and there's a cloud copy —
-see "Artifacts" below). It captures the whole project so work can continue without this session.
+This project must survive with **nothing left on the original computer**. Everything is in GitHub, in
+Claude.ai artifacts, and in Google Drive. This file is the source of truth. Give it to Claude on the
+new machine.
 
-_Last updated: 2026-09-22._
+_Last updated: 2026-09-24._
 
 ---
 
+## 0. EVACUATION — do this before the old computer dies
+
+1. **Push BOTH branches to GitHub** (Claude cannot push; you must, from the old machine while it lives):
+   ```bash
+   git push origin classic
+   git push origin rebuild
+   ```
+   `classic` is the current working branch and holds the newest work **and this handoff + the artifact
+   backups in `docs/artifacts/`**. `rebuild` holds the alternate (Bridge) design. If you can only do one,
+   push **classic**.
+2. That's it for the code. Everything else (artifacts, Drive docs) is already in the cloud.
+
+To confirm nothing is stranded: `git status` should say clean, and `git log origin/classic..HEAD`
+should be empty after the push.
+
 ## 1. What this is
 
-A full rebuild of **mulwalawater.com** — the website for **Mulwala Water Operating & Investment LLC**
-(a firm that **advises, operates, and invests** in founder-led, family-owned, sponsor-backed and
-multi-unit businesses). Laura (laura@aussieglows.com) is managing it on her husband's behalf.
-
-The app is one Next.js project:
-- **Public marketing site** = the rebuild (what we've been working on).
-- **`/admin`** = an accounting/P&L + CMS section. **Untouched by the rebuild — do not change it.**
+The website for **Mulwala Water Operating & Investment LLC** — a firm that **advises, operates, and
+invests** in founder-led, family-owned, sponsor-backed and multi-unit businesses. Laura
+(laura@aussieglows.com) manages it for her husband. One Next.js app: the public marketing site is the
+rebuild; **`/admin`** is a separate accounting/CMS section — **do not touch it**.
 
 ## 2. Repo, branches, hosting
 
-- **GitHub:** `https://github.com/aussieglows/mulwala-water`
-- **Working branch: `rebuild`** (all rebuild work). **PR #1 is open: `rebuild` → `main`.**
-- **`main`** = the ORIGINAL v1 site, still live at mulwalawater.com. Merging `main` deploys production.
-- **Backup of the original:** git tag `v1-original` and branch `backup/original-v1` (commit `fb095f1`).
-- **Hosting:** Vercel (auto-deploys). GoDaddy DNS (apex A → Vercel `216.198.79.1`, `www` CNAME → `cname.vercel-dns.com`).
-- **DB:** Neon Postgres via `DATABASE_URL` (Prisma 7 driver adapters; local dev can fall back to SQLite/better-sqlite3). The homepage portfolio logos + `/admin` read the DB.
+- **GitHub:** https://github.com/aussieglows/mulwala-water
+- **Two design versions, on two branches:**
+  - **`classic`** — the CURRENT working branch. Full site in the **original mulwalawater.com look**
+    (Poppins, teal/navy/white, the wordmark logo, photo hero on every page). Also has the `/book` page.
+  - **`rebuild`** — the alternate "Bridge" design (Source-Serif-ish → now Space Grotesk, ink/teal/brass,
+    truss graphic). Kept intact so it can be chosen instead. **PR #1 (rebuild → main) is open.**
+  - **The Bridge-vs-classic decision is still open.** Laura is leaning classic (this is where recent
+    work went). Whichever wins gets merged to `main`; the other stays as a branch.
+- **`main`** = the ORIGINAL v1 site, still live at mulwalawater.com. Merging to `main` deploys production.
+- **Original backup:** git tag `v1-original` / branch `backup/original-v1` (`fb095f1`).
+- **Hosting:** Vercel (auto-deploys every branch). GoDaddy DNS. Neon Postgres.
+- **Preview URLs (after pushing):** classic → `https://mulwala-water-git-classic-aussie-glows.vercel.app`,
+  Bridge → `https://mulwala-water-git-rebuild-aussie-glows.vercel.app`. Both are behind **Vercel
+  Deployment Protection** (a login wall) until you turn it OFF: Vercel → project `mulwala-water` →
+  Settings → Deployment Protection → **Vercel Authentication → Off → Save**.
 
-> ⚠️ **First thing to do on the new computer: get the code + env.** Push any local commits from the
-> OLD computer first (`git push origin rebuild`). Then on the new computer: `git clone …`,
-> `git checkout rebuild`, `npm install`, **pull env from Vercel (see §3 — do NOT transfer `.env`)**,
-> `npm run dev` (port 3000).
-
-## 2b. Environment variables — pull from Vercel (never transfer .env)
-
-The `.env` file is not moved between computers. Get the env vars from Vercel instead:
+## 3. New computer: get set up (nothing transfers from the old one)
 
 ```bash
-npm i -g vercel        # once, if the Vercel CLI isn't installed
-vercel login           # sign in as the account that owns the project
-vercel link            # in the repo root: pick the "mulwala-water" project
-vercel env pull .env.local   # writes DATABASE_URL etc. into .env.local
+git clone https://github.com/aussieglows/mulwala-water
+cd mulwala-water
+git checkout classic        # or rebuild
+npm install
+# env — pull from Vercel, never copy a .env file:
+npm i -g vercel && vercel login && vercel link   # pick "mulwala-water"
+vercel env pull .env.local                        # writes DATABASE_URL etc.
+npm run dev                                        # http://localhost:3000
 ```
+- **DATABASE_URL** (Neon Postgres) is the key var — powers the homepage portfolio logos + `/admin`.
+  Manual fallback: Vercel → Settings → Environment Variables → reveal DATABASE_URL → paste into `.env.local`.
+- Neon dashboard has the DB itself if you ever need it; the connection string is the same `DATABASE_URL`.
+- Verify builds with `node_modules/.bin/tsc --noEmit` then `node_modules/.bin/next build`. If `next build`
+  errors on stale `.next/types` after moving routes: `node -e "require('fs').rmSync('.next',{recursive:true,force:true})"`
+  then rebuild. **Don't delete `.next` while `npm run dev` is running** — it 500s; restart dev after.
 
-`vercel env pull` downloads the project's environment variables (Development scope by default; add
-`--environment=production` if a var is only set there) into a local `.env.local` that Next.js reads
-automatically. **Manual fallback:** Vercel → project `mulwala-water` → Settings → Environment
-Variables → reveal `DATABASE_URL` (Neon Postgres) and paste it into a local `.env.local`. That one var
-is what the homepage portfolio logos and `/admin` need; the site's public pages render without it.
-
-## 3. Stack & conventions
+## 4. Stack & conventions
 
 - Next.js 16 App Router, React 19, TypeScript, Tailwind v4 (CSS-var tokens in `app/globals.css`).
-- **Copy lives in typed modules under `content/`** — not inline in JSX — so words change without touching components. Modules: `site, home, howWeWork, whoWeHelp, playbooks, about, principal, insights, diagnostic`.
-- Components in `components/site/`. Public pages in `app/(public)/`.
-- The **truss-bridge motif** (`components/site/Truss.tsx`) is the single graphic system.
-- Verify with `node_modules/.bin/tsc --noEmit` then `node_modules/.bin/next build`.
-- If `next build` errors on stale `.next/types` after moving routes: `node -e "require('fs').rmSync('.next',{recursive:true,force:true})"` then rebuild.
+- **Copy lives in typed modules under `content/`** — `site, home, howWeWork, whoWeHelp, playbooks, about,
+  principal, insights, diagnostic`. Change words there, not in JSX.
+- Components in `components/site/`. Public pages in `app/(public)/`. Fonts in `app/fonts.ts`.
+- Design is token-driven: to reskin, change `app/globals.css` palette tokens + `app/fonts.ts` + the
+  `Hero`/`Nav`/`Footer`/`Logo` components. (That's exactly how `classic` differs from `rebuild`.)
 
-## 4. Current design (CHOSEN — "Bridge palette + Harbour fonts")
+## 5. Design specifics per branch
 
-Laura reviewed three directions and chose **Bridge colours with Harbour fonts**. Applied in commit `50a74e4`.
-- **Palette** (`app/globals.css` `:root`): `--color-ink:#13232d`, `--color-ink2:#26333c`,
-  `--color-river:#0e6055` (teal, primary accent), `--color-river-deep:#0a4a42`,
-  `--color-river-wash:#d9e8e3`, `--color-brass:#b8863b`, `--color-brass-deep:#8a6120`,
-  `--color-paper:#f7f3ec` (warm ground), `--color-surface:#ffffff`, `--color-line:#e4ddd0`,
-  `--color-muted:#67707a`.
-- **Fonts** (`app/fonts.ts`): **Space Grotesk** for display + eyebrows + metrics, **Inter** for body.
-  No serif, no mono. (The `mono` export aliases the display font.)
-- The "companies we've backed" strip on the home page uses **white** section + **white** logo tiles
-  with a hairline border (commits `295ad33`, `53cae8f`).
+- **classic:** `app/fonts.ts` = Poppins. `app/globals.css` tokens = navy `#24384f` (ink), teal `#0f766e`
+  (river/accent), white/`#f5f8f9` grounds. `components/site/Logo.tsx` = the real wordmark (bridge + text),
+  used in Nav/Footer. `Hero.tsx` = full-bleed photo + navy overlay; each page passes an `image` (aerial
+  home, boardroom how-we-work, skyline who-we-help, office doors/insights, sunset playbooks, pano about).
+- **rebuild:** Space Grotesk + Inter, ink/teal/brass tokens, the X-braced truss motif
+  (`components/site/Truss.tsx` `TrussMark` + `Truss`) matching the logo bridge.
 
-## 5. Positioning (do not regress)
+## 6. Positioning & content rules (both branches)
 
-The firm does **all three: advise, operate, invest** (an override of the original spec's "operating,
-not advisory"). Homepage headline: "We advise, operate, and invest." with a "Three ways to work with
-us" section. **Do NOT reintroduce copy that disparages traditional consulting / strategy documents.**
+- The firm does **all three: advise, operate, invest.** Never reintroduce copy that talks down
+  traditional consulting.
+- **Hide-until-provided:** sections awaiting Laura's input are HIDDEN from the public site (no `⚠` to
+  visitors); they appear only once real data exists. Gates use `isPlaceholder(...)` and flags like
+  `home.proof.caseStudies.length` / `howWeWork.risk.approved`. The `[[…]]` strings stay in `content/`.
+- **Launch trim:** `/portfolio`, `/results`, and the four individual `/playbooks/[slug]` pages are
+  **parked under `parked/`** (not deleted); `/playbooks` is one page; newsletter removed; portfolio logos
+  kept on the home page. Restore by moving folders back + reverting nav/footer/sitemap/redirect edits.
 
-## 6. Hide-until-provided (Laura's rule)
+## 7. Booking (`/book`)
 
-Any section awaiting Laura's input is **hidden from the public site** (no `⚠` markers to visitors) and
-appears only once real data exists. Gates live in the page components: e.g.
-`home.proof.caseStudies.length > 0`, `howWeWork.risk.approved`, and `isPlaceholder(...)` checks on
-door case studies / contact / FAQ / play descriptions. The `[[…]]` strings STAY in the `content/`
-files as the data source. `⚠` markers appear only in the private tracker (below), never on the site.
+- Every "Book a 20-minute call" button routes to the on-site **`/book`** page (`bookingHref` in
+  `content/site.ts`), which **embeds the scheduler** in an iframe from `site.bookingUrl`.
+- `site.bookingUrl` is not set yet, so `/book` shows an email/call fallback. **To go live:** create a
+  Google Calendar → Appointment schedule (or Calendly), copy the embed/booking URL, and set
+  `site.bookingUrl = "<url>"`. (Currently on `classic`; port to `rebuild` if that design is chosen.)
 
-## 7. Launch trim (shipping a simple version first)
+## 8. Cloud artifacts (on Laura's Claude account — survive the computer)
 
-Parked under **`parked/`** (NOT deleted — restore later by moving folders back + reverting nav/footer/
-sitemap/redirect edits):
-- `parked/playbooks-slug` — the four individual playbook pages (`/playbooks` is now ONE page).
-- `parked/portfolio` — the portfolio page (logos kept on the home page; `/portfolio` +
-  `/portfolio-companies` temporarily redirect home in `next.config.ts`).
-- `parked/results` — the results page (removed from nav).
-- Newsletter sign-up removed from the footer.
-- Nav: Playbooks is a single link; Portfolio removed from the Who We Help dropdown.
+All are private to Laura's account; open from claude.ai or Claude Code `/artifacts`. **Source HTML for
+each is backed up in the repo at `docs/artifacts/`** so a new Claude can edit/republish or rebuild them.
 
-Also live: a fourth Who We Help door — **Family-owned** — added alongside Founder-led, Sponsor-backed,
-Franchise & multi-unit.
+| Artifact | URL | Source in repo |
+|---|---|---|
+| **Mulwala site tracker** (the to-dos) | https://claude.ai/artifact/VDRJvUzYMGr7QXpBsSuM76 | `docs/artifacts/mulwala-tracker.html` |
+| Handoff (this doc, styled) | https://claude.ai/artifact/Sni7oWEqdpSgxZvrSzxRFB | `docs/artifacts/handoff.html` |
+| Design directions (3 concepts) | https://claude.ai/artifact/5jN92cEqMsxb9TnzLuNpyy | `docs/artifacts/design-directions.html` |
+| Classic demo (homepage mockup) | https://claude.ai/artifact/Jj9iKEhASDZ9cJ3zgYgmCx | `docs/artifacts/classic-demo.html` |
 
-## 8. Artifacts (cloud — owned by Laura's account)
+Also in **Google Drive → "Mulwala Water website"** folder: Handoff, Phase 3 intake, Insight article
+drafts (as Google Docs).
 
-- **ACTIONS TRACKER — "Mulwala site tracker":** https://claude.ai/artifact/VDRJvUzYMGr7QXpBsSuM76
-  (pinned). The private to-do dashboard. Mirrors the aussie-glows backlog / Job Search Actions
-  dashboards, styled with the consulting palette/fonts. **To update it from the new computer:** use the
-  Artifact tool — `read` it by that URL, then republish with `url` set to that URL (keeps the same link).
-- **Design directions — "Mulwala design directions":** https://claude.ai/artifact/5jN92cEqMsxb9TnzLuNpyy
-  The three concepts (Harbour / Bridge / Estuary). Chosen = **Bridge palette + Harbour fonts** (applied).
+## 9. How to rebuild / keep the project management + to-dos going
 
-## 9. The actions tracker, in text (so it travels)
+The "to-dos on the side" = the **Mulwala site tracker** artifact (pinned in the claude.ai sidebar). It is
+a single self-contained HTML page (header, summary stats, filter chips, collapsible sections of items
+with copy-to-chat buttons, a shipped log). To continue it on a new computer:
 
-**Needs Laura's input** (each hidden on the public site until provided):
-1. **Case studies (2–3)** — situation → what we found → what we changed → the number → a named quote.
-   Shows on: homepage proof band, matching door page, `/results` (parked). Data: `content/home.ts`
-   `home.proof.caseStudies`, `content/whoWeHelp.ts` `door.caseStudy`.
-2. **Principal bio** — name, title, LinkedIn, photo, bio, career. Fill `content/principal.ts` (currently
-   null → About shows a deliberate signed statement). If it must wait, capture WHY.
-3. **Portfolio: relationship (Investment/Advisory/Operating), period, 2 lines + logo permissions** per
-   company. For when `/portfolio` is un-parked. Confirm F45, Noom, Iris Energy especially.
-4. **Contact details** — named email, phone hours, LinkedIn URL. `content/site.ts` `PLACEHOLDER` + `site`.
-5. **FAQ answers (7 questions)** on `/how-we-work`. `content/howWeWork.ts` `faq.items` (answers are `[[LAURA]]`).
-6. **Playbook play descriptions** — names + subtitles are live; fuller detail pending review.
+- **To update it** (add/complete a to-do): the new Claude opens the source `docs/artifacts/mulwala-tracker.html`
+  (or `Artifact` tool `action:"read"` on the tracker URL to pull the live HTML), edits the item list, then
+  **republishes to the SAME url** — `Artifact` `publish` with `url:"https://claude.ai/artifact/VDRJvUzYMGr7QXpBsSuM76"`
+  (from a new conversation) — which keeps the same link and the sidebar pin.
+- **To rebuild it from scratch** (if ever lost): the source in `docs/artifacts/mulwala-tracker.html` is the
+  whole thing — publish it as a new artifact and re-pin. It's styled with the consulting palette/fonts and
+  mirrors Laura's other dashboards (aussie glows backlog, Job Search Actions).
+- **Item model:** each `<li class="item need|decision|drafted|build">` has a title, description, a
+  "where it shows" line, tags, and a `data-copy` fill-in message. Add items by copying an `<li>`.
+- Keep the tracker in sync as work lands: when a to-do is done, move it to the Shipped list; when Laura
+  supplies an input, wire it into `content/` and tick it off.
 
-**A decision:**
-7. **The guarantee** on `/how-we-work` — approve / amend / delete. Currently hidden. To publish: set
-   `content/howWeWork.ts` `risk.approved = true` (only with Laura's explicit approval).
+## 10. Outstanding to-dos (mirror of the tracker, in text)
 
-**Drafted, waiting on Laura:**
-8. **Six insight articles** — written in `content/insights.ts` but `published: false`. Need a **byline**
-   (author name) + approval, then flip `published: true`. Readable copies in `INSIGHTS-DRAFTS.md`.
+**Needs Laura's input** (hidden on the site until provided): booking scheduler URL (`site.bookingUrl` →
+`/book`); 2–3 case studies; principal bio (`content/principal.ts`); portfolio relationship/period + logo
+permissions; contact named email / phone-hours / LinkedIn (`content/site.ts`); FAQ answers (7, on
+`/how-we-work`); playbook play descriptions.
+**A decision:** the guarantee on `/how-we-work` — approve/amend/delete (publish by setting
+`howWeWork.risk.approved = true`).
+**Drafted, waiting on Laura:** six insight articles (`content/insights.ts`, `published:false`; need a
+byline). Readable copies in `INSIGHTS-DRAFTS.md` / the Drive doc.
+**To build next:** a pure-consulting / advise-only option on the Who We Help pages, and a consulting
+equivalent of "Diagnose · Scope · Run · Hand over" on `/how-we-work`.
 
-**To build next (needs Laura's steer on the advise-only model):**
-9. Add a **pure-consulting / advise-only option** to the four Who We Help pages (they currently only
-   describe someone coming into the business).
-10. A **consulting equivalent of "Diagnose · Scope · Run · Hand over"** for advise-only engagements, on
-    `/how-we-work`.
+## 11. First steps for the new Claude
 
-Repo docs: **`PHASE-3-INTAKE.md`** (fill-in worksheet for items 1–8) and **`INSIGHTS-DRAFTS.md`**.
+1. Read this file. Confirm branch (`classic` for the current direction), `npm install`, pull env from
+   Vercel (§3), `npm run dev`.
+2. Skim `content/` and `components/site/`. Open the tracker artifact (§8) for the live to-do list.
+3. Continue from §10. Wire Laura's inputs into the right `content/` module — gated sections un-hide
+   automatically. Keep the tracker artifact updated (§9).
+4. Commit on the working branch with `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+   Laura pushes (Claude couldn't push in the old environment; check whether the new one can).
 
-## 10. Deploy / sharing status (open item)
+## 12. Constraints
 
-- Vercel auto-builds a preview of `rebuild`. Preview URL (auto-updates on push):
-  **https://mulwala-water-git-rebuild-aussie-glows.vercel.app**
-- **BLOCKER:** that preview is currently behind **Vercel Deployment Protection** (visiting it redirects
-  to a Vercel login — 302 → `vercel.com/sso-api`). To let anyone (e.g. Laura's husband) view it:
-  Vercel → project `mulwala-water` → **Settings → Deployment Protection → Vercel Authentication →
-  turn OFF → Save.** (Or use a per-deployment "Share" bypass link.) As of this handoff it was still ON.
-- **To go live:** push `rebuild`, review PR #1, merge into `main` → Vercel deploys production.
-
-## 11. Constraints & gotchas
-
-- **Never recreate brand/company logos in code** — use only user-supplied logo files.
-- In the OLD environment, `git push`, `rm`, and `curl` were blocked for Claude (Laura ran pushes
-  herself). The new environment may differ — check before assuming.
-- Local memory files (`~/.claude/projects/.../memory/`) do NOT transfer between computers; their key
-  facts are captured in this file.
-- The old design spec (`C:\Users\lamoo\Downloads\mulwala-water-website-build-spec.md`) drove the
-  original rebuild but has been overridden in places (positioning; visible-placeholder → hide-until-
-  provided; launch trim). This HANDOFF is the current source of truth where they conflict.
-
-## 12. First steps for the new Claude
-
-1. Confirm you're on branch `rebuild`, `npm install`, pull env from Vercel (§2b), `npm run dev`.
-2. Read this file, then skim `content/` and `components/site/`.
-3. Open the actions tracker artifact (URL in §8) to see the live to-do list.
-4. Continue from §9. When Laura supplies inputs, wire them into the relevant `content/` module and the
-   gated section un-hides automatically. Keep the tracker artifact updated (read + republish by URL).
-5. Commit on `rebuild` with the standard `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` line.
+- **Never recreate brand/company logos in code** — use only user-supplied logo files (in `public/images/logos/`).
+- Local Claude memory files do not transfer between computers; their key facts are in this file.

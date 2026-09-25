@@ -1,0 +1,461 @@
+<title>Mulwala site tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root {
+    --paper: #faf8f4;
+    --surface: #ffffff;
+    --surface-2: #f3efe8;
+    --ink: #0e1720;
+    --ink2: #1b2b3a;
+    --muted: #5c6873;
+    --line: #e3dfd7;
+    --line-strong: #d5cec1;
+    --river: #0b5850;
+    --river-deep: #084039;
+    --river-wash: #dcebe7;
+    --brass: #b8863b;
+    --brass-deep: #8a6120;
+    --flag-bg: #f3e6cd;
+    --flag-ink: #7a5514;
+    --shadow: 0 1px 2px rgba(14,23,32,.05), 0 10px 30px -20px rgba(14,23,32,.35);
+    --ff-display: "Source Serif 4", Georgia, serif;
+    --ff-body: "Inter", system-ui, sans-serif;
+    --ff-mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --paper: #0e1720;
+      --surface: #16212c;
+      --surface-2: #1c2833;
+      --ink: #f2ede4;
+      --ink2: #d6dde3;
+      --muted: #9aa6b0;
+      --line: #2a3742;
+      --line-strong: #3a4854;
+      --river: #4f9d92;
+      --river-deep: #74b6ab;
+      --river-wash: #16302c;
+      --brass: #cda158;
+      --brass-deep: #ddb878;
+      --flag-bg: #33280f;
+      --flag-ink: #e6c483;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px -20px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0e1720;
+    --surface: #16212c;
+    --surface-2: #1c2833;
+    --ink: #f2ede4;
+    --ink2: #d6dde3;
+    --muted: #9aa6b0;
+    --line: #2a3742;
+    --line-strong: #3a4854;
+    --river: #4f9d92;
+    --river-deep: #74b6ab;
+    --river-wash: #16302c;
+    --brass: #cda158;
+    --brass-deep: #ddb878;
+    --flag-bg: #33280f;
+    --flag-ink: #e6c483;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px -20px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--ff-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding-block: clamp(24px, 5vw, 56px); padding-left: clamp(16px, 4vw, 40px); padding-right: clamp(16px, 4vw, 40px); }
+
+  a { color: var(--river-deep); }
+
+  header { margin-bottom: 26px; }
+  .eyebrow {
+    font-family: var(--ff-mono); font-size: 12px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--brass-deep);
+    margin: 0 0 12px; display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow svg { width: 30px; height: auto; color: var(--brass); }
+  h1 {
+    font-family: var(--ff-display); font-weight: 600;
+    font-size: clamp(30px, 6vw, 46px); line-height: 1.05; letter-spacing: -.02em;
+    margin: 0; text-wrap: balance;
+  }
+  .lede { color: var(--muted); max-width: 64ch; margin: 14px 0 0; font-size: 16px; }
+  .policy {
+    margin: 18px 0 0; padding: 14px 16px; border: 1px solid var(--line);
+    border-left: 3px solid var(--brass); border-radius: 10px; background: var(--surface);
+    color: var(--ink2); font-size: 14px; max-width: 68ch; box-shadow: var(--shadow);
+  }
+  .policy b { font-family: var(--ff-display); font-weight: 600; }
+
+  .summary { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 4px; }
+  .stat {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 13px 16px; box-shadow: var(--shadow); flex: 1 1 auto; min-width: 108px;
+  }
+  .stat .n { font-family: var(--ff-mono); font-weight: 600; font-size: 26px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: 7px; }
+  .stat.need .n { color: var(--brass-deep); }
+  .stat.decision .n { color: var(--river-deep); }
+  .stat.drafted .n { color: var(--ink2); }
+  .stat.build .n { color: var(--brass-deep); }
+  .stat.shipped .n { color: var(--river); }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 20px; align-items: center; }
+  .filters .fl { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-right: 2px; }
+  .chip {
+    font-family: var(--ff-mono); font-size: 12px; font-weight: 500;
+    border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink);
+    padding: 6px 13px; border-radius: 999px; cursor: pointer; transition: background .15s, border-color .15s, color .15s;
+  }
+  .chip:hover { border-color: var(--river); }
+  .chip[aria-pressed="true"] { background: var(--river); border-color: var(--river); color: #fff; }
+  :root[data-theme="dark"] .chip[aria-pressed="true"], :root:not([data-theme="light"]) .chip[aria-pressed="true"] { color: #0e1720; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chip[aria-pressed="true"] { color: #0e1720; } }
+  .chip:focus-visible { outline: 2px solid var(--river); outline-offset: 2px; }
+
+  section { margin-bottom: 12px; }
+  details { border-top: 1px solid var(--line); }
+  summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 12px; padding: 18px 4px 14px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: "›"; font-family: var(--ff-display); color: var(--river);
+    font-size: 20px; line-height: 1; transform: rotate(90deg); transition: transform .18s;
+  }
+  details:not([open]) summary::before { transform: rotate(0deg); }
+  .sec-title { font-family: var(--ff-display); font-weight: 600; font-size: 19px; letter-spacing: -.01em; }
+  .sec-count { font-family: var(--ff-mono); font-size: 12px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+  .sec-note { color: var(--muted); font-size: 13px; margin: 0 0 6px; max-width: 68ch; }
+
+  ul.items { list-style: none; margin: 0 0 10px; padding: 0; }
+  li.item { display: grid; grid-template-columns: 11px 1fr auto; gap: 14px; align-items: start; padding: 15px 6px 15px 8px; border-top: 1px solid var(--line); }
+  li.item:first-child { border-top: none; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 7px; background: var(--muted); }
+  .item.need .dot { background: var(--brass); }
+  .item.decision .dot { background: var(--river); }
+  .item.drafted .dot { background: var(--ink2); }
+  .item.build .dot { background: var(--brass); }
+  .item.shipped .dot { background: var(--river); }
+  .it-title { font-weight: 600; font-size: 15.5px; }
+  .it-desc { color: var(--muted); font-size: 14px; margin-top: 4px; max-width: 70ch; }
+  .it-where { color: var(--ink2); font-size: 13px; margin-top: 7px; }
+  .it-where b { font-weight: 600; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .tag {
+    font-family: var(--ff-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .02em;
+    padding: 2px 8px; border-radius: 6px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--line);
+  }
+  .tag.hidden { background: var(--flag-bg); color: var(--flag-ink); border-color: transparent; font-weight: 600; }
+  .tag.live { background: var(--river-wash); color: var(--river-deep); border-color: transparent; font-weight: 600; }
+
+  .go {
+    align-self: center; flex-shrink: 0; font-family: var(--ff-mono); font-size: 12px; font-weight: 600;
+    color: #fff; background: var(--river); border: 1px solid var(--river);
+    padding: 7px 14px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    transition: background .15s, transform .1s;
+  }
+  :root[data-theme="dark"] .go, :root:not([data-theme="light"]) .go { color: #0e1720; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .go { color: #0e1720; } }
+  .go:hover { background: var(--river-deep); }
+  .go:active { transform: translateY(1px); }
+  .go:focus-visible { outline: 2px solid var(--river); outline-offset: 2px; }
+  .go.copied { background: var(--brass); border-color: var(--brass); }
+
+  li.done-item { display: grid; grid-template-columns: 16px 1fr; gap: 10px; align-items: baseline; padding: 10px 6px 10px 8px; border-top: 1px solid var(--line); }
+  li.done-item:first-child { border-top: none; }
+  .done-item .chk { color: var(--river); font-weight: 700; }
+  .done-item .d-text { font-size: 14px; }
+  .done-item .d-text b { font-weight: 600; font-family: var(--ff-display); }
+  details.shipped-sec > summary .sec-title { color: var(--river-deep); }
+  .item.hide, section.hide { display: none; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--paper); border-radius: 12px; box-shadow: var(--shadow);
+    padding: 12px 18px; font-size: 13.5px; max-width: min(90vw, 460px); line-height: 1.45;
+    opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 50;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast b { font-family: var(--ff-display); }
+
+  footer { margin-top: 42px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; max-width: 70ch; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 560px) { .stat { min-width: 0; flex-basis: calc(50% - 5px); } li.item { grid-template-columns: 11px 1fr; } .go { grid-column: 2; justify-self: start; margin-top: 10px; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">
+      <svg viewBox="0 0 30 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><line x1="1" y1="14" x2="29" y2="14"/><line x1="1" y1="2" x2="29" y2="2"/><line x1="1" y1="14" x2="8.5" y2="2"/><line x1="8.5" y1="2" x2="16" y2="14"/><line x1="16" y1="14" x2="23.5" y2="2"/><line x1="23.5" y1="2" x2="29" y2="14"/></svg>
+      Mulwala Water · website
+    </p>
+    <h1>What the site still needs from you</h1>
+    <p class="lede">The rebuild is built and every page works. What&rsquo;s left is the content only you can supply. Each item below is its own small project &mdash; work through them in any order.</p>
+    <p class="policy"><b>How placeholders work:</b> anything that needs your input is <b>hidden on the public website</b> until you provide it. Visitors never see a gap or a &ldquo;coming soon&rdquo; &mdash; the section simply isn&rsquo;t there, and appears only once the information is in. Hit <b>Copy</b> on any item for a ready-to-fill message; paste it back into our chat and I&rsquo;ll wire it in.</p>
+  </header>
+
+  <div class="summary" id="summary">
+    <div class="stat need"><div class="n" data-count="need">0</div><div class="l">Needs your input</div></div>
+    <div class="stat decision"><div class="n" data-count="decision">0</div><div class="l">Decisions</div></div>
+    <div class="stat drafted"><div class="n" data-count="drafted">0</div><div class="l">Drafted for you</div></div>
+    <div class="stat build"><div class="n" data-count="build">0</div><div class="l">To build next</div></div>
+    <div class="stat shipped"><div class="n" data-count="shipped">0</div><div class="l">Shipped</div></div>
+  </div>
+
+  <div class="filters" role="group" aria-label="Filter by status">
+    <span class="fl">Show</span>
+    <button class="chip" data-filter="all" aria-pressed="true">All</button>
+    <button class="chip" data-filter="need" aria-pressed="false">Needs you</button>
+    <button class="chip" data-filter="decision" aria-pressed="false">Decisions</button>
+    <button class="chip" data-filter="drafted" aria-pressed="false">Drafted</button>
+    <button class="chip" data-filter="build" aria-pressed="false">To build</button>
+    <button class="chip" data-filter="shipped" aria-pressed="false">✓ Shipped</button>
+  </div>
+
+  <!-- NEEDS YOUR INPUT -->
+  <section>
+    <details open>
+      <summary><span class="sec-title">Needs your input</span><span class="sec-count"></span></summary>
+      <p class="sec-note">Each of these is hidden on the public site until you provide it.</p>
+      <ul class="items">
+
+        <li class="item need" data-status="need" data-copy="Here's a case study for the site.&#10;&#10;Situation (business type, size, what was happening): &#10;What we found: &#10;What we changed (specific actions): &#10;The number (one figure + time frame): &#10;Quote (exact words): &#10;Named by (name, title, company): &#10;OK to also post this on their LinkedIn / a review site? ">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">Case studies (2&ndash;3)</div>
+            <div class="it-desc">The single highest-value item &mdash; one properly-written case study beats all fourteen logos. Five blocks each: situation, what we found, what we changed, the number, and a named quote.</div>
+            <div class="it-where"><b>Where it shows:</b> the homepage &ldquo;What it looks like when it works&rdquo; band, the matching audience door page, and <b>/results</b>.</div>
+            <div class="tags"><span class="tag hidden">hidden until provided</span><span class="tag">needs a named quote</span></div>
+          </div>
+        </li>
+
+        <li class="item need" data-status="need" data-copy="Here's my bio for the About page.&#10;&#10;Name: &#10;Title / role: &#10;LinkedIn URL: &#10;Photo (I'll send the file separately): &#10;Short bio (2–4 sentences): &#10;Career highlights (3–6 lines): &#10;&#10;— OR — keep the bio out for now because: ">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">Principal profile / bio</div>
+            <div class="it-desc">The site&rsquo;s biggest single gap: a named person with a track record. About currently shows a deliberate unsigned statement instead. Filling this in is one data file &mdash; no redesign. If it has to wait, tell me why (non-compete, current role, live deal), because it changes what we can claim elsewhere.</div>
+            <div class="it-where"><b>Where it shows:</b> the <b>/about</b> profile block (renders the signed statement until you provide it).</div>
+            <div class="tags"><span class="tag hidden">signed statement shows until provided</span></div>
+          </div>
+        </li>
+
+        <li class="item need" data-status="need" data-copy="Here's the booking scheduler link for the /book page: [paste your Google Appointment Schedule embed URL, or your Calendly link]">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">Booking scheduler link</div>
+            <div class="it-desc">Create a scheduler that reads your calendar, lets you set the hours you're available, and books straight into your calendar &mdash; Google Calendar &rarr; Create &rarr; Appointment schedule (or Calendly). Then send the embed/booking URL.</div>
+            <div class="it-where"><b>Where it shows:</b> the on-site <b>/book</b> page embeds it, and every &ldquo;Book a 20-minute call&rdquo; button routes there. Shows an email/call fallback until the link is in.</div>
+            <div class="tags"><span class="tag hidden">fallback shows until provided</span><span class="tag">calendar booking</span></div>
+          </div>
+        </li>
+
+        <li class="item need" data-status="need" data-copy="Portfolio details (one block per company):&#10;&#10;Company: &#10;Relationship (Investment / Advisory / Operating): &#10;Period (e.g. 2019–2022, or 'since 2021'): &#10;What the business is (one line): &#10;What Mulwala Water did (one line): &#10;Logo cleared to display? (yes/no) ">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">Portfolio: relationship, period &amp; logo permissions</div>
+            <div class="it-desc">For each company: the accurate role (Investment / Advisory / Operating), the period, one line on the business and one on what we did &mdash; and confirmation the logo is cleared. Confirm F45, Noom and Iris Energy especially. Don&rsquo;t publish any company you can&rsquo;t describe accurately or aren&rsquo;t cleared to show.</div>
+            <div class="it-where"><b>Where it shows:</b> each card on <b>/portfolio</b> (logos show now; the role &amp; period line stays hidden until you give it).</div>
+            <div class="tags"><span class="tag hidden">role &amp; period hidden until provided</span><span class="tag">14 companies</span></div>
+          </div>
+        </li>
+
+        <li class="item need" data-status="need" data-copy="Contact details for the site:&#10;&#10;Named email (a person, not info@): &#10;Phone hours to show (e.g. '9am–5pm ET, weekdays'): &#10;LinkedIn URL (company or personal): ">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">Contact details</div>
+            <div class="it-desc">A named email (a person, not info@), the hours the phone is answered, and a LinkedIn URL. Until then the site falls back cleanly to the general email and no hours.</div>
+            <div class="it-where"><b>Where it shows:</b> <b>/contact</b> and the footer (phone-hours and LinkedIn rows are hidden until provided).</div>
+            <div class="tags"><span class="tag hidden">hours &amp; LinkedIn hidden until provided</span></div>
+          </div>
+        </li>
+
+        <li class="item need" data-status="need" data-copy="How We Work — FAQ answers (answer any you like; I'll publish the ones you answer):&#10;&#10;Who actually turns up? &#10;How much of your time do we get? &#10;Do you work remotely or on site? &#10;What do you need from us to start? &#10;What happens if the engagement needs to change shape halfway through? &#10;Do you sign NDAs? &#10;Will you take equity instead of fees? ">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">FAQ answers (7 questions)</div>
+            <div class="it-desc">Seven real first-call questions are written; they need your answers. Answer any subset &mdash; only answered questions publish (and they power the FAQ rich-result data).</div>
+            <div class="it-where"><b>Where it shows:</b> the <b>/how-we-work</b> FAQ (the whole section is hidden until at least one answer exists).</div>
+            <div class="tags"><span class="tag hidden">section hidden until answered</span></div>
+          </div>
+        </li>
+
+        <li class="item need" data-status="need" data-copy="Playbook plays — descriptions to publish. For each play I can add: a two-sentence description, 'when it applies', and 'what you get'. Corrections/notes per play: ">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">Playbook play descriptions</div>
+            <div class="it-desc">Every play has a name and plain-language subtitle live now. The fuller detail (a two-sentence description, &ldquo;when it applies&rdquo;, &ldquo;what you get&rdquo;) is drafted-pending-your-review, so it isn&rsquo;t shown yet. Confirm or correct and I&rsquo;ll add it.</div>
+            <div class="it-where"><b>Where it shows:</b> the four <b>/playbooks</b> category pages (names + subtitles show now; descriptions hidden until confirmed).</div>
+            <div class="tags"><span class="tag hidden">detail hidden until confirmed</span></div>
+          </div>
+        </li>
+
+      </ul>
+    </details>
+  </section>
+
+  <!-- A DECISION FROM YOU -->
+  <section>
+    <details open>
+      <summary><span class="sec-title">A decision from you</span><span class="sec-count"></span></summary>
+      <ul class="items">
+        <li class="item decision" data-status="decision" data-copy="On the How We Work guarantee — my decision is:&#10;&#10;[ ] Approve as written&#10;[ ] Amend to: &#10;[ ] Delete for now&#10;&#10;(Current draft: 'Two weeks into any engagement you'll know whether we're the right people, and so will we. If either of us thinks we aren't, we stop there and you pay only for the time used. No notice period, no wind-down fee, no awkward conversation about the rest of the contract.')">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">The guarantee &mdash; approve, amend or delete</div>
+            <div class="it-desc">A real commercial commitment: a two-week &ldquo;if it isn&rsquo;t working, stop and pay only for time used&rdquo; promise. Every top-tier firm in the category has some version; none of the weak ones do. It&rsquo;s yours to make, not mine.</div>
+            <div class="it-where"><b>Where it shows:</b> the &ldquo;Where the risk sits&rdquo; section on <b>/how-we-work</b> &mdash; hidden entirely until you approve it.</div>
+            <div class="tags"><span class="tag hidden">hidden until approved</span></div>
+          </div>
+        </li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- DRAFTED, WAITING ON YOU -->
+  <section>
+    <details open>
+      <summary><span class="sec-title">Drafted &mdash; waiting on your OK</span><span class="sec-count"></span></summary>
+      <ul class="items">
+        <li class="item drafted" data-status="drafted" data-copy="On the six insight articles: the voice is [good / change it like this: ___]. Publish them under the byline: [name]. Publish [all six / just these: ___].">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">Six insight articles</div>
+            <div class="it-desc">All six are written in the operating voice, no invented client facts. They need two things from you: a thumbs-up on the voice, and a byline (whose name they publish under &mdash; ties to the bio). Titles: units-awarded vanity metric · first 100 days in a founder-led portfolio co · five weekly numbers · why improvements don&rsquo;t survive the consultant · running a US business as an Australian · four-wall EBITDA.</div>
+            <div class="it-where"><b>Where it shows:</b> <b>/insights</b> and each article page &mdash; unpublished (not routable, out of the sitemap) until you approve + name the author.</div>
+            <div class="tags"><span class="tag hidden">unpublished until approved</span><span class="tag">needs a byline</span></div>
+          </div>
+        </li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- TO BUILD NEXT -->
+  <section>
+    <details open>
+      <summary><span class="sec-title">To build next</span><span class="sec-count"></span></summary>
+      <p class="sec-note">My side to build &mdash; a couple need a steer from you on the pure-consulting model.</p>
+      <ul class="items">
+        <li class="item build" data-status="build" data-copy="On the pure-consulting option for the Who We Help pages: here's how the advise-only engagement should be described (who it's for, what they get, how it differs from us coming into the business): ">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">Add the pure-consulting option to Who We Help</div>
+            <div class="it-desc">Right now every Who We Help page describes us coming into the business (an operator in the seat). They don&rsquo;t offer the advise-only / traditional-consulting path. Add that option to each door so both routes are clear. Needs a steer from you on how the advise-only offer is framed.</div>
+            <div class="it-where"><b>Where it shows:</b> the four <b>/who-we-help</b> pages.</div>
+            <div class="tags"><span class="tag">needs your steer</span></div>
+          </div>
+        </li>
+        <li class="item build" data-status="build" data-copy="For the pure-consulting 'how it works': the equivalent of Diagnose / Scope / Run / Hand over for an advise-only engagement is: (step 1) … (step 2) … (step 3) … (step 4) …">
+          <span class="dot"></span>
+          <div>
+            <div class="it-title">A &ldquo;how it works&rdquo; for pure consulting</div>
+            <div class="it-desc">&ldquo;Diagnose · Scope · Run · Hand over&rdquo; describes an engagement where we come into the business. Pure consulting (advise-only) needs its own equivalent set of phases, so How We Work covers both models. Needs your input on the advise-only phases.</div>
+            <div class="it-where"><b>Where it shows:</b> the phases section on <b>/how-we-work</b>.</div>
+            <div class="tags"><span class="tag">needs your steer</span></div>
+          </div>
+        </li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- SHIPPED -->
+  <section>
+    <details class="shipped-sec">
+      <summary><span class="sec-title">✓ Shipped</span><span class="sec-count"></span></summary>
+      <p class="sec-note">Done and live on the rebuild branch (ready to deploy).</p>
+      <ul class="items">
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>Full rebuild</b> &mdash; new design system (truss motif, serif/ink/river/brass), nav + footer, all pages, built to the spec.</div></li>
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>Positioning: advise, operate &amp; invest</b> &mdash; reframed from &ldquo;operating, not advisory&rdquo;; removed the lines that talked down consulting.</div></li>
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>Fourth door: Family-owned</b> &mdash; added to Who We Help with its own detail page, nav, footer and card.</div></li>
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>Homepage metrics</b> &mdash; your real figures in: 20+ years · 50+ businesses · $5B+ revenue · 2 continents.</div></li>
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>How We Work cleanup</b> &mdash; removed the revenue-floor bullet and the &ldquo;typical starting price&rdquo; prompt at your request.</div></li>
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>Hide-until-provided</b> &mdash; every unfilled section is now hidden from the public site instead of showing a placeholder.</div></li>
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>Playbook diagnostic</b> &mdash; the 8-question &ldquo;Which play do you need?&rdquo; tool, live with an instant result.</div></li>
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>SEO &amp; sharing</b> &mdash; per-page share images, breadcrumbs, structured data, sitemap and robots.</div></li>
+        <li class="done-item" data-status="shipped"><span class="chk">✓</span><div class="d-text"><b>Trimmed to a launch-ready build</b> &mdash; parked the four playbook detail pages, the portfolio page, the results page and the newsletter to add back later. Kept one playbook page and the portfolio logos on the home page.</div></li>
+      </ul>
+    </details>
+  </section>
+
+  <footer>
+    Compiled from the website rebuild. This tracker is private to you. The site itself is on the <code style="font-family:var(--ff-mono);font-size:12px;">rebuild</code> branch and not yet deployed &mdash; nothing here is public until you push and go live.
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  (function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll("li.item, li.done-item"));
+    var toast = document.getElementById("toast");
+    var toastTimer = null;
+    function showToast(html) {
+      toast.innerHTML = html; toast.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 4200);
+    }
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+      return new Promise(function (resolve, reject) {
+        try {
+          var ta = document.createElement("textarea");
+          ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+          document.body.appendChild(ta); ta.focus(); ta.select();
+          var ok = document.execCommand("copy"); document.body.removeChild(ta);
+          ok ? resolve() : reject();
+        } catch (e) { reject(e); }
+      });
+    }
+    // Add a Copy button to every actionable (non-shipped) item.
+    document.querySelectorAll("li.item").forEach(function (item) {
+      var copy = item.getAttribute("data-copy"); if (!copy) return;
+      var title = (item.querySelector(".it-title") || {}).textContent || "";
+      var btn = document.createElement("button");
+      btn.className = "go"; btn.type = "button"; btn.textContent = "Copy";
+      btn.setAttribute("aria-label", "Copy a ready-to-fill message for: " + title);
+      btn.addEventListener("click", function () {
+        copyText(copy).then(function () {
+          btn.classList.add("copied"); btn.textContent = "Copied";
+          setTimeout(function () { btn.classList.remove("copied"); btn.textContent = "Copy"; }, 2200);
+          showToast("Copied a fill-in message for <b>" + title.trim() + "</b> — paste it into our chat and fill it in.");
+        }).catch(function () {
+          showToast("Couldn't copy automatically — just tell me about <b>" + title.trim() + "</b> in chat.");
+        });
+      });
+      item.appendChild(btn);
+    });
+
+    // Summary counts.
+    function tally(s) { return items.filter(function (i) { return i.dataset.status === s; }).length; }
+    var counts = { need: tally("need"), decision: tally("decision"), drafted: tally("drafted"), shipped: tally("shipped") };
+    document.querySelectorAll("[data-count]").forEach(function (el) { el.textContent = counts[el.getAttribute("data-count")]; });
+
+    // Per-section counts.
+    document.querySelectorAll("details").forEach(function (d) {
+      var n = d.querySelectorAll("li.item, li.done-item").length;
+      var c = d.querySelector(".sec-count"); if (c) c.textContent = n + (n === 1 ? " item" : " items");
+    });
+
+    // Filter.
+    var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+    function applyFilter(f) {
+      chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c.getAttribute("data-filter") === f)); });
+      items.forEach(function (i) { i.classList.toggle("hide", !(f === "all" || i.dataset.status === f)); });
+      document.querySelectorAll("section").forEach(function (s) {
+        var visible = s.querySelectorAll("li.item:not(.hide), li.done-item:not(.hide)").length;
+        s.classList.toggle("hide", visible === 0);
+        var det = s.querySelector("details"); if (det && f !== "all" && visible > 0) det.open = true;
+      });
+    }
+    chips.forEach(function (chip) { chip.addEventListener("click", function () { applyFilter(chip.getAttribute("data-filter")); }); });
+  })();
+</script>

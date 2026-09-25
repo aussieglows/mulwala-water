@@ -1,0 +1,157 @@
+<title>Mulwala Water handoff</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper: #f7f3ec; --surface: #ffffff; --ink: #13232d; --ink2: #26333c; --muted: #67707a;
+    --line: #e4ddd0; --river: #0e6055; --river-deep: #0a4a42; --brass: #8a6120; --wash: #d9e8e3;
+    --flag-bg: #f3e6cd; --flag-ink: #7a5514;
+    --d: "Space Grotesk", system-ui, sans-serif; --b: "Inter", system-ui, sans-serif;
+    --shadow: 0 1px 2px rgba(19,35,45,.05), 0 14px 36px -24px rgba(19,35,45,.4);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--b); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 820px; margin: 0 auto; padding-block: clamp(26px, 5vw, 56px); padding-left: clamp(16px, 4vw, 40px); padding-right: clamp(16px, 4vw, 40px); }
+  .eyebrow { font-family: var(--d); font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--brass); margin: 0 0 12px; }
+  h1 { font-family: var(--d); font-weight: 600; font-size: clamp(28px, 5.5vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+  .sub { color: var(--muted); margin: 12px 0 0; font-size: 15.5px; }
+  h2 { font-family: var(--d); font-weight: 600; font-size: 20px; letter-spacing: -.01em; margin: 34px 0 4px; padding-top: 20px; border-top: 1px solid var(--line); }
+  h2 .num { color: var(--river); }
+  h3 { font-family: var(--d); font-weight: 600; font-size: 15px; margin: 18px 0 4px; color: var(--ink2); }
+  p, li { font-size: 15px; }
+  a { color: var(--river-deep); word-break: break-word; }
+  code { font-family: ui-monospace, monospace; font-size: 12.5px; background: var(--surface); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; }
+  ul, ol { padding-left: 20px; }
+  li { margin: 5px 0; }
+  .callout { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--brass); border-radius: 10px; padding: 14px 16px; margin: 16px 0; box-shadow: var(--shadow); }
+  .callout.go { border-left-color: var(--river); }
+  .callout b { font-family: var(--d); font-weight: 600; }
+  .pill { display: inline-block; font-family: var(--d); font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-radius: 999px; padding: 3px 9px; background: var(--flag-bg); color: var(--flag-ink); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 12px 0; box-shadow: var(--shadow); }
+  .card a { font-weight: 600; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+  .foot { color: var(--muted); font-size: 13px; margin-top: 36px; }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Mulwala Water · project handoff</p>
+  <h1>Everything a new Claude needs to continue the website</h1>
+  <p class="sub">Paste this to Claude on the new computer, or point it at <code>HANDOFF.md</code> in the repo. Last updated 22 Sep 2026.</p>
+
+  <div class="callout go">
+    <b>Do this first — get the code + env.</b> Push any local commits from the old computer
+    (<code>git push origin rebuild</code>). Then on the new computer:
+    <code>git clone https://github.com/aussieglows/mulwala-water</code> → <code>git checkout rebuild</code>
+    → <code>npm install</code> → <b>pull env from Vercel (below)</b> → <code>npm run dev</code> (port 3000).
+  </div>
+
+  <div class="callout">
+    <b>Environment — pull from Vercel, never transfer <code>.env</code>.</b> The <code>.env</code> file is not
+    moved between machines. Instead:
+    <code>npm i -g vercel</code> → <code>vercel login</code> → <code>vercel link</code> (pick
+    <code>mulwala-water</code>) → <code>vercel env pull .env.local</code>. That writes
+    <code>DATABASE_URL</code> (Neon) and the rest into <code>.env.local</code>, which Next.js reads
+    automatically. Manual fallback: Vercel → project <code>mulwala-water</code> → Settings →
+    Environment Variables → reveal <code>DATABASE_URL</code> and paste it into <code>.env.local</code>.
+    That one var powers the homepage portfolio logos + <code>/admin</code>; public pages render without it.
+  </div>
+
+  <h2><span class="num">1.</span> What this is</h2>
+  <p>A full rebuild of <b>mulwalawater.com</b> — the site for <b>Mulwala Water Operating &amp; Investment LLC</b>,
+  a firm that <b>advises, operates, and invests</b> in founder-led, family-owned, sponsor-backed and multi-unit
+  businesses. Laura (laura@aussieglows.com) manages it for her husband. One Next.js project: the public
+  marketing site is the rebuild; <code>/admin</code> is an accounting/CMS section that is <b>untouched — leave it alone</b>.</p>
+
+  <h2><span class="num">2.</span> Repo &amp; hosting</h2>
+  <ul>
+    <li>GitHub: <a href="https://github.com/aussieglows/mulwala-water">github.com/aussieglows/mulwala-water</a></li>
+    <li>Working branch <code>rebuild</code>. <b>PR #1 open: rebuild → main.</b> <code>main</code> = the original v1 site, still live.</li>
+    <li>Original backup: tag <code>v1-original</code> / branch <code>backup/original-v1</code> (<code>fb095f1</code>).</li>
+    <li>Vercel hosting (auto-deploy). GoDaddy DNS. Neon Postgres via <code>DATABASE_URL</code> (Prisma 7).</li>
+  </ul>
+
+  <h2><span class="num">3.</span> Stack &amp; conventions</h2>
+  <ul>
+    <li>Next 16 App Router, React 19, TypeScript, Tailwind v4 (CSS-var tokens in <code>app/globals.css</code>).</li>
+    <li>Copy lives in typed <code>content/*.ts</code> modules, not inline JSX. Components in <code>components/site/</code>, pages in <code>app/(public)/</code>.</li>
+    <li>The truss-bridge motif (<code>components/site/Truss.tsx</code>) is the single graphic system.</li>
+    <li>Verify: <code>tsc --noEmit</code> then <code>next build</code>. If stale <code>.next/types</code> errors after moving routes, delete <code>.next</code> and rebuild.</li>
+  </ul>
+
+  <h2><span class="num">4.</span> Current design — "Bridge palette + Harbour fonts" (chosen)</h2>
+  <p>Laura reviewed three directions and chose this. In <code>app/globals.css</code>:
+  ink <code>#13232d</code>, teal <code>#0e6055</code> (primary), brass <code>#b8863b</code>, warm paper <code>#f7f3ec</code>,
+  surface white. Fonts (<code>app/fonts.ts</code>): <b>Space Grotesk</b> (display + eyebrows + metrics) + <b>Inter</b> (body) —
+  no serif, no mono. The "companies we've backed" strip uses a white section + white logo tiles.</p>
+
+  <h2><span class="num">5.</span> Positioning (don't regress)</h2>
+  <p>The firm does <b>all three: advise, operate, invest.</b> Homepage: "We advise, operate, and invest." +
+  a "Three ways to work with us" section. <b>Never reintroduce copy that talks down traditional consulting.</b></p>
+
+  <h2><span class="num">6.</span> Hide-until-provided</h2>
+  <p>Any section awaiting Laura's input is <b>hidden from the public site</b> (no <code>⚠</code> to visitors) and
+  appears only once real data exists — gated in the page components via <code>isPlaceholder(...)</code> and flags
+  like <code>home.proof.caseStudies.length</code> / <code>howWeWork.risk.approved</code>. The <code>[[…]]</code> strings
+  stay in <code>content/</code> as the data source. <code>⚠</code> markers appear only in the private tracker.</p>
+
+  <h2><span class="num">7.</span> Launch trim</h2>
+  <p>Shipping a simple version first. Parked under <code>parked/</code> (not deleted — restore by moving folders
+  back + reverting nav/footer/sitemap/redirect edits): <code>playbooks-slug</code> (the 4 detail pages — /playbooks
+  is now one page), <code>portfolio</code> (logos kept on home; /portfolio + /portfolio-companies redirect home),
+  <code>results</code>. Newsletter removed from footer. Nav: Playbooks a single link, Portfolio out of the dropdown.
+  A fourth Who We Help door — <b>Family-owned</b> — was added.</p>
+
+  <h2><span class="num">8.</span> Artifacts (already in the cloud, on Laura's account)</h2>
+  <div class="card">
+    <a href="https://claude.ai/artifact/VDRJvUzYMGr7QXpBsSuM76">Mulwala site tracker</a> — <b>the actions tracker</b> (pinned).
+    To update from the new computer: read it by that URL with the Artifact tool, then republish with <code>url</code> set to it.
+  </div>
+  <div class="card">
+    <a href="https://claude.ai/artifact/5jN92cEqMsxb9TnzLuNpyy">Mulwala design directions</a> — the three concepts (Harbour / Bridge / Estuary). Chosen = Bridge palette + Harbour fonts.
+  </div>
+
+  <h2><span class="num">9.</span> The actions tracker, in text</h2>
+  <h3>Needs Laura's input (hidden on the site until provided)</h3>
+  <ol>
+    <li><b>Case studies (2–3)</b> — situation → what we found → what we changed → the number → a named quote. → <code>home.proof.caseStudies</code>, <code>whoWeHelp.door.caseStudy</code>.</li>
+    <li><b>Principal bio</b> — fill <code>content/principal.ts</code> (null now → About shows a signed statement). If it must wait, note why.</li>
+    <li><b>Portfolio</b> — relationship (Investment/Advisory/Operating), period, 2 lines + logo permissions per company. Confirm F45, Noom, Iris Energy.</li>
+    <li><b>Contact</b> — named email, phone hours, LinkedIn → <code>content/site.ts</code>.</li>
+    <li><b>FAQ answers (7)</b> on /how-we-work → <code>content/howWeWork.ts</code> <code>faq.items</code>.</li>
+    <li><b>Playbook play descriptions</b> — names + subtitles live; fuller detail pending review.</li>
+  </ol>
+  <h3>A decision</h3>
+  <ol start="7"><li><b>The guarantee</b> on /how-we-work — approve / amend / delete. Hidden until approved; to publish set <code>howWeWork.risk.approved = true</code> (only with explicit approval).</li></ol>
+  <h3>Drafted, waiting on Laura</h3>
+  <ol start="8"><li><b>Six insight articles</b> — written in <code>content/insights.ts</code> (<code>published:false</code>). Need a byline + approval, then flip to <code>true</code>. Copies in <code>INSIGHTS-DRAFTS.md</code>.</li></ol>
+  <h3>To build next (needs Laura's steer)</h3>
+  <ol start="9">
+    <li>Add a <b>pure-consulting / advise-only option</b> to the four Who We Help pages.</li>
+    <li>A <b>consulting equivalent of "Diagnose · Scope · Run · Hand over"</b> on /how-we-work.</li>
+  </ol>
+  <p>Repo worksheets: <code>PHASE-3-INTAKE.md</code> (fill-in for items 1–8) and <code>INSIGHTS-DRAFTS.md</code>.</p>
+
+  <h2><span class="num">10.</span> Deploy / sharing (open item)</h2>
+  <p>Vercel auto-builds a preview of <code>rebuild</code>: <a href="https://mulwala-water-git-rebuild-aussie-glows.vercel.app">mulwala-water-git-rebuild-aussie-glows.vercel.app</a> (auto-updates on push).</p>
+  <div class="callout"><b>Blocker:</b> the preview is behind Vercel Deployment Protection (redirects to a Vercel login). To share it: Vercel → project <code>mulwala-water</code> → Settings → Deployment Protection → <b>Vercel Authentication → OFF → Save</b>. To go live: merge PR #1 into <code>main</code>.</div>
+
+  <h2><span class="num">11.</span> Constraints</h2>
+  <ul>
+    <li><b>Never recreate brand/company logos in code</b> — use only user-supplied logo files.</li>
+    <li>In the old environment, <code>git push</code> / <code>rm</code> / <code>curl</code> were blocked for Claude — Laura pushed herself. The new environment may differ.</li>
+    <li>Local Claude memory files don't transfer between computers; their key facts are in <code>HANDOFF.md</code>.</li>
+  </ul>
+
+  <h2><span class="num">12.</span> First steps for the new Claude</h2>
+  <ol>
+    <li>Get on branch <code>rebuild</code>, <code>npm install</code>, pull env from Vercel (top callout), <code>npm run dev</code>.</li>
+    <li>Read <code>HANDOFF.md</code>, skim <code>content/</code> and <code>components/site/</code>.</li>
+    <li>Open the actions tracker (§8) for the live to-do list.</li>
+    <li>Continue from §9. Wire Laura's inputs into the right <code>content/</code> module — the gated section un-hides itself. Keep the tracker artifact updated.</li>
+    <li>Commit on <code>rebuild</code> with <code>Co-Authored-By: Claude Opus 4.8 &lt;noreply@anthropic.com&gt;</code>.</li>
+  </ol>
+
+  <p class="foot">This page mirrors <code>HANDOFF.md</code> in the repo, which is the source of truth if they ever differ.</p>
+</div>

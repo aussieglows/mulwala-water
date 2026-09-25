@@ -1,0 +1,235 @@
+<title>Mulwala classic demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --teal: #0f766e; --teal-dark: #0b5850; --navy: #24384f; --ink: #1f2d3d;
+    --muted: #5f6f7e; --bg: #ffffff; --soft: #f3f7f8; --line: #e5ebef; --gold: #b8863b;
+    --ff: "Poppins", system-ui, sans-serif;
+    --shadow: 0 1px 2px rgba(31,45,61,.04), 0 16px 40px -26px rgba(31,45,61,.35);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--ff); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-left: clamp(16px,4vw,40px); padding-right: clamp(16px,4vw,40px); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 999px; cursor: pointer; }
+  .btn-teal { background: var(--teal); color: #fff; } .btn-teal:hover { background: var(--teal-dark); }
+  .btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.6); } .btn-ghost:hover { border-color: #fff; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); margin: 0 0 14px; }
+  h2 { font-weight: 700; color: var(--navy); font-size: clamp(26px,3.4vw,36px); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+  .lead { color: var(--muted); font-size: 17px; }
+
+  /* bridge marker (logo truss, old format) */
+  .brg { display: block; color: var(--teal); }
+  .brg-eb { width: 30px; height: 8px; }
+  .brg-card { width: 48px; height: 13px; margin-bottom: 14px; }
+  .hero .eyebrow .brg { color: #bfe3dc; }
+
+  header.nav { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
+  .logo { height: 40px; width: auto; }
+  .nav-links { display: none; gap: 26px; align-items: center; }
+  .nav-links a { font-size: 15px; font-weight: 500; color: var(--navy); } .nav-links a:hover { color: var(--teal); }
+  @media (min-width: 940px) { .nav-links { display: flex; } }
+
+  .hero { position: relative; color: #fff; background: linear-gradient(180deg, rgba(20,32,48,.55), rgba(20,32,48,.72)), url('{{HERO_URI}}'); background-size: cover; background-position: center; }
+  .hero-in { padding: clamp(70px,11vw,150px) 0 clamp(60px,9vw,120px); max-width: 760px; }
+  .hero h1 { font-weight: 700; font-size: clamp(38px,6.6vw,68px); line-height: 1.04; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+  .hero p { font-size: clamp(17px,2vw,20px); color: rgba(255,255,255,.9); margin: 20px 0 0; max-width: 620px; }
+  .hero .btns { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+
+  html { scroll-behavior: smooth; }
+  section { padding: clamp(48px,7vw,84px) 0; scroll-margin-top: 84px; }
+  .soft { background: var(--soft); }
+  .center { text-align: center; } .center .eyebrow, .center h2 { justify-content: center; }
+  .sec-lead { max-width: 60ch; margin: 14px auto 0; }
+
+  .metrics { display: grid; grid-template-columns: repeat(2,1fr); gap: 26px; text-align: center; }
+  @media (min-width: 760px) { .metrics { grid-template-columns: repeat(4,1fr); } }
+  .metric .n { font-weight: 700; color: var(--teal); font-size: clamp(34px,4.5vw,52px); line-height: 1; }
+  .metric .l { color: var(--muted); font-size: 14px; margin-top: 8px; }
+
+  .grid { display: grid; gap: 22px; margin-top: 40px; }
+  .g3 { grid-template-columns: 1fr; } @media (min-width:820px){ .g3 { grid-template-columns: repeat(3,1fr); } }
+  .g4 { grid-template-columns: 1fr; } @media (min-width:560px){ .g4 { grid-template-columns: repeat(2,1fr); } } @media (min-width:980px){ .g4 { grid-template-columns: repeat(4,1fr); } }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px; box-shadow: var(--shadow); }
+  .card h3 { color: var(--navy); font-weight: 600; font-size: 20px; margin: 0 0 8px; }
+  .card p { color: var(--muted); font-size: 15px; margin: 0; }
+  .card .more { color: var(--teal); font-weight: 600; font-size: 14px; margin-top: 14px; display: inline-block; }
+  .plays { list-style: none; padding: 0; margin: 12px 0 0; }
+  .plays li { font-size: 14px; color: var(--ink); padding-left: 22px; position: relative; margin: 6px 0; }
+  .plays li::before { content: "✓"; color: var(--teal); position: absolute; left: 0; font-weight: 700; }
+
+  .split { display: grid; gap: 34px; align-items: start; } @media (min-width:860px){ .split { grid-template-columns: 1fr 1.1fr; } }
+
+  /* how we work phases */
+  .phases { display: grid; gap: 26px; margin-top: 40px; grid-template-columns: 1fr; } @media (min-width:680px){ .phases { grid-template-columns: repeat(2,1fr);} } @media (min-width:1000px){ .phases { grid-template-columns: repeat(4,1fr);} }
+  .phase .pnum { font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--teal); text-transform: uppercase; margin: 10px 0 2px; }
+  .phase h3 { color: var(--navy); font-weight: 600; font-size: 19px; margin: 0 0 8px; }
+  .phase p { color: var(--muted); font-size: 14px; margin: 0; }
+  .seehow { display: inline-block; margin-top: 30px; color: var(--teal); font-weight: 600; font-size: 15px; }
+
+  .logos { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 40px; } @media (min-width:640px){ .logos { grid-template-columns: repeat(3,1fr);} } @media (min-width:960px){ .logos { grid-template-columns: repeat(5,1fr);} }
+  .logo-tile { background: #fff; border: 1px solid var(--line); border-radius: 12px; height: 92px; display: flex; align-items: center; justify-content: center; padding: 14px; }
+  .logo-tile img { max-height: 48px; max-width: 80%; object-fit: contain; filter: grayscale(1); opacity: .68; }
+
+  .closing { background: var(--navy); color: #fff; text-align: center; }
+  .closing h2 { color: #fff; } .closing p { color: rgba(255,255,255,.82); max-width: 56ch; margin: 14px auto 0; }
+  .closing .btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
+
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 46px 0 34px; }
+  .foot { display: grid; gap: 28px; grid-template-columns: 1fr; } @media (min-width:760px){ .foot { grid-template-columns: 1.6fr 1fr 1fr; } }
+  .foot h4 { color: var(--navy); font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 12px; }
+  .foot a { display: block; color: var(--muted); font-size: 14px; margin: 6px 0; } .foot a:hover { color: var(--teal); }
+  .foot .desc { color: var(--muted); font-size: 14px; max-width: 34ch; margin-top: 12px; }
+  .copy { color: var(--muted); font-size: 13px; margin-top: 30px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .demoflag { background: var(--gold); color: #fff; text-align: center; font-size: 13px; font-weight: 600; padding: 7px; }
+</style>
+
+<!-- reusable bridge (logo truss) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="bridge" viewBox="3 23 112 30"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="50" x2="112" y2="50"/><line x1="18.7" y1="26" x2="99.3" y2="26"/><line x1="6" y1="50" x2="18.7" y2="26"/><line x1="112" y1="50" x2="99.3" y2="26"/><line x1="18.7" y1="50" x2="18.7" y2="26"/><line x1="38.9" y1="50" x2="38.9" y2="26"/><line x1="59" y1="50" x2="59" y2="26"/><line x1="79.1" y1="50" x2="79.1" y2="26"/><line x1="99.3" y1="50" x2="99.3" y2="26"/><line x1="18.7" y1="50" x2="38.9" y2="26"/><line x1="38.9" y1="50" x2="18.7" y2="26"/><line x1="38.9" y1="50" x2="59" y2="26"/><line x1="59" y1="50" x2="38.9" y2="26"/><line x1="59" y1="50" x2="79.1" y2="26"/><line x1="79.1" y1="50" x2="59" y2="26"/><line x1="79.1" y1="50" x2="99.3" y2="26"/><line x1="99.3" y1="50" x2="79.1" y2="26"/></g></symbol></svg>
+
+<div class="demoflag">DEMO — original site styling with the new content. Compare against the current build.</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#" aria-label="Mulwala Water" style="display:inline-flex;align-items:center;">
+      <svg viewBox="0 0 452 74" class="logo" role="img" aria-label="Mulwala Water Operating & Investment Company" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#24384f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="50" x2="112" y2="50"/><line x1="18.7" y1="26" x2="99.3" y2="26"/><line x1="6" y1="50" x2="18.7" y2="26"/><line x1="112" y1="50" x2="99.3" y2="26"/><line x1="18.7" y1="50" x2="18.7" y2="26"/><line x1="38.9" y1="50" x2="38.9" y2="26"/><line x1="59" y1="50" x2="59" y2="26"/><line x1="79.1" y1="50" x2="79.1" y2="26"/><line x1="99.3" y1="50" x2="99.3" y2="26"/><line x1="18.7" y1="50" x2="38.9" y2="26"/><line x1="38.9" y1="50" x2="18.7" y2="26"/><line x1="38.9" y1="50" x2="59" y2="26"/><line x1="59" y1="50" x2="38.9" y2="26"/><line x1="59" y1="50" x2="79.1" y2="26"/><line x1="79.1" y1="50" x2="59" y2="26"/><line x1="79.1" y1="50" x2="99.3" y2="26"/><line x1="99.3" y1="50" x2="79.1" y2="26"/></g>
+        <text x="134" y="38" fill="#24384f" style="font-family:'Poppins',sans-serif;font-weight:500;font-size:22px;letter-spacing:5px">MULWALA WATER</text>
+        <text x="136" y="58" fill="#24384f" opacity="0.72" style="font-family:'Poppins',sans-serif;font-weight:400;font-size:8.5px;letter-spacing:2.2px">OPERATING &amp; INVESTMENT COMPANY</text>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="#">Who We Help</a><a href="#">How We Work</a><a href="#">Playbooks</a><a href="#">About</a>
+      <a href="#" class="btn btn-teal" style="padding:9px 18px;">Book a 20-minute call</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-in">
+    <p class="eyebrow"><svg class="brg brg-eb"><use href="#bridge"/></svg> Advisory · Operating · Investment</p>
+    <h1>We advise, operate, and invest.</h1>
+    <p>Big-company discipline for founder-led, family-owned, sponsor-backed and multi-unit businesses — from people who have actually done the job, in Australia and America.</p>
+    <div class="btns">
+      <a href="#" class="btn btn-teal">Book a 20-minute call</a>
+      <a href="#" class="btn btn-ghost">See how we work</a>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="metrics">
+      <div class="metric"><div class="n">20+</div><div class="l">years in operating seats</div></div>
+      <div class="metric"><div class="n">50+</div><div class="l">businesses backed, advised or operated</div></div>
+      <div class="metric"><div class="n">$5B+</div><div class="l">revenue run through</div></div>
+      <div class="metric"><div class="n">2</div><div class="l">continents</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Where we're useful</h2>
+    <div class="grid g4">
+      <div class="card"><svg class="brg brg-card"><use href="#bridge"/></svg><h3>Founder-led businesses</h3><p>You built it. It shouldn't depend on you to run it.</p><span class="more">Read more →</span></div>
+      <div class="card"><svg class="brg brg-card"><use href="#bridge"/></svg><h3>Family-owned businesses</h3><p>Everyone owns a piece. Nobody owns the decision.</p><span class="more">Read more →</span></div>
+      <div class="card"><svg class="brg brg-card"><use href="#bridge"/></svg><h3>Sponsor-backed companies</h3><p>The underwriting case doesn't care how busy the team is.</p><span class="more">Read more →</span></div>
+      <div class="card"><svg class="brg brg-card"><use href="#bridge"/></svg><h3>Franchise & multi-unit</h3><p>Units open is not the same number as units working.</p><span class="more">Read more →</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap center">
+    <h2>Three ways to work with us</h2>
+    <p class="lead sec-lead">A plan you can act on, a senior operator who steps in and runs it, or capital alongside you.</p>
+    <div class="grid g3" style="text-align:left;">
+      <div class="card"><svg class="brg brg-card"><use href="#bridge"/></svg><h3>Advise</h3><p>A senior operator reads the business, tells you what's actually holding it back, hands you the things to do first, and lays out a plan for the rest.</p></div>
+      <div class="card"><svg class="brg brg-card"><use href="#bridge"/></svg><h3>Operate</h3><p>When advice isn't enough, we step in — COO, GM, or a defined mandate — run the play, and write a leaving date into the scope before we start.</p></div>
+      <div class="card"><svg class="brg brg-card"><use href="#bridge"/></svg><h3>Invest</h3><p>Where it fits, we back the businesses we believe in as well as advise them — so our incentives sit with yours.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow"><svg class="brg brg-eb"><use href="#bridge"/></svg> Our approach</p>
+        <h2>Data drives decision. People drive businesses.</h2>
+      </div>
+      <p class="lead" style="margin:0;">We start with the people, because you cannot fix a business you do not understand, and you cannot understand one without understanding who runs it and why they do it that way. Then the numbers come in — and they come in hard. Both halves matter, whether we're advising you or running it ourselves.</p>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <h2>The work falls into four kinds</h2>
+    <div class="grid g4">
+      <div class="card"><h3>Growth</h3><p>Grow on what already works before betting on what doesn't.</p><ul class="plays"><li>Au Naturel</li><li>Big Foot</li><li>Strategic Reset</li></ul></div>
+      <div class="card"><h3>Systems</h3><p>Install the numbers, the scoreboard and the bench so it runs without you.</p><ul class="plays"><li>Single Source of Truth</li><li>The Scoreboard</li><li>Handover</li></ul></div>
+      <div class="card"><h3>Turnaround</h3><p>Stabilize the cash, cut to the core, rebuild trust in that order.</p><ul class="plays"><li>Cash First</li><li>Cut to the Core</li><li>Unit Triage</li></ul></div>
+      <div class="card"><h3>Owner & Exit</h3><p>Get the owner out of the day-to-day and the business ready to stand alone.</p><ul class="plays"><li>Sellable</li><li>Take Back the Calendar</li><li>Succession</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How we work</h2>
+    <p class="lead" style="margin-top:12px;max-width:60ch;">Diagnose. Scope. Run. Hand over. Every engagement has a leaving date, written in before we start.</p>
+    <div class="phases">
+      <div class="phase"><svg class="brg brg-card"><use href="#bridge"/></svg><div class="pnum">01 · Diagnose</div><h3>Is this our kind of problem?</h3><p>A 20-minute call, then a longer conversation if it looks like a fit. Sometimes it isn't, and we say so.</p></div>
+      <div class="phase"><svg class="brg brg-card"><use href="#bridge"/></svg><div class="pnum">02 · Scope</div><h3>One page, fixed fee.</h3><p>The mandate, what success looks like as a number, who's doing it, how long, what it costs, and when we leave. Agreed in writing before we start.</p></div>
+      <div class="phase"><svg class="brg brg-card"><use href="#bridge"/></svg><div class="pnum">03 · Run</div><h3>In the business, not adjacent.</h3><p>Weekly scoreboard, monthly written update to you and anyone who needs it — your board, sponsor or lender. No surprises in month three.</p></div>
+      <div class="phase"><svg class="brg brg-card"><use href="#bridge"/></svg><div class="pnum">04 · Hand over</div><h3>We leave it working.</h3><p>You get the artifacts, your people get the training, and we check in at 90 days to see whether it held.</p></div>
+    </div>
+    <a href="#" class="seehow">See how we work →</a>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap center">
+    <h2>Companies we've backed, advised and operated</h2>
+    <div class="logos">{{LOGO_TILES}}</div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Tell us what's actually going on.</h2>
+    <p>Twenty minutes, no deck. If it's not a problem we're good at, we'll say so and point you somewhere better.</p>
+    <div class="btns">
+      <a href="#" class="btn btn-teal">Book a 20-minute call</a>
+      <a href="#" class="btn btn-ghost">Send us a note</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <svg viewBox="0 0 452 74" class="logo" style="height:38px;" role="img" aria-label="Mulwala Water Operating & Investment Company" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#24384f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="50" x2="112" y2="50"/><line x1="18.7" y1="26" x2="99.3" y2="26"/><line x1="6" y1="50" x2="18.7" y2="26"/><line x1="112" y1="50" x2="99.3" y2="26"/><line x1="18.7" y1="50" x2="18.7" y2="26"/><line x1="38.9" y1="50" x2="38.9" y2="26"/><line x1="59" y1="50" x2="59" y2="26"/><line x1="79.1" y1="50" x2="79.1" y2="26"/><line x1="99.3" y1="50" x2="99.3" y2="26"/><line x1="18.7" y1="50" x2="38.9" y2="26"/><line x1="38.9" y1="50" x2="18.7" y2="26"/><line x1="38.9" y1="50" x2="59" y2="26"/><line x1="59" y1="50" x2="38.9" y2="26"/><line x1="59" y1="50" x2="79.1" y2="26"/><line x1="79.1" y1="50" x2="59" y2="26"/><line x1="79.1" y1="50" x2="99.3" y2="26"/><line x1="99.3" y1="50" x2="79.1" y2="26"/></g>
+        <text x="134" y="38" fill="#24384f" style="font-family:'Poppins',sans-serif;font-weight:500;font-size:22px;letter-spacing:5px">MULWALA WATER</text>
+        <text x="136" y="58" fill="#24384f" opacity="0.72" style="font-family:'Poppins',sans-serif;font-weight:400;font-size:8.5px;letter-spacing:2.2px">OPERATING &amp; INVESTMENT COMPANY</text>
+      </svg>
+      <p class="desc">We advise, operate, and invest in founder-led, family-owned, sponsor-backed and multi-unit businesses.</p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="#">How We Work</a><a href="#">Playbooks</a><a href="#">About</a><a href="#">Contact</a>
+    </div>
+    <div>
+      <h4>Who We Help</h4>
+      <a href="#">Founder-led</a><a href="#">Family-owned</a><a href="#">Sponsor-backed</a><a href="#">Franchise & multi-unit</a>
+    </div>
+  </div>
+  <div class="wrap copy">© 2026 Mulwala Water Operating & Investment LLC · info@mulwalawater.com · (201) 657-2292</div>
+</footer>
