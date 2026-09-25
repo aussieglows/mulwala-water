@@ -23,3 +23,5 @@ scripts/page-*.html
 .DS_Store
 Thumbs.db
 .neon
+.vercel
+.env*

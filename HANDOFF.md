@@ -4,7 +4,7 @@ This project must survive with **nothing left on the original computer**. Everyt
 Claude.ai artifacts, and in Google Drive. This file is the source of truth. Give it to Claude on the
 new machine.
 
-_Last updated: 2026-09-24._
+_Last updated: 2026-09-25 (moved to the new computer; §3 setup corrected)._
 
 ---
 
@@ -54,15 +54,24 @@ rebuild; **`/admin`** is a separate accounting/CMS section — **do not touch it
 git clone https://github.com/aussieglows/mulwala-water
 cd mulwala-water
 git checkout classic        # or rebuild
-npm install
-# env — pull from Vercel, never copy a .env file:
-npm i -g vercel && vercel login && vercel link   # pick "mulwala-water"
-vercel env pull .env.local                        # writes DATABASE_URL etc.
-npm run dev                                        # http://localhost:3000
+npm install                 # npm 11+: if it warns about install scripts, run
+                            #   npm approve-scripts better-sqlite3 esbuild prisma sharp unrs-resolver @prisma/engines
+                            #   npm rebuild
+npm run dev                 # http://localhost:3000
 ```
+- **Env: Vercel can't hand it over.** Every var in Vercel is a **Secret** (Production + Preview only), so
+  `vercel env pull` writes `[SENSITIVE]` placeholders and the dashboard won't reveal values. Don't use
+  the pulled file — write `.env.local` by hand instead (gitignored).
 - **DATABASE_URL** (Neon Postgres) is the key var — powers the homepage portfolio logos + `/admin`.
-  Manual fallback: Vercel → Settings → Environment Variables → reveal DATABASE_URL → paste into `.env.local`.
-- Neon dashboard has the DB itself if you ever need it; the connection string is the same `DATABASE_URL`.
+  Get it from the **Neon dashboard** (console.neon.tech → project → Connect → connection string) and
+  put `DATABASE_URL="postgresql://…"` in `.env.local`. Laura pastes it herself; never paste it in chat.
+- **Without Neon** you can run on a local SQLite test DB: `DATABASE_URL="file:./dev.db"` in `.env.local`,
+  then `$env:DATABASE_URL='file:./dev.db'; npm run setup` (PowerShell) to create + seed it. The CLI
+  scripts load `.env`, not `.env.local`, hence the inline var.
+- `scripts/db-provider.mjs` flips `prisma/schema.prisma` between `sqlite` and `postgresql` to match
+  `DATABASE_URL`. **Never commit the schema while it says `sqlite`.**
+- Windows PowerShell blocks `vercel.ps1` ("running scripts is disabled") — use `vercel.cmd …` instead,
+  and open a new terminal after `npm i -g vercel` so it's on PATH.
 - Verify builds with `node_modules/.bin/tsc --noEmit` then `node_modules/.bin/next build`. If `next build`
   errors on stale `.next/types` after moving routes: `node -e "require('fs').rmSync('.next',{recursive:true,force:true})"`
   then rebuild. **Don't delete `.next` while `npm run dev` is running** — it 500s; restart dev after.
@@ -152,8 +161,8 @@ equivalent of "Diagnose · Scope · Run · Hand over" on `/how-we-work`.
 
 ## 11. First steps for the new Claude
 
-1. Read this file. Confirm branch (`classic` for the current direction), `npm install`, pull env from
-   Vercel (§3), `npm run dev`.
+1. Read this file. Confirm branch (`classic` for the current direction), `npm install`, set up
+   `.env.local` (§3), `npm run dev`.
 2. Skim `content/` and `components/site/`. Open the tracker artifact (§8) for the live to-do list.
 3. Continue from §10. Wire Laura's inputs into the right `content/` module — gated sections un-hide
    automatically. Keep the tracker artifact updated (§9).
@@ -214,3 +223,7 @@ Chronological arc of the whole project:
     to the tracker.
 16. **This evacuation.** Backed everything to GitHub + Drive + artifacts because the working computer is
     failing; wrote this handoff so a new Claude on a new machine continues seamlessly.
+17. **New computer (2026-09-25).** Cloned to `C:\Users\lamoo\Projects\mulwala-water`, running on a
+    local SQLite test DB until the Neon `DATABASE_URL` is added. Found Vercel env vars are all Secrets
+    (can't be pulled) and rewrote §3. Tracker caught up: added the Classic-vs-Bridge decision and the
+    later shipped work, fixed the "To build next" count.
