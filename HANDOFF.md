@@ -164,3 +164,53 @@ equivalent of "Diagnose · Scope · Run · Hand over" on `/how-we-work`.
 
 - **Never recreate brand/company logos in code** — use only user-supplied logo files (in `public/images/logos/`).
 - Local Claude memory files do not transfer between computers; their key facts are in this file.
+
+## 13. How we got here (chat history, so the new Claude can pick up)
+
+Chronological arc of the whole project:
+
+1. **Origin.** Started as an accounting/P&L app for a consulting business (reusing the "aussie glows"
+   booking framework). Then pivoted: recreate the husband's site **mulwalawater.com** so Laura can manage
+   it — unified as ONE Next.js app, public marketing site + the accounting as **`/admin`**.
+2. **First live site.** Built the public site + admin, wired integrations (Gmail import, Plaid, Claude
+   vision for receipts), added expense categories/sources, real portfolio & advisory logos, hero imagery.
+   Went live: Neon Postgres, GitHub, Vercel, GoDaddy DNS + SSL. Removed the Admin link from the footer.
+3. **Full rebuild (per a spec).** Decided to rebuild the public site to a detailed brief while keeping
+   the original revertible (tag `v1-original`, branch `backup/original-v1`). Built on the **`rebuild`**
+   branch: a design system (truss motif, free fonts, palette tokens), restructured Nav/Footer, all content
+   moved into typed `content/` modules, and every page (home, how-we-work, who-we-help doors, playbooks,
+   about, contact, insights, results, portfolio, privacy) + OG images, breadcrumbs, structured data,
+   sitemap, and an 8-question playbook diagnostic.
+4. **Positioning override.** Laura corrected the spec's "operating, not advisory" → the firm does **all
+   three: advise, operate, invest.** Reworded the site; removed copy that talked down consulting.
+5. **Fourth door.** Added **Family-owned** to Who We Help (now four doors).
+6. **Phase 3 content.** Wrote an intake worksheet (`PHASE-3-INTAKE.md`) and drafted six insight articles
+   (`content/insights.ts`, kept unpublished). Filled the homepage metrics with real figures
+   (20+ / 50+ / $5B+ / 2). Removed the how-we-work revenue-floor bullet and the pricing prompt.
+7. **Project tracker.** Built the **Mulwala site tracker** artifact (pinned) — the to-dos dashboard,
+   mirroring Laura's aussie-glows backlog / Job Search Actions dashboards.
+8. **Hide-until-provided.** Switched unfilled sections from visible `⚠` placeholders to being **hidden**
+   on the public site until Laura supplies the data.
+9. **Launch trim.** Parked `/portfolio`, `/results`, and the four `/playbooks/[slug]` pages under
+   `parked/`; made `/playbooks` a single page; removed the newsletter; kept portfolio logos on the home page.
+10. **Handoff v1 + Drive.** Created the handoff doc/artifact and saved docs to Google Drive; established
+    env-from-Vercel (never transfer `.env`).
+11. **Design directions.** Presented three concepts (Harbour / Bridge / Estuary). Laura chose **Bridge
+    palette + Harbour fonts** → applied to the `rebuild` build (Space Grotesk + Inter, ink/teal/brass).
+    Then: portfolio tiles → white; the bridge **icon** replaced with the real live-logo X-braced truss;
+    the large truss (hero backdrop, dividers, phase strip) aligned to the same X-braced + sloped-end shape;
+    fixed a button-hover bug (text now stays white on the green button).
+12. **CTAs.** "Book a 20-minute call" → the booking flow; added a second CTA **"Send us a note" → /contact**.
+13. **Copy pass.** Reworded "Advise"; condensed the "four kinds" cards; renamed "Same, Same but Different"
+    → "Channel Expansion"; dropped "thirteen-week" from "Cash First"; replaced the "three things to do
+    first" bullet in "The Read"; moved engagement-card bullets to the top; fixed the Mulwala/Lake Mulwala
+    wording.
+14. **Second version (classic).** Laura wanted to compare the new content in the ORIGINAL site's look.
+    Built a classic demo artifact, then decided to do a **full build in the classic design on the
+    `classic` branch** (Poppins, teal/navy/white, the real wordmark logo, a photo hero carried across
+    every page, original imagery). **Both versions now exist; the Bridge-vs-classic choice is still open.**
+15. **Booking embed.** Added the on-site **`/book`** page that embeds a scheduler (Google Appointment
+    Schedule / Calendly) from `site.bookingUrl`; all Book buttons route there; added the booking-URL task
+    to the tracker.
+16. **This evacuation.** Backed everything to GitHub + Drive + artifacts because the working computer is
+    failing; wrote this handoff so a new Claude on a new machine continues seamlessly.
